@@ -32,8 +32,12 @@ public class CrazyStans extends EscapeRoom {
         this.user = traveler.getUser();
         user.newName("Nick");
         opening();
-        challenges();
-        closing();
+        try {
+            challenges();
+            closing();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void opening() {
@@ -47,17 +51,18 @@ public class CrazyStans extends EscapeRoom {
         return "p = Play, s = Stop, r = Reset, quit = Quit";
     }
 
-    private void challenges() {
-        lobbyChallenge();
-        if(user.getInventory().contains("match") || user.getInventory().contains("leaf headband")) {
-            System.out.println("Beyonce is also a hidden leaf ninja, she has allowed you to skip her room and endowed you with one of her many grammys.");
-            user.addItem("beyoncesGrammy");
-        } else {
-            beyonceChallenge();
-        }
-        arianaChallenge();
-        michaelJacksonChallenge();
+    private void challenges() throws InterruptedException {
+//        lobbyChallenge();
+//        if(user.getInventory().contains("match") || user.getInventory().contains("leaf headband")) {
+//            System.out.println("Beyonce is also a hidden leaf ninja, she has allowed you to skip her room and endowed you with one of her many grammys.");
+//            user.addItem("beyoncesGrammy");
+//        } else {
+//            beyonceChallenge();
+//        }
+//        arianaChallenge();
+//        michaelJacksonChallenge();
         christinaAguileraChallenge();
+        kanye();
         System.out.println("You have escaped Crazy Stans!");
     }
 
@@ -98,6 +103,15 @@ public class CrazyStans extends EscapeRoom {
                 ansi().fg(RED).a("Christina Aguilera.").reset() + "\nSolve all the challenges in the Aguilera room " +
                 "to receive the mic of the great one.\nWith this mic, you will be able to make your escape.\n" +
                 "If any of the challenges become too difficult along the way, type 'hint' to receive a hint.";
+    }
+
+    private void kanye() throws InterruptedException {
+
+        System.out.println("BUT WAIT! RIGHT WHEN YOU OBTAINED AGUILERA'S MIC, KANYE CAME IN!");
+        System.out.println("You aren't the greatest. HE IS: ");
+        musicPlayer = new MusicPlayer("numbers.wav");
+        musicPlayer.start();
+        Thread.sleep(1000);
     }
 
 
