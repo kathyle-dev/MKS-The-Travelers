@@ -1,0 +1,62 @@
+{
+
+  "Trap Room": {
+    "puzzles": ["puzzle1", "puzzle2"],
+    "puzzle1": {
+      "items": [
+        {
+          "Skyline": {
+            "itemType": "CD",
+            "description": "Skyline is a song by FKJ, that will send you chill vibes",
+            "hasClue": false
+          },
+          "soar": {
+            "itemType": "CD",
+            "description": "Soar is a song by Christina Aguilera that will motivate you to do great things ",
+            "hasClue": false
+          },
+          "walkItTalkIt":{
+            "itemType": "CD",
+            "description":"Walk It, Talk It is a song by Migos, that will help you walk the path you have spoken",
+            "hasClue": false
+        }
+        }],
+      "doors": [{
+        "door1":{
+          "destination": "puzzle2",
+          "clueNeeded": false
+        } ,
+        "door2": {
+          "destination": "JoninExam",
+          "clueNeeded": "
+        }
+      }]
+    },
+    "puzzle2" : {
+      "items": [
+        {"blaster":{
+          "itemType": "Tool",
+          "description": "This is a blaster. Dangerous weapon.",
+          "hasClue": "key1"
+        },
+          "phone": {
+            "itemType": "Tool",
+            "description": "This is a phone.",
+            "hasClue": false
+          }
+        }],
+      "doors": [{
+        "door1":{
+          "destination": "room2",
+          "clueNeeded": false
+        } ,
+        "door2": {
+          "destination": "room3",
+          "clueNeeded": false
+        }
+      }]
+    }
+  }
+}
+
+

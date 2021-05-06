@@ -1,55 +1,67 @@
 package com.escaperooms.application;
 
+import org.json.simple.JSONObject;
+import com.escaperooms.puzzles.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Room {
+public class Puzzle {
     String name;
     Map<String, String> directions = new HashMap<>();
-    List<String> items = new ArrayList<>();
+    List<JSONObject> items = new ArrayList<>();
     List<String> usefulItems = new ArrayList<>();
     List<String> actors = new ArrayList<>();
-    List<String> doors = new ArrayList<>();
+    List<JSONObject> doors = new ArrayList<>();
 
-    public Room(String name) {
+    ITem has itemType
+    MAP == itemTYpe+count  : object
+
+
+    public Puzzle(String name) {
         setName(name);
     }
 
-    public Room(String name, List<String> items) {
+    public Puzzle(String name, List<JSONObject> items) {
         this(name);
         setItems(items);
     }
 
-    public Room(String name, List<String> items, List<String> usefulItems) {
+    public Puzzle(String name, List<JSONObject> items, List<JSONObject> doors) {
         this(name, items);
-        setUsefulItems(usefulItems);
-    }
-
-    public Room(String name, List<String> items, List<String> usefulItems, List<String> actors) {
-        this(name, items, usefulItems);
-        setActors(actors);
-    }
-
-    public Room(String name, List<String> items, List<String> usefulItems, List<String> actors, List<String> doors) {
-        this(name, items, usefulItems,actors);
         setDoors(doors);
     }
 
-    public void setDoors(List<String> doors) {
+//    public Room(String name, List<String> items, List<String> usefulItems) {
+//        this(name, items);
+//        setUsefulItems(usefulItems);
+//    }
+//
+//    public Room(String name, List<String> items, List<String> usefulItems, List<String> actors) {
+//        this(name, items, usefulItems);
+//        setActors(actors);
+//    }
+//
+//    public Room(String name, List<String> items, List<String> usefulItems, List<String> actors, List<String> doors) {
+//        this(name, items, usefulItems,actors);
+//        setDoors(doors);
+//    }
+
+    public void setDoors(List<JSONObject> doors) {
         this.doors = doors;
     }
 
-    public List<String> getDoors() {
+    public List<JSONObject> getDoors() {
         return this.doors;
     }
 
-    public void addDoor(String door) {
+    public void addDoor(JSONObject door) {
         this.doors.add(door);
     }
 
-    public void removeDoor(String door) {
+    public void removeDoor(JSONObject door) {
         this.doors.remove(door);
     }
 
@@ -57,15 +69,15 @@ public class Room {
         return this.doors.contains(door);
     }
 
-    public List<String> getItems() {
+    public List<JSONObject> getItems() {
         return items;
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(List<JSONObject> items) {
         this.items = items;
     }
 
-    public void removeItem(String item) {
+    public void removeItem(JSONObject item) {
         items.remove(item);
     }
 
@@ -105,8 +117,8 @@ public class Room {
         return getItems().contains(itemName);
     }
 
-    public void addItem(String itemName) {
-        items.add(itemName);
+    public void addItem(JSONObject item) {
+        items.add(item);
     }
 
     public boolean hasUsefulItem(String itemName) {
@@ -117,5 +129,9 @@ public class Room {
         return getActors().contains(actorName);
     }
 
+    public void description(){
+        CD cd = new CD();
+        cd.setDescription("This CD is about  Trap Music");
+    }
 
 }
