@@ -17,18 +17,18 @@ import java.util.*;
 public class EscapeRoom implements EscapeRoomInterface {
     private static final EscapeRoomPrompter escapeRoomPrompter = new EscapeRoomPrompter();
     Map<String, Playable> escapeRooms = new HashMap<>();
-    public Map<String, Puzzle> innerRooms;
+    public Map<String, Puzzle> innerPuzzles;
     public Map<String, Trivia> trivia;
     private static EscapeRoom me;
 
     public EscapeRoom() throws IOException {
-        this.innerRooms = this.load();
+        this.innerPuzzles = this.load();
 //        this.trivia = this.loadTrivia();
     }
 
     public Map<String, Puzzle> load() {
 
-        Map<String, Puzzle> allRooms = new HashMap<>();
+        Map<String, Puzzle> allPuzzles = new HashMap<>();
         try {
             InputStream in = getClass().getResourceAsStream("/resources/data/test.json");
             InputStreamReader file = new InputStreamReader(in,
@@ -40,13 +40,18 @@ public class EscapeRoom implements EscapeRoomInterface {
             while(keys.hasNext()){
                 String gameName = (String) keys.next();
                 JSONObject game = (JSONObject) data.get(gameName);
-                List puzzles = (List) game.get("puzzles");
-                for(int i = 0; i< puzzles.size(); i++){
-                    String roomName = (String) puzzles.get(i);
-                    Puzzle currentPuzzle = generateRoom(game, roomName);
-                    allRooms.put(gameName + " : " + roomName, currentPuzzle);
+                Iterator keys2 = game.keySet().iterator();
+                while(keys2.hasNext()){
+                    String puzzleName = (String) keys2.next();
+                    JSONObject puzzle = (JSONObject) game.get(puzzleName);
+                    Puzzle currentPuzzle = new Puzzle(puzzle, puzzleName);
+                    allPuzzles.put(gameName + " : " + puzzleName, currentPuzzle);
+
+
                 }
             }
+
+
 
 //            InputStream in = getClass().getResourceAsStream("/resources/data/RoomData.csv");
 //            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -66,7 +71,7 @@ public class EscapeRoom implements EscapeRoomInterface {
             System.out.println(e);
             System.out.println("In load");
         }
-        return allRooms;
+        return allPuzzles;
 
 
     }

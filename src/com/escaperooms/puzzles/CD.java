@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 public class CD extends Item {
     private String song;
     private MusicPlayer musicPlayer;
+    private String hasClue;
 
 
 
@@ -16,10 +17,10 @@ public class CD extends Item {
         this.musicPlayer = new MusicPlayer(song);
     }
 
-    public CD(String description, String itemType){
-        this();
+    public CD(String description,String hasClue){
         setDescription(description);
-        setItemType(itemType);
+        setHasClue(hasClue);
+
     }
 
     @Override
@@ -41,6 +42,10 @@ public class CD extends Item {
 
         }
     }
-
-
+    public String setHasClue(String hasClue) {
+        return this.hasClue;
+    }
+    public String getHasClue() {
+        return hasClue;
+    }
 }

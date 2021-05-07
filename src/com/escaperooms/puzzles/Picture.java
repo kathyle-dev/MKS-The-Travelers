@@ -4,6 +4,14 @@ import com.escaperooms.application.Item;
 
 public class Picture extends Item {
 
+    private String name;
+    private String description;
+    private String hasClue;
+
+    Picture(){
+        this.name = name;
+        this.description = description
+    }
 
 
     @Override

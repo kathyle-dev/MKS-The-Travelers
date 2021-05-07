@@ -1,61 +1,59 @@
 {
-
   "Trap Room": {
-    "puzzles": ["puzzle1", "puzzle2"],
     "puzzle1": {
-      "items": [
-        {
-          "Skyline": {
-            "itemType": "CD",
+      "items": {
+        "CD": {
+          "skyline": {
             "description": "Skyline is a song by FKJ, that will send you chill vibes",
-            "hasClue": false
+            "hasClue": "false"
           },
           "soar": {
-            "itemType": "CD",
             "description": "Soar is a song by Christina Aguilera that will motivate you to do great things ",
-            "hasClue": false
+            "hasClue": "false"
           },
-          "walkItTalkIt":{
-            "itemType": "CD",
-            "description":"Walk It, Talk It is a song by Migos, that will help you walk the path you have spoken",
-            "hasClue": false
-        }
-        }],
-      "doors": [{
-        "door1":{
-          "destination": "puzzle2",
-          "clueNeeded": false
-        } ,
-        "door2": {
-          "destination": "JoninExam",
-          "clueNeeded": "
-        }
-      }]
-    },
-    "puzzle2" : {
-      "items": [
-        {"blaster":{
-          "itemType": "Tool",
-          "description": "This is a blaster. Dangerous weapon.",
-          "hasClue": "key1"
-        },
-          "phone": {
-            "itemType": "Tool",
-            "description": "This is a phone.",
-            "hasClue": false
+          "walkItTalkIt": {
+            "description": "Walk It, Talk It is a song by Migos, that will help you walk the path you have spoken",
+            "hasClue": "false"
           }
-        }],
-      "doors": [{
-        "door1":{
-          "destination": "room2",
-          "clueNeeded": false
-        } ,
-        "door2": {
-          "destination": "room3",
-          "clueNeeded": false
+        },
+        "Picture": {
+          "randomPicture0": {
+            "description": "This is a picture of something very random",
+            "hasClue": "yellowKey"
+          },
+          "soaringEagle": {
+            "description": " This is a picture of an eagle soaring in the sky with a golden microphone in it's talons",
+            "hasClue": "blackKey"
+          },
+          "randomPicture1": {
+            "description": "This is a picture of something very random",
+            "hasClue": "purpleKey"
+          },
+          "randomPicture2": {
+            "description": "This is a picture of something very random",
+            "hasClue": "redKey"
+          },
+          "skylinePicture": {
+            "description": "This is a picture of the beautiful Seattle skyline",
+            "hasClue": "whiteKey"
+          },
+          "randomPicture3": {
+            "description": "This is a picture of something very random",
+            "hasClue": "violetKey"
+          },
+          "walkingPicture": {
+            "description": "This is a picture of a group of friends walking down a path",
+            "hasClue": "brownKey"
+          }
         }
-      }]
+      },
+      "door": {
+        "destination": "puzzle2",
+        "solution":
+          "blackKey : whiteKey : brownKey"
+      }
     }
+
   }
 }
 
