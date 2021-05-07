@@ -6,9 +6,6 @@ import com.escaperooms.spaceodyssey.SpaceOdyssey;
 import com.escaperooms.spaceodyssey.Trivia;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.util.*;
 
@@ -32,8 +29,10 @@ public class EscapeRoom implements EscapeRoomInterface {
             reader.lines().forEach(roomData -> {
                 File data = new File(roomData);
                 try {
-                    allThemes.add(parser.parse(data));
-                } catch (IOException e) {
+                    System.out.println("Room Data: " + data.getAbsoluteFile());
+                    ThemeRoom themeRoom = parser.parse(data);
+                   allThemes.add(themeRoom);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });

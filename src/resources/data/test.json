@@ -67,7 +67,7 @@
       ],
       "door": {
         "destination": "puzzle2",
-        "solution": "blackKey : whiteKey : brownKey"
+        "solution": ["blackKey", "whiteKey", "brownKey"]
       }
     }
   ],

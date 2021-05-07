@@ -2,7 +2,6 @@ package com.escaperooms.client;
 
 import com.escaperooms.application.EscapeRoom;
 import com.escaperooms.application.ThemeRoom;
-import com.escaperooms.puzzles.*;
 import com.escaperooms.application.Traveler;
 import com.escaperooms.application.User;
 import org.fusesource.jansi.AnsiConsole;
