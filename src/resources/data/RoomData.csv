@@ -1,9 +1,1 @@
-Jonin Exams : RoomName : Item1 ~ Item2 : UsefulItem1 ~ UsefulItem2 : ActorName ~ ActorName : RoomName ~ RoomName
-Crazy Stan : RoomName : Item1 ~ Item2 : UsefulItem1 ~ UsefulItem2 : ActorName ~ ActorName : RoomName ~ RoomName
-Space Odyssey : KITCHEN :  : MATCH : DUCKLING : STOCK ROOM ~ DORMS
-Space Odyssey : STOCK ROOM :  :  : DUCK : KITCHEN
-Space Odyssey : COCK PIT :  :  : DOG : ENGINE ROOM ~ DORMS
-Space Odyssey : ENGINE ROOM :  :  : HORSE : ESCAPE HATCH ~ COCK PIT
-Space Odyssey : DORMS : MATCH :  :  : COCK PIT ~ KITCHEN
-Space Odyssey : ESCAPE HATCH :  :  : FISH : ENGINE ROOM ~ POD
-Space Odyssey : POD : WRENCH : KEYPAD : CAT : ESCAPE HATCH
+/resources/data/test.json
