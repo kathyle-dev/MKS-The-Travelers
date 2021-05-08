@@ -11,27 +11,31 @@ import java.util.*;
 
 public class EscapeRoom implements EscapeRoomInterface {
     private static final EscapeRoomPrompter escapeRoomPrompter = new EscapeRoomPrompter();
-    private List<ThemeRoom> gameList = new ArrayList<>();
+    private List<ThemeRoom> gameList;
     private AdventureParser parser = new AdventureParser();
     public Map<String, Trivia> trivia;
     private static EscapeRoom me;
 
+    // default path to csv file
     public EscapeRoom() throws IOException {
-        this.gameList = this.load();
+        this.gameList = this.load("/resources/data/RoomData.csv");// has paths to JSON files
 //        this.trivia = this.loadTrivia();
     }
 
-    public List<ThemeRoom> load() {
+    public EscapeRoom(String path) throws IOException {
+        this.gameList = this.load(path);
+    }
+
+    public List<ThemeRoom> load(String path) {
         List<ThemeRoom> allThemes = new ArrayList<>();
         try {
-            InputStream room = getClass().getResourceAsStream("/resources/data/RoomData.csv");
+            InputStream room = getClass().getResourceAsStream(path);
             BufferedReader reader = new BufferedReader(new InputStreamReader(room));
             reader.lines().forEach(roomData -> {
                 File data = new File(roomData);
                 try {
-                    System.out.println("Room Data: " + data.getAbsoluteFile());
                     ThemeRoom themeRoom = parser.parse(data);
-                   allThemes.add(themeRoom);
+                    allThemes.add(themeRoom);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -128,14 +132,4 @@ public class EscapeRoom implements EscapeRoomInterface {
         return null;
     }
 
-    public static void main(String[] args){
-        try {
-            EscapeRoom escapeRoom = new EscapeRoom();
-            List<ThemeRoom> rooms = escapeRoom.getGameList();
-            rooms.forEach(room -> System.out.println(room.getName()));
-        }catch (Exception e){
-            System.out.println("The main is not working");
-
-        }
-    }
 }
