@@ -60,4 +60,12 @@ public class EscapeRoomGameTest {
         assertEquals("false", hasClue);
     }
 
+    @Test
+    public void testIsPuzzlesCompleted(){
+        themeRoom = escapeRoomGame.getGameList().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        puzzle.setCompleted(true);
+        boolean result = themeRoom.isPuzzleCompleted();
+        assertEquals(true , result);
+    }
 }

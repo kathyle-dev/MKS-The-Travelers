@@ -38,7 +38,6 @@ class Client {
             traveler.menu();
         } catch (Exception e) {
             System.out.println("The main is not working");
-
         }
     }
 

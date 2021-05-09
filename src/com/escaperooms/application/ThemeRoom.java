@@ -13,7 +13,6 @@ public class ThemeRoom {
     private List<Puzzle> puzzles;
     @JsonProperty("nextTheme")
     private String nextTheme;
-
     private Puzzle currentPuzzle;
     private boolean isCompleted = false;
 
@@ -65,5 +64,18 @@ public class ThemeRoom {
 
     public void setCompleted() {
         this.isCompleted = true;
+    }
+
+    //Check if user has completed all puzzles
+    //Create is completed var in puzzle class
+
+    public boolean isPuzzleCompleted(){
+        boolean result = true;
+        for (Puzzle currentPuzzle  : puzzles) {
+            if(!currentPuzzle.isCompleted()){
+                result = false;
+            }
+        }
+        return result;
     }
 }
