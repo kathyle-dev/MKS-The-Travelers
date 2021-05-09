@@ -1,6 +1,6 @@
 package com.escaperooms.crazystans;
 
-import com.escaperooms.application.EscapeRoom;
+import com.escaperooms.application.EscapeRoomGame;
 import com.escaperooms.music.MusicPlayer;
 
 import java.util.List;
@@ -12,7 +12,7 @@ class CrazyStansPrompter {
         final StringBuffer controls = new StringBuffer();
         musicControls.forEach(control -> controls.append("|").append(control));
         regex = regex + controls.toString() + "|commands";
-        String input = EscapeRoom.prompt(message, regex, "That is not the correct answer.");
+        String input = EscapeRoomGame.prompt(message, regex, "That is not the correct answer.");
         String result = "rerun";
         if(musicPlayer.getClip() != null && musicControls.contains(input)) {
             switch (input) {

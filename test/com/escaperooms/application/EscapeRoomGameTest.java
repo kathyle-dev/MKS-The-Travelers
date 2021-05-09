@@ -7,8 +7,8 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class EscapeRoomTest {
-    EscapeRoom escapeRoom;
+public class EscapeRoomGameTest {
+    EscapeRoomGame escapeRoomGame;
     ThemeRoom themeRoom;
     List<Puzzle> puzzleList;
     List<Item> puzzleItems;
@@ -16,7 +16,7 @@ public class EscapeRoomTest {
     @Before
     public void setUp(){
         try {
-            escapeRoom = new EscapeRoom();
+            escapeRoomGame = new EscapeRoomGame();
         }catch (Exception e){
             System.out.println("Could not create an Escape Room");
         }
@@ -24,19 +24,19 @@ public class EscapeRoomTest {
 
     @Test
     public void testLoadWithDefaultCSV() {
-        int gameListSize = escapeRoom.getGameList().size();
+        int gameListSize = escapeRoomGame.getGameList().size();
         assertEquals(1, gameListSize);
     }
 
     @Test
     public void testGetThemeInGameListWithDefaultCSV() {
-        String result = escapeRoom.getGameList().get(0).getName();
+        String result = escapeRoomGame.getGameList().get(0).getName();
         assertEquals("Trap Room", result);
     }
 
     @Test
     public void testGetPuzzlesofAThemeRoomWithDefaultCSV(){
-        themeRoom = escapeRoom.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameList().get(0);
         puzzleList = themeRoom.getPuzzles();
         puzzleItems = puzzleList.get(0).getItems();
 
@@ -47,7 +47,7 @@ public class EscapeRoomTest {
 
     @Test
     public void testItemsOfAPuzzleWithDefaultCSV(){
-        themeRoom = escapeRoom.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get(0);
         Item puzzleItem = puzzle.getItems().get(0);
         String name = puzzleItem.getName();

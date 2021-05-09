@@ -1,14 +1,10 @@
 package com.escaperooms.client;
 
-import com.escaperooms.application.EscapeRoom;
+import com.escaperooms.application.EscapeRoomGame;
 import com.escaperooms.application.ThemeRoom;
 import com.escaperooms.application.Traveler;
 import com.escaperooms.application.User;
-import org.fusesource.jansi.AnsiConsole;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.*;
 
-import java.io.IOException;
 import java.util.List;
 
 class Client {
@@ -31,12 +27,16 @@ class Client {
 //        traveler.menu();
 //    }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
-            EscapeRoom escapeRoom = new EscapeRoom();
-            List<ThemeRoom> rooms = escapeRoom.getGameList();
-            rooms.forEach(room -> System.out.println(room.getName()));
-        }catch (Exception e){
+            User user = new User();
+            EscapeRoomGame escapeRoomGame = new EscapeRoomGame();
+            String name = EscapeRoomGame.prompt("Please enter your name: ", "[ a-zA-z]*",
+                    "\nThat is not a valid name!\n");
+            user.newName(name);
+            Traveler traveler = new Traveler(user, escapeRoomGame);
+            traveler.menu();
+        } catch (Exception e) {
             System.out.println("The main is not working");
 
         }

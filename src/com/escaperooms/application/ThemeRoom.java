@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-import java.util.Map;
 
 public class ThemeRoom {
 
@@ -15,14 +14,21 @@ public class ThemeRoom {
     @JsonProperty("nextTheme")
     private String nextTheme;
 
-    private int currentPuzzle;
+    private Puzzle currentPuzzle;
+    private boolean isCompleted = false;
 
     @JsonCreator
     public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("puzzles") List<Puzzle> puzzles, @JsonProperty("nextTheme") String nextTheme){
         this.name = name;
         this.puzzles = puzzles;
         this.nextTheme = nextTheme;
-        this.currentPuzzle = 0;
+        this.currentPuzzle = puzzles.get(0);
+    }
+
+    public void run(Traveler traveler, ThemeRoom room) {
+        System.out.println("You are in "+ getName());
+        System.out.println("Here's your first puzzle:");
+        System.out.println(currentPuzzle.getName());
     }
 
     /*
@@ -45,11 +51,19 @@ public class ThemeRoom {
         this.puzzles = puzzles;
     }
 
-    public int getCurrentPuzzle() {
+    public Puzzle getCurrentPuzzle() {
         return currentPuzzle;
     }
 
-    public void setCurrentPuzzle(int currentPuzzle) {
+    public void setCurrentPuzzle(Puzzle currentPuzzle) {
         this.currentPuzzle = currentPuzzle;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted() {
+        this.isCompleted = true;
     }
 }
