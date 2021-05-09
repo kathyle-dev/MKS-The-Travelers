@@ -27,7 +27,7 @@ public class ThemeRoom {
     public void run(Traveler traveler, ThemeRoom room) {
         System.out.println("You are in "+ getName());
         System.out.println("Here's your first puzzle:");
-        System.out.println(currentPuzzle.getName());
+        System.out.println(currentPuzzle.getDescription());
     }
 
     /*
