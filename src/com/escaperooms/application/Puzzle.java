@@ -12,6 +12,7 @@ public class Puzzle {
     private List<Item> items;
     @JsonProperty("door")
     private Door door;
+    private boolean isCompleted;
 
 
     /*
@@ -42,4 +43,11 @@ public class Puzzle {
         this.items = items;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
 }
