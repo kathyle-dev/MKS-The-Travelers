@@ -4,6 +4,8 @@ import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Scanner;
+
 public class Item {
     private String name;
     private String description;
@@ -11,7 +13,7 @@ public class Item {
     private String hasClue;
     private String userInput;
     private MusicPlayer musicPlayer;
-
+    Scanner scanner = new Scanner(System.in);
 
     public Item() {
 
@@ -36,58 +38,68 @@ public class Item {
     }
 
 
-//  public void useCD(){
-//        switch (getUserInput){
-//            case "look at":
-//            case "examine":
-//            case "view":
-//                getDescription();
-//                break;
-//                case "play":
-//            case "listen":
-//                musicPlayer.run();
-//            break;
-//            case "stop":
-//                musicPlayer.stopMusic();
-//            default:
-//                System.out.println("You have entered an invalid Command");
-//  }
-//
-    public String getDescription(){
-        return this.description;
+    public void useCD() {
+        switch (getUserInput()) {
+            case "look at":
+            case "examine":
+            case "view":
+                ;
+                break;
+            case "play":
+            case "listen":
+                musicPlayer.run();
+                break;
+            case "stop":
+                musicPlayer.stopMusic();
+            default:
+                System.out.println("You have entered an invalid Command");
+        }
     }
 
-    public String getItemType() {
-        return itemType;
-    }
+        public String getDescription () {
+            return this.description;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getItemType () {
+            return itemType;
+        }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+        public String getName () {
+            return name;
+        }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
+        public void setDescription (String description){
+            this.description = description;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public void setItemType (String itemType){
+            this.itemType = itemType;
+        }
 
-    public String getHasClue() {
-        return hasClue;
-    }
+        public void setName (String name){
+            this.name = name;
+        }
 
-    public void setHasClue(String hasClue) {
-        this.hasClue = hasClue;
-    }
+        public String getHasClue () {
+            return hasClue;
+        }
 
-    //}
+        public void setHasClue (String hasClue){
+            this.hasClue = hasClue;
+        }
+
+        //}
 //
 //    public String getUserInput() {
 //        return userInput;
 //    }
+
+
+    public String getUserInput() {
+        return userInput;
+    }
+
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
+    }
 }

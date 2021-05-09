@@ -3,6 +3,7 @@
   "puzzles": [
     {
       "name": "puzzle1",
+      "description": "This is kind of like the SAW movies, You must figure out how to unlock the door.\n There are twelve pictures and boom box that appears to have 3 CDs inside. Good luck",
       "items": [
         {
           "name": "skyline",
