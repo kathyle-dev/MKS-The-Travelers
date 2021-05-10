@@ -69,4 +69,33 @@ public class EscapeRoomGameTest {
         boolean result = themeRoom.isPuzzleCompleted();
         assertEquals(true , result);
     }
+
+    @Test
+    public void userInputSplitTwoWords(){
+        themeRoom = escapeRoomGame.getGameList().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Item puzzleItem = puzzle.getItems().get(0);
+        String verb = "view";
+        String noun = "cd";
+        puzzleItem.setUserInput("view cd");
+        puzzleItem.splitUserInput();
+
+        assertEquals(verb,puzzleItem.getVerb());
+        assertEquals(noun,puzzleItem.getNoun());
+    }
+    @Test
+    public void userInputSplitThreeWords(){
+        themeRoom = escapeRoomGame.getGameList().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Item puzzleItem = puzzle.getItems().get(0);
+        String verb = "look at";
+        String noun = "cd";
+        puzzleItem.setUserInput("look at cd");
+        puzzleItem.splitUserInput();
+
+        assertEquals(verb,puzzleItem.getVerb());
+        assertEquals(noun,puzzleItem.getNoun());
+    }
+
+
 }

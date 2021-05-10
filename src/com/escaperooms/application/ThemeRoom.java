@@ -28,6 +28,7 @@ public class ThemeRoom {
         System.out.println("You are in "+ getName());
         System.out.println("Here's your first puzzle:");
         System.out.println(currentPuzzle.getDescription());
+
     }
 
     /*

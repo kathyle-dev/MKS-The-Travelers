@@ -4,6 +4,7 @@ import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Item {
@@ -14,6 +15,11 @@ public class Item {
     private String userInput;
     private MusicPlayer musicPlayer;
     Scanner scanner = new Scanner(System.in);
+
+
+    private String verb;
+    private String noun;
+    private String[] splitting;
 
     public Item() {
 
@@ -33,7 +39,16 @@ public class Item {
 
 
     public void use() {
-
+        switch (getNoun()) {
+            case "cd":
+                useCD();
+            case "picture":
+                usePicture();
+                break;
+            default:
+                System.out.println("invalid input try again");
+                input();
+        }
 
     }
 
@@ -43,57 +58,94 @@ public class Item {
             case "look at":
             case "examine":
             case "view":
-                ;
+            case "describe":
+                this.getDescription();
                 break;
             case "play":
-            case "listen":
-                musicPlayer.run();
+            case "listen to":
+                // musicPlayer.run();
                 break;
             case "stop":
                 musicPlayer.stopMusic();
-            default:
-                System.out.println("You have entered an invalid Command");
+
         }
     }
 
-        public String getDescription () {
-            return this.description;
+    public void usePicture() {
+        switch (getVerb()) {
+            case "look at":
+            case "examine":
+            case "view":
+            case "describe":
+                this.getDescription();
+                break;
+            case "move":
+            case "pick up":
+            case "lift":
+                System.out.println("you have added one" + this.getHasClue());
+                break;
+
+        }
+    }
+    public void input() {
+        System.out.println("What would you like to do");
+        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
+        splitUserInput();
+    }
+
+
+    public void splitUserInput() {
+        setSplitting(getUserInput().split("\\s"));
+        if (getSplitting().length == 2) {
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1]);
+            use();
+        } else if (getSplitting().length == 3) {
+            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
+            setNoun(getSplitting()[2]);
+            use();
+        } else {
+            input();
         }
 
-        public String getItemType () {
-            return itemType;
-        }
 
-        public String getName () {
-            return name;
-        }
+    }
 
-        public void setDescription (String description){
-            this.description = description;
-        }
 
-        public void setItemType (String itemType){
-            this.itemType = itemType;
-        }
 
-        public void setName (String name){
-            this.name = name;
-        }
 
-        public String getHasClue () {
-            return hasClue;
-        }
+   //Getters and Setters
+    public String getDescription() {
+        return this.description;
+    }
 
-        public void setHasClue (String hasClue){
-            this.hasClue = hasClue;
-        }
+    public String getItemType() {
+        return itemType;
+    }
 
-        //}
-//
-//    public String getUserInput() {
-//        return userInput;
-//    }
+    public String getName() {
+        return name;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getHasClue() {
+        return hasClue;
+    }
+
+    public void setHasClue(String hasClue) {
+        this.hasClue = hasClue;
+    }
 
     public String getUserInput() {
         return userInput;
@@ -102,4 +154,29 @@ public class Item {
     public void setUserInput(String userInput) {
         this.userInput = userInput;
     }
+
+    public String getVerb() {
+        return verb;
+    }
+
+    public void setVerb(String verb) {
+        this.verb = verb;
+    }
+
+    public String getNoun() {
+        return noun;
+    }
+
+    public void setNoun(String noun) {
+        this.noun = noun;
+    }
+
+    public String[] getSplitting() {
+        return splitting;
+    }
+
+    public void setSplitting(String[] splitting) {
+        this.splitting = splitting;
+    }
+
 }
