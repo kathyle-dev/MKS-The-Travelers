@@ -1,5 +1,6 @@
 package com.escaperooms.application;
 
+import java.util.ArrayList;
 import java.util.List;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
@@ -7,7 +8,7 @@ public class Traveler {
     User user;
     EscapeRoomGame game;
     List<ThemeRoom> availableRooms;
-
+    List<String> inventory = new ArrayList<>();
 
     public Traveler(User user, EscapeRoomGame game) {
         this.user = user;
@@ -61,5 +62,30 @@ public class Traveler {
             wonSequence();
             System.exit(0);
         }
+    }
+
+    public List<String> getInventory() {
+        return inventory;
+    }
+
+    public void showInventory() {
+        if(inventory.size()==0){
+            System.out.println("There is nothing in your inventory");
+        }else{
+            System.out.println("You have " + inventory + " in your inventory");
+        }
+    }
+
+    public void addItem(String item) {
+        System.out.println(" Obtained "+item);
+        this.inventory.add(item);
+    }
+
+    public void removeItem(String item) {
+        this.inventory.remove(item);
+    }
+
+    public boolean isItemInInventory(String itemName){
+        return this.inventory.contains(itemName);
     }
 }
