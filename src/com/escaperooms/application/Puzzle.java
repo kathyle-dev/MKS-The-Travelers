@@ -11,7 +11,7 @@ public class Puzzle {
     @JsonProperty("description")
     private String description;
     @JsonProperty("items")
-    private List<Item> items;
+    private Map<String, Item> items;
     @JsonProperty("door")
     private Door door;
     private boolean isCompleted;
@@ -45,11 +45,11 @@ public class Puzzle {
         this.door = door;
     }
 
-    public List<Item> getItems() {
+    public Map<String, Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Map<String, Item> items) {
         this.items = items;
     }
 

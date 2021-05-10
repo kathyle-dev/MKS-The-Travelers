@@ -52,17 +52,17 @@ public class EscapeRoomGameTest {
     public void testGetPuzzlesofAThemeRoomWithDefaultCSV(){
         themeRoom = escapeRoomGame.getGameList().get(0);
         puzzleList = themeRoom.getPuzzles();
-        puzzleItems = puzzleList.get(0).getItems();
+        puzzleItems = puzzleList.get("puzzle1").getItems();
 
         assertEquals(1, puzzleList.size());
-        assertEquals("puzzle1", puzzleList.get(0).getName());
+        assertEquals("puzzle1", puzzleList.get("puzzle1").getName());
         assertEquals(10, puzzleItems.size());
     }
 
     @Test
     public void testItemsOfAPuzzleWithDefaultCSV(){
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get(0);
         String name = puzzleItem.getName();
         String description = puzzleItem.getDescription();
@@ -77,7 +77,7 @@ public class EscapeRoomGameTest {
     @Test
     public void testIsPuzzlesCompleted(){
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         puzzle.setCompleted(true);
         boolean result = themeRoom.isThemeRoomCompleted();
         assertEquals(true , result);
@@ -86,7 +86,7 @@ public class EscapeRoomGameTest {
     @Test
     public void userInputSplitTwoWords(){
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get(0);
         String verb = "view";
         String noun = "cd";
@@ -99,7 +99,7 @@ public class EscapeRoomGameTest {
     @Test
     public void userInputSplitThreeWords(){
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get(0);
         String verb = "look at";
         String noun = "cd";
@@ -114,7 +114,7 @@ public class EscapeRoomGameTest {
     @Test
     public void testShowInventory() {
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get(0);
         String itemName1 = puzzleItem.getName();
         String itemName2 = puzzle.getItems().get(1).getName();
@@ -130,7 +130,7 @@ public class EscapeRoomGameTest {
     @Test
     public void testAddItem() {
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get(0);
         String itemName1 = puzzleItem.getName();
         String itemName2 = puzzle.getItems().get(1).getName();
@@ -144,7 +144,7 @@ public class EscapeRoomGameTest {
     @Test
     public void testRemoveItem() {
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get(0);
+        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get(0);
         String itemName1 = puzzleItem.getName();
         String itemName2 = puzzle.getItems().get(1).getName();
@@ -165,6 +165,7 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testHashMapPuzzleInThemeRoom(){
+        themeRoom = escapeRoomGame.getGameList().get(0);
         puzzleList = themeRoom.getPuzzles();
         String expectedDescription = "This is kind of like the SAW movies, You must figure out how to unlock the door.\n There are twelve pictures and boom box that appears to have 3 CDs inside. Good luck";
         assertEquals(1, puzzleList.size());
