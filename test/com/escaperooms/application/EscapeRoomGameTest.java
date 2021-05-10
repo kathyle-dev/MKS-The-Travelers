@@ -7,7 +7,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -18,7 +18,7 @@ public class EscapeRoomGameTest {
     User player;
     Traveler traveler;
 
-    HashMap<String, Puzzle> puzzleList;
+    Map<String, Puzzle> puzzleList;
     List<Item> puzzleItems;
 
     @Before
