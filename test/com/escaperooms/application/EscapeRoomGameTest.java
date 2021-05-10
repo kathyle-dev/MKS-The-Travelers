@@ -7,6 +7,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -17,7 +18,7 @@ public class EscapeRoomGameTest {
     User player;
     Traveler traveler;
 
-    List<Puzzle> puzzleList;
+    HashMap<String, Puzzle> puzzleList;
     List<Item> puzzleItems;
 
     @Before
@@ -78,7 +79,7 @@ public class EscapeRoomGameTest {
         themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get(0);
         puzzle.setCompleted(true);
-        boolean result = themeRoom.isPuzzleCompleted();
+        boolean result = themeRoom.isThemeRoomCompleted();
         assertEquals(true , result);
     }
 
@@ -160,5 +161,15 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testIsItemInInventory() {
+    }
+
+    @Test
+    public void testHashMapPuzzleInThemeRoom(){
+        puzzleList = themeRoom.getPuzzles();
+        String expectedDescription = "This is kind of like the SAW movies, You must figure out how to unlock the door.\n There are twelve pictures and boom box that appears to have 3 CDs inside. Good luck";
+        assertEquals(1, puzzleList.size());
+        assertEquals("puzzle1", puzzleList.get("puzzle1").getName());
+        assertEquals(expectedDescription,  puzzleList.get("puzzle1").getDescription());
+
     }
 }

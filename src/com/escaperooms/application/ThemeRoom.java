@@ -3,6 +3,8 @@ package com.escaperooms.application;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class ThemeRoom {
@@ -10,14 +12,14 @@ public class ThemeRoom {
     @JsonProperty("name")
     private String name;
     @JsonProperty("puzzles")
-    private List<Puzzle> puzzles;
+    private HashMap<String, Puzzle> puzzles;
     @JsonProperty("nextTheme")
     private String nextTheme;
     private Puzzle currentPuzzle;
     private boolean isCompleted = false;
 
     @JsonCreator
-    public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("puzzles") List<Puzzle> puzzles, @JsonProperty("nextTheme") String nextTheme){
+    public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("puzzles") HashMap<String, Puzzle> puzzles, @JsonProperty("nextTheme") String nextTheme){
         this.name = name;
         this.puzzles = puzzles;
         this.nextTheme = nextTheme;
@@ -28,7 +30,7 @@ public class ThemeRoom {
         System.out.println("You are in "+ getName());
         System.out.println("Here's your first puzzle:");
         System.out.println(currentPuzzle.getDescription());
-
+        System.out.println("size: "+ puzzles.size());
     }
 
     /*
@@ -43,11 +45,11 @@ public class ThemeRoom {
         this.name = name;
     }
 
-    public List<Puzzle> getPuzzles() {
+    public HashMap<String, Puzzle> getPuzzles() {
         return puzzles;
     }
 
-    public void setPuzzles(List<Puzzle> puzzles) {
+    public void setPuzzles(HashMap<String, Puzzle> puzzles) {
         this.puzzles = puzzles;
     }
 
@@ -70,13 +72,22 @@ public class ThemeRoom {
     //Check if user has completed all puzzles
     //Create is completed var in puzzle class
 
-    public boolean isPuzzleCompleted(){
+    public boolean isThemeRoomCompleted(){
         boolean result = true;
-        for (Puzzle currentPuzzle  : puzzles) {
+        Collection<Puzzle> puzzleList = puzzles.values();
+        for (Puzzle currentPuzzle  : puzzleList) {
             if(!currentPuzzle.isCompleted()){
                 result = false;
             }
         }
         return result;
+    }
+
+    //if the current puzzles is completed, get the next puzzle for the user to play
+    public void getNextPuzzle(){
+        if(currentPuzzle.isCompleted()){
+            String puzzleName = currentPuzzle.getDoor().getDestination();
+            setCurrentPuzzle(puzzles.get(puzzleName));
+        }
     }
 }
