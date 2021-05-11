@@ -4,11 +4,11 @@ public class Playable {
 
     private String name;
     private String message;
-    private EscapeRoom escapeRoom;
+    private ThemeRoom themeRoom;
     private boolean isCompleted = false;
 
-    public Playable(String name, String message, EscapeRoom escapeRoom) {
-        setEscapeRoom(escapeRoom);
+    public Playable(String name, String message, ThemeRoom themeRoom) {
+        setEscapeRoom(themeRoom);
         setMessage(message);
         setName(name);
     }
@@ -29,12 +29,12 @@ public class Playable {
         this.message = message;
     }
 
-    public EscapeRoom getEscapeRoom() {
-        return escapeRoom;
+    public ThemeRoom getEscapeRoom() {
+        return themeRoom;
     }
 
-    public void setEscapeRoom(EscapeRoom escapeRoom) {
-        this.escapeRoom = escapeRoom;
+    public void setEscapeRoom(ThemeRoom themeRoom) {
+        this.themeRoom = themeRoom;
     }
 
     public boolean isCompleted() {

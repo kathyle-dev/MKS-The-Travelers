@@ -1,6 +1,6 @@
 package com.escaperooms.crazystans;
 
-import com.escaperooms.application.EscapeRoom;
+import com.escaperooms.application.EscapeRoomGame;
 
 import static org.fusesource.jansi.Ansi.Color.RED;
 import static org.fusesource.jansi.Ansi.ansi;
@@ -16,7 +16,7 @@ class MichaelJacksonsRoom {
     }
 
     private void askQuestion() {
-        String hint = EscapeRoom.prompt("In the song Billie Jean, what did Michael Jackson state Billie Jean was more like? ",
+        String hint = EscapeRoomGame.prompt("In the song Billie Jean, what did Michael Jackson state Billie Jean was more like? ",
                 challengeAnswer() + "|hint", "That is not the correct answer.");
         if (hint.equals("hint")) {
             hintChecker();

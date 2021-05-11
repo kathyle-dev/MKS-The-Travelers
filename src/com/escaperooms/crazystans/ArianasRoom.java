@@ -1,6 +1,6 @@
 package com.escaperooms.crazystans;
 
-import com.escaperooms.application.EscapeRoom;
+import com.escaperooms.application.EscapeRoomGame;
 import static org.fusesource.jansi.Ansi.Color.RED;
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -15,7 +15,7 @@ class ArianasRoom {
     }
 
     private void askQuestion() {
-        String hint = EscapeRoom.prompt("What kind of donut did Ariana Grande lick? ",
+        String hint = EscapeRoomGame.prompt("What kind of donut did Ariana Grande lick? ",
                 challengeAnswer() + "|hint", "That is not the correct answer.");
         if (hint.equals("hint")) {
             hintChecker();

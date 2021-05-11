@@ -1,0 +1,88 @@
+{
+  "name": "Trap Room",
+  "startingPuzzle": "puzzle1",
+  "puzzles": {
+    "puzzle1": {
+      "name": "puzzle1",
+      "description": "This is kind of like the SAW movies, You must figure out how to unlock the door.\n There are twelve pictures and boom box that appears to have 3 CDs inside. Good luck",
+      "items": {
+        "cd": {
+          "skyline": {
+            "name": "skyline",
+            "description": "Skyline is a song by FKJ, that will send you chill vibes",
+            "itemType": "CD",
+            "hasClue": "false"
+          },
+          "soar": {
+            "name": "soar",
+            "description": "Soar is a song by Christina Aguilera that will motivate you to do great things ",
+            "itemType": "CD",
+            "hasClue": "false"
+          },
+          "walkItTalkIt": {
+            "name": "walkItTalkIt",
+            "description": "Walk It, Talk It is a song by Migos, that will help you walk the path you have spoken",
+            "itemType": "CD",
+            "hasClue": "false"
+          }
+        },
+        "picture": {
+          "randomPicture0": {
+            "name": "randomPicture0",
+            "description": "This is a picture of something very random",
+            "itemType": "Picture",
+            "hasClue": "yellowKey"
+          },
+          "soaringEagle": {
+            "name": "soaringEagle",
+            "description": " This is a picture of an eagle soaring in the sky with a golden microphone in it's talons",
+            "itemType": "Picture",
+            "hasClue": "blackKey"
+          },
+          "randomPicture1": {
+            "name": "randomPicture1",
+            "description": "This is a picture of something very random",
+            "itemType": "Picture",
+            "hasClue": "purpleKey"
+          },
+          "randomPicture2": {
+            "name": "randomPicture2",
+            "description": "This is a picture of something very random",
+            "itemType": "Picture",
+            "hasClue": "redKey"
+          },
+          "skylinePicture": {
+            "name": "skylinePicture",
+            "description": "This is a picture of the beautiful Seattle skyline",
+            "itemType": "Picture",
+            "hasClue": "whiteKey"
+          },
+          "randomPicture3": {
+            "name": "randomPicture3",
+            "description": "This is a picture of something very random",
+            "itemType": "Picture",
+            "hasClue": "violetKey"
+          },
+          "walkingPicture": {
+            "name": "walkingPicture",
+            "description": "This is a picture of a group of friends walking down a path",
+            "itemType": "Picture",
+            "hasClue": "brownKey"
+          }
+        }
+      },
+      "door": {
+        "destination": "puzzle2",
+        "solution": [
+          "blackKey",
+          "whiteKey",
+          "brownKey"
+        ]
+      }
+    }
+  },
+  "isStartingTheme":  true,
+  "nextTheme": "Mirage"
+}
+
+
