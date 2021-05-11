@@ -19,11 +19,7 @@ public class EscapeRoomGameTest {
     Traveler traveler;
 
     Map<String, Puzzle> puzzleList;
-<<<<<<< Updated upstream
-    Map<String, Item> puzzleItems;
-=======
     Map<String, Map<String, Item>> puzzleItems;
->>>>>>> Stashed changes
 
     @Before
     public void setUp(){
