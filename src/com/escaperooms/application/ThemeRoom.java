@@ -19,6 +19,7 @@ public class ThemeRoom {
     private String noun;
     private String[] splitting;
     private String userInput;
+    private String itemSelection;
     private Item currentItem;
     private String itemType;
     Scanner scanner = new Scanner(System.in);
@@ -123,7 +124,15 @@ public class ThemeRoom {
         this.itemType = itemType;
     }
 
-    //Check if user has completed all puzzles
+    public String getItemSelection() {
+        return itemSelection;
+    }
+
+    public void setItemSelection(String itemSelection) {
+        this.itemSelection = itemSelection;
+    }
+
+//Check if user has completed all puzzles
     //Create is completed var in puzzle class
 
     public boolean isThemeRoomCompleted(){
@@ -182,26 +191,36 @@ public class ThemeRoom {
         } else {
             input();
         }
-
+        checkItemType();
     }
 
-    void checkItem(){
-        switch (getNoun()) {
-            case "cd":
-                cdSelection();
-            case "picture":
-                ;
-                break;
-            default:
-                System.out.println("invalid input try again");
-                input();
+    void checkItemType(){
+        if (currentPuzzle.getItems().containsKey(getNoun())) {
+            itemSelection();
+        }else {
+            System.out.println("invalid item type");
+            input();
         }
+
     }
 
 
-    void cdSelection(){
-        System.out.println("Which cd would you like to perform the previous action on");
+    void itemSelection(){
+        System.out.println("Which "+ getNoun() + " would you like to perform the previous action on");
+        Map<String, Item> itemMap = currentPuzzle.getItems().get(getNoun());
 
+        for(Map.Entry<String,Item> entry:itemMap.entrySet()){
+            System.out.println(entry.getKey());
+        }
+
+        itemSelection = scanner.nextLine();
+        if(itemMap.containsKey(itemSelection)){
+            currentItem = itemMap.get(itemSelection);
+        }else {
+            itemSelection();
+        }
+
+        System.out.println(currentItem.getName() + " " + currentItem.getDescription());
     }
 
 
