@@ -19,7 +19,11 @@ public class EscapeRoomGameTest {
     Traveler traveler;
 
     Map<String, Puzzle> puzzleList;
+<<<<<<< Updated upstream
     Map<String, Item> puzzleItems;
+=======
+    Map<String, Map<String, Item>> puzzleItems;
+>>>>>>> Stashed changes
 
     @Before
     public void setUp(){
@@ -63,8 +67,13 @@ public class EscapeRoomGameTest {
     public void testItemsOfAPuzzleWithDefaultCSV(){
         themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
+<<<<<<< Updated upstream
 
         Item puzzleItem = puzzle.getItems().get("skyline");
+=======
+        Item puzzleItem = puzzle.getItems().get("CD").get("skyline");
+        String name = puzzleItem.getName();
+>>>>>>> Stashed changes
         String description = puzzleItem.getDescription();
         String itemType =puzzleItem.getItemType();
         String hasClue = puzzleItem.getHasClue();
@@ -170,5 +179,16 @@ public class EscapeRoomGameTest {
         assertEquals("puzzle1", puzzleList.get("puzzle1").getName());
         assertEquals(expectedDescription,  puzzleList.get("puzzle1").getDescription());
 
+    }
+
+    @Test
+    public void testDataStructureOfItemsMap() {
+        themeRoom = escapeRoomGame.getGameList().get(0);
+        puzzleList = themeRoom.getPuzzles();
+        Puzzle puzzle = puzzleList.get("puzzle1");
+        puzzleItems = puzzle.getItems();
+        assertEquals(2, puzzleItems.size());
+        assertEquals(3, puzzleItems.get("CD").size());
+        assertEquals(7, puzzleItems.get("picture").size());
     }
 }

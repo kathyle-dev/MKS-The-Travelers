@@ -24,11 +24,11 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
 
     @JsonCreator
-    public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("nextTheme") String nextTheme){
+    public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("nextTheme") String nextTheme){
         this.name = name;
         this.puzzles = puzzles;
         this.nextTheme = nextTheme;
-        this.currentPuzzle = puzzles.get("puzzle1");
+        this.currentPuzzle = puzzles.get(startingPuzzle);
     }
 
     public void run(Traveler traveler, ThemeRoom room) {
