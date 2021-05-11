@@ -103,4 +103,8 @@ public class Traveler {
         gameList.removeIf(room -> !room.isStartingTheme());
         this.availableRooms = gameList;
     }
+
+    public void clearInventory(){
+        this.inventory.clear();
+    }
 }

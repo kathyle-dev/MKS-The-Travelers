@@ -25,6 +25,7 @@ public class ThemeRoom {
     private Item currentItem;
     private String itemType;
     Scanner scanner = new Scanner(System.in);
+    private Traveler traveler;
 
     @JsonCreator
     public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("isStartingTheme") boolean isStartingTheme, @JsonProperty("nextTheme") String nextTheme) {
@@ -37,8 +38,7 @@ public class ThemeRoom {
 
     public void run(Traveler traveler) {
         this.traveler = traveler;
-        System.out.println("IS COMPLETED BEFORE WHILE IN RUN" + this.isCompleted);
-        while (this.isCompleted == false) {
+        while (!isCompleted) {
             System.out.println(printPuzzleMessage());
             input();
             getNextPuzzle();
@@ -46,8 +46,9 @@ public class ThemeRoom {
     }
 
     public String printPuzzleMessage() {
-        String msg;
-        msg = "Here's your puzzle" + currentPuzzle.getDescription();
+        String msg = "";
+        msg += ("You've entered: " + getName());
+        msg += "\nHere's your puzzle: \n" + currentPuzzle.getDescription();
         return msg;
     }
 
@@ -84,8 +85,8 @@ public class ThemeRoom {
         return this.isCompleted;
     }
 
-    public void setCompleted() {
-        this.isCompleted = true;
+    public void setCompleted(Boolean completed) {
+        this.isCompleted = completed;
     }
 
     public String getUserInput() {
@@ -221,27 +222,12 @@ public class ThemeRoom {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
         } else if (getNoun().equals("door")) {
-            traveler.showInventory();
-            Boolean enteredSolution = false;
-            List<String> solution = currentPuzzle.getDoor().getSolution();
-            int index = 0;
-            while (!enteredSolution){
-                if ((index ) == solution.size()) {
-                    System.out.println("YOU GOT OUT");
-                    setCompleted(true);
-                    break;
-                } else {
-                    System.out.println("Enter an item to unlock this door.");
-                    String clue = scanner.nextLine();
-                    if (solution.get(index).equalsIgnoreCase(clue)) {
-                        index++;
-                    } else {
-                        System.out.println("WRONG!");
-                        index = 0;
-                        break;
-                    }
-                }
-
+            if(traveler.getInventory().size() > 0){
+                traveler.showInventory();
+                List<String> solution = currentPuzzle.getDoor().getSolution();
+                checkSolution(solution);
+            }else{
+                System.out.println("You can't open this door without items. Nice try.");
             }
 
         } else {
@@ -251,6 +237,31 @@ public class ThemeRoom {
 
     }
 
+    void checkSolution(List<String> solution){
+        Boolean enteredSolution = false;
+        int index = 0;
+        while (!enteredSolution){
+            if (index == solution.size()) {
+                System.out.println("YOU GOT OUT");
+                setCompleted(true);
+                enteredSolution = true;
+            } else {
+                System.out.println("Enter an item to unlock this door.");
+                String clue = scanner.nextLine();
+                if (solution.get(index).equalsIgnoreCase(clue) && traveler.isItemInInventory(clue)) {
+                    index++;
+                } else if (!traveler.isItemInInventory(clue)) {
+                    System.out.println("You don't have that.");
+                    break;
+                }else{
+                    System.out.println("WRONG!");
+                    index = 0;
+                    break;
+                }
+            }
+
+        }
+    }
 
     void itemSelection() {
         System.out.println("Which " + getNoun() + " would you like to perform the previous action on");
@@ -298,8 +309,6 @@ public class ThemeRoom {
             case "view":
             case "describe":
                 currentItem.getDescription();
-                setCompleted(true);
-                System.out.println("THIS IS COMPLETED STATUS IN USE CD: " + isCompleted);
                 break;
             case "play":
             case "listen to":

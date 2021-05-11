@@ -51,7 +51,7 @@ public class EscapeRoomGame implements EscapeRoomInterface {
     public void run(Traveler traveler, ThemeRoom room) {
         this.currentTheme = room;
         while(!isCompleted){
-            System.out.println(currentTheme.toString());
+            traveler.clearInventory();
             currentTheme.run(traveler);
             getNextThemeRoom();
         }
