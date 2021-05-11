@@ -19,7 +19,7 @@ public class EscapeRoomGameTest {
     Traveler traveler;
 
     Map<String, Puzzle> puzzleList;
-    List<Item> puzzleItems;
+    Map<String, Item> puzzleItems;
 
     @Before
     public void setUp(){
@@ -63,12 +63,12 @@ public class EscapeRoomGameTest {
     public void testItemsOfAPuzzleWithDefaultCSV(){
         themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
-        Item puzzleItem = puzzle.getItems().get(0);
-        String name = puzzleItem.getName();
+
+        Item puzzleItem = puzzle.getItems().get("skyline");
         String description = puzzleItem.getDescription();
-        String itemType = puzzleItem.getItemType();
+        String itemType =puzzleItem.getItemType();
         String hasClue = puzzleItem.getHasClue();
-        assertEquals("skyline", name);
+        assertEquals("skyline", puzzleItem.getName());
         assertEquals("Skyline is a song by FKJ, that will send you chill vibes", description);
         assertEquals("CD", itemType);
         assertEquals("false", hasClue);
@@ -86,28 +86,26 @@ public class EscapeRoomGameTest {
     @Test
     public void userInputSplitTwoWords(){
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
-        Item puzzleItem = puzzle.getItems().get(0);
+        themeRoom.setCurrentPuzzle(themeRoom.getPuzzles().get("puzzle1"));
         String verb = "view";
         String noun = "cd";
-        puzzleItem.setUserInput("view cd");
-        puzzleItem.splitUserInput();
+        themeRoom.setUserInput("view cd");
+        themeRoom.splitUserInput();
 
-        assertEquals(verb,puzzleItem.getVerb());
-        assertEquals(noun,puzzleItem.getNoun());
+        assertEquals(verb,themeRoom.getVerb());
+        assertEquals(noun,themeRoom.getNoun());
     }
     @Test
     public void userInputSplitThreeWords(){
         themeRoom = escapeRoomGame.getGameList().get(0);
-        Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
-        Item puzzleItem = puzzle.getItems().get(0);
+        themeRoom.setCurrentPuzzle(themeRoom.getPuzzles().get("puzzle1"));
         String verb = "look at";
         String noun = "cd";
-        puzzleItem.setUserInput("look at cd");
-        puzzleItem.splitUserInput();
+        themeRoom.setUserInput("look at cd");
+        themeRoom.splitUserInput();
 
-        assertEquals(verb,puzzleItem.getVerb());
-        assertEquals(noun,puzzleItem.getNoun());
+        assertEquals(verb,themeRoom.getVerb());
+        assertEquals(noun,themeRoom.getNoun());
     }
 
 
@@ -115,9 +113,9 @@ public class EscapeRoomGameTest {
     public void testShowInventory() {
         themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
-        Item puzzleItem = puzzle.getItems().get(0);
+        Item puzzleItem = puzzle.getItems().get("skyline");
         String itemName1 = puzzleItem.getName();
-        String itemName2 = puzzle.getItems().get(1).getName();
+        String itemName2 = puzzle.getItems().get("soar").getName();
         player.addItem(itemName1);
         player.addItem(itemName2);
         player.showInventory();
@@ -131,9 +129,9 @@ public class EscapeRoomGameTest {
     public void testAddItem() {
         themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
-        Item puzzleItem = puzzle.getItems().get(0);
+        Item puzzleItem = puzzle.getItems().get("skyline");
         String itemName1 = puzzleItem.getName();
-        String itemName2 = puzzle.getItems().get(1).getName();
+        String itemName2 = puzzle.getItems().get("soar").getName();
         player.addItem(itemName1);
         player.addItem(itemName2);
         String playerItem1 = player.getInventory().get(0);
@@ -145,9 +143,9 @@ public class EscapeRoomGameTest {
     public void testRemoveItem() {
         themeRoom = escapeRoomGame.getGameList().get(0);
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
-        Item puzzleItem = puzzle.getItems().get(0);
+        Item puzzleItem = puzzle.getItems().get("skyline");
         String itemName1 = puzzleItem.getName();
-        String itemName2 = puzzle.getItems().get(1).getName();
+        String itemName2 = puzzle.getItems().get("soar").getName();
         player.addItem(itemName1);
         player.addItem(itemName2);
         String playerItem1 = player.getInventory().get(0);

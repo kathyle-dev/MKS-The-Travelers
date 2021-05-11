@@ -47,7 +47,7 @@ public class Item {
                 break;
             default:
                 System.out.println("invalid input try again");
-                input();
+               // input();
         }
 
     }
@@ -87,29 +87,29 @@ public class Item {
 
         }
     }
-    public void input() {
-        System.out.println("What would you like to do");
-        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-        splitUserInput();
-    }
-
-
-    public void splitUserInput() {
-        setSplitting(getUserInput().split("\\s"));
-        if (getSplitting().length == 2) {
-            setVerb(getSplitting()[0]);
-            setNoun(getSplitting()[1]);
-            use();
-        } else if (getSplitting().length == 3) {
-            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-            setNoun(getSplitting()[2]);
-            use();
-        } else {
-            input();
-        }
-
-
-    }
+//    public void input() {
+//        System.out.println("What would you like to do");
+//        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
+//        splitUserInput();
+//    }
+//
+//
+//    public void splitUserInput() {
+//        setSplitting(getUserInput().split("\\s"));
+//        if (getSplitting().length == 2) {
+//            setVerb(getSplitting()[0]);
+//            setNoun(getSplitting()[1]);
+//            use();
+//        } else if (getSplitting().length == 3) {
+//            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
+//            setNoun(getSplitting()[2]);
+//            use();
+//        } else {
+//            input();
+//        }
+//
+//
+//    }
 
 
 
