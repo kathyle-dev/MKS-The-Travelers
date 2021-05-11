@@ -88,4 +88,11 @@ public class Traveler {
     public boolean isItemInInventory(String itemName){
         return this.inventory.contains(itemName);
     }
+
+    public boolean doesItemHaveClue(Item itemName){
+        if(itemName.getHasClue().equalsIgnoreCase("false")){
+            return false;
+        }
+        return true;
+    }
 }

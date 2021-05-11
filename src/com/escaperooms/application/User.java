@@ -3,7 +3,9 @@ package com.escaperooms.application;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User {
 
@@ -11,7 +13,7 @@ public class User {
     String currentRoom;
     long startTime = System.currentTimeMillis();
     int points = 0;
-    List<String> inventory = new ArrayList<>();
+    HashMap<String, String[]> inventory = new HashMap<>();
     List<String> answers = new ArrayList<>();
     boolean winOrLose;
     private double travelersID;
@@ -43,26 +45,29 @@ public class User {
         this.points -= points;
     }
 
-    public List<String> getInventory() {
-        return inventory;
-    }
-
-    public void showInventory() {
-        if(inventory.size()==0){
-            System.out.println("You have nothing in your inventory");
-        }else{
-            System.out.println("You have " + inventory + " in your inventory");
-        }
-    }
-
-    public void addItem(String item) {
-        System.out.println(name+ " Obtained "+item);
-        this.inventory.add(item);
-    }
-
-    public void removeItem(String item) {
-        this.inventory.remove(item);
-    }
+//    public Map<String, String[]> getInventory() {
+//        return inventory;
+//    }
+//
+//    public void showInventory() {
+//        if(inventory.size()==0){
+//            System.out.println("You have nothing in your inventory");
+//        }else{
+//            System.out.println("You have " + inventory + " in your inventory");
+//        }
+//    }
+//
+//    public void addItem(String item) {
+//        System.out.println(name+ " Obtained "+item);
+//        this.inventory.add(item);
+//    }
+//
+//    public void removeItem(String item) {
+//        this.inventory.remove(item);
+//    }
+//public boolean isItemInInventory(String itemName){
+//    return this.inventory.contains(itemName);
+//}
 
     public boolean getWinOrLose() {
         return winOrLose;
@@ -84,9 +89,7 @@ public class User {
         return roomName.equals(this.currentRoom);
     }
 
-    public boolean isItemInInventory(String itemName){
-        return this.inventory.contains(itemName);
-    }
+
 
     public void addAnswer(String answer){
         this.answers.add(answer);
