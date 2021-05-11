@@ -27,4 +27,9 @@ public class Door {
         return solution;
     }
 
+    public void useDoor(){
+
+        getSolution().forEach(System.out::println);
+
+    }
 }

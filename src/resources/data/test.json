@@ -81,7 +81,8 @@
       }
     }
   },
-  "nextTheme": "none"
+  "isStartingTheme":  true,
+  "nextTheme": "Mirage"
 }
 
 

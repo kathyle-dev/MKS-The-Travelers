@@ -11,22 +11,24 @@ import java.util.*;
 
 public class EscapeRoomGame implements EscapeRoomInterface {
     private static final EscapeRoomPrompter escapeRoomPrompter = new EscapeRoomPrompter();
-    private List<ThemeRoom> gameList;
+    private Map<String, ThemeRoom> gameMap;
     private AdventureParser parser = new AdventureParser();
     public Map<String, Trivia> trivia;
+    private ThemeRoom currentTheme;
+    private boolean isCompleted = false;
 
     // default path to csv file
     public EscapeRoomGame() throws IOException {
-        this.gameList = this.load("/resources/data/RoomData.csv");// has paths to JSON files
+        this.gameMap = this.load("/resources/data/RoomData.csv");// has paths to JSON files
 //        this.trivia = this.loadTrivia();
     }
 
     public EscapeRoomGame(String path) throws IOException {
-        this.gameList = this.load(path);
+        this.gameMap = this.load(path);
     }
 
-    public List<ThemeRoom> load(String path) {
-        List<ThemeRoom> allThemes = new ArrayList<>();
+    public Map<String, ThemeRoom> load(String path) {
+        Map<String, ThemeRoom> allThemes = new HashMap<>();
         try {
             InputStream room = getClass().getResourceAsStream(path);
             BufferedReader reader = new BufferedReader(new InputStreamReader(room));
@@ -34,7 +36,7 @@ public class EscapeRoomGame implements EscapeRoomInterface {
                 File data = new File(roomData);
                 try {
                     ThemeRoom themeRoom = parser.parse(data);
-                    allThemes.add(themeRoom);
+                    allThemes.put(themeRoom.getName(), themeRoom);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -46,38 +48,30 @@ public class EscapeRoomGame implements EscapeRoomInterface {
         return allThemes;
     }
 
-
-//
-//    public void generateEscapeRooms(EscapeRoom room) throws IOException {
-//        me = room;
-//        SpaceOdyssey spaceOdyssey = new SpaceOdyssey();
-//        CrazyStans crazyStans = new CrazyStans();
-//        JoninExams joninExams = new JoninExams();
-//        escapeRooms.put(spaceOdyssey.getName(), spaceOdyssey.playable());
-//        escapeRooms.put(crazyStans.getName(), crazyStans.playable());
-//        escapeRooms.put(joninExams.getName(), joninExams.playable());
-//    }
-//
-//    public Map<String, Playable> getEscapeRooms() {
-//        return escapeRooms;
-//    }
-
-//
-//    public Playable getEscapeRoomPlayable(String room) {
-//        Map<String, Playable> playables = getEscapeRooms();
-//        return playables.get(room);
-//    }
-//
-//    public void removeEscapeRoom(String room) {
-//        escapeRooms.remove(room);
-//    }
-
-    public List<ThemeRoom> getGameList() {
-        return gameList;
+    public void run(Traveler traveler, ThemeRoom room) {
+        this.currentTheme = room;
+        while(!isCompleted){
+            System.out.println(currentTheme.toString());
+            currentTheme.run(traveler);
+            getNextThemeRoom();
+        }
     }
 
-    public void setGameList(List<ThemeRoom> gameList) {
-        this.gameList = gameList;
+    public void getNextThemeRoom(){
+        String roomName = currentTheme.getNextTheme();
+        if(roomName.equalsIgnoreCase("none")){
+            isCompleted = true;
+        }else{
+            this.currentTheme = gameMap.get(roomName);
+        }
+    }
+
+    public Map<String, ThemeRoom> getGameMap() {
+        return gameMap;
+    }
+
+    public void setGameMap(Map<String, ThemeRoom> gameMap) {
+        this.gameMap = gameMap;
     }
 
     public static String prompt(String message, String regex, String errorMessage) {

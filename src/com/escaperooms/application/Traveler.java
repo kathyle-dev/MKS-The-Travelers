@@ -1,7 +1,11 @@
 package com.escaperooms.application;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
 public class Traveler {
@@ -13,12 +17,11 @@ public class Traveler {
     public Traveler(User user, EscapeRoomGame game) {
         this.user = user;
         this.game = game;
-        this.availableRooms = game.getGameList();
+        setAvailableRooms(game);
     }
 
     private void jump(ThemeRoom room) {
-        room.setCompleted();
-        room.run(this, room);
+        game.run(this, room);
     }
 
     public User getUser() {
@@ -94,5 +97,10 @@ public class Traveler {
             return false;
         }
         return true;
+    }
+    public void setAvailableRooms(EscapeRoomGame game) {
+        List<ThemeRoom> gameList = game.getGameMap().values().stream().collect(Collectors.toList());
+        gameList.removeIf(room -> !room.isStartingTheme());
+        this.availableRooms = gameList;
     }
 }

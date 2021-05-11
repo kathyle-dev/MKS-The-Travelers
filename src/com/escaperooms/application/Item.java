@@ -42,8 +42,10 @@ public class Item {
         switch (getNoun()) {
             case "cd":
                 useCD();
+                break;
             case "picture":
-                usePicture();
+            case "actionfigure":
+                useGenericItem();
                 break;
             default:
                 System.out.println("invalid input try again");
@@ -54,7 +56,7 @@ public class Item {
 
 
     public void useCD() {
-        switch (getUserInput()) {
+        switch (getVerb()) {
             case "look at":
             case "examine":
             case "view":
@@ -67,11 +69,13 @@ public class Item {
                 break;
             case "stop":
                 musicPlayer.stopMusic();
-
+            break;
+            default:
+                System.out.println("You can not do that action with "+ getNoun());
         }
     }
 
-    public void usePicture() {
+    public void useGenericItem() {
         switch (getVerb()) {
             case "look at":
             case "examine":
@@ -82,11 +86,21 @@ public class Item {
             case "move":
             case "pick up":
             case "lift":
-                System.out.println("you have added one" + this.getHasClue());
+                if(!getHasClue().equals("false")) {
+                    System.out.println("you have added one " + this.getHasClue());
+
+                }else{
+                    System.out.println("When you "+ getVerb() + getNoun()+ " Nothing was there");
+                }
                 break;
+            default:
+                System.out.println("You can not do that action with "+ getNoun());
 
         }
+
     }
+
+
 //    public void input() {
 //        System.out.println("What would you like to do");
 //        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));

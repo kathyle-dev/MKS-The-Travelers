@@ -14,7 +14,9 @@ public class ThemeRoom {
     @JsonProperty("nextTheme")
     private String nextTheme;
     private Puzzle currentPuzzle;
-    private boolean isCompleted = false;
+    private boolean isCompleted;
+    @JsonProperty("isStartingTheme")
+    private boolean isStartingTheme;
     private String verb;
     private String noun;
     private String[] splitting;
@@ -25,20 +27,30 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
 
     @JsonCreator
-    public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("nextTheme") String nextTheme){
+    public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("isStartingTheme") boolean isStartingTheme, @JsonProperty("nextTheme") String nextTheme) {
         this.name = name;
         this.puzzles = puzzles;
+        this.isStartingTheme = isStartingTheme;
         this.nextTheme = nextTheme;
         this.currentPuzzle = puzzles.get(startingPuzzle);
     }
 
-    public void run(Traveler traveler, ThemeRoom room) {
-        System.out.println("You are in "+ getName());
-        System.out.println("Here's your first puzzle:");
-        System.out.println(currentPuzzle.getDescription());
-        System.out.println("size: "+ puzzles.size());
-        input();
+    public void run(Traveler traveler) {
+        this.traveler = traveler;
+        System.out.println("IS COMPLETED BEFORE WHILE IN RUN" + this.isCompleted);
+        while (this.isCompleted == false) {
+            System.out.println(printPuzzleMessage());
+            input();
+            getNextPuzzle();
+        }
     }
+
+    public String printPuzzleMessage() {
+        String msg;
+        msg = "Here's your puzzle" + currentPuzzle.getDescription();
+        return msg;
+    }
+
 
     /*
      * GETTER'S AND SETTERS
@@ -69,7 +81,7 @@ public class ThemeRoom {
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return this.isCompleted;
     }
 
     public void setCompleted() {
@@ -132,14 +144,22 @@ public class ThemeRoom {
         this.itemSelection = itemSelection;
     }
 
-//Check if user has completed all puzzles
+    public boolean isStartingTheme() {
+        return isStartingTheme;
+    }
+
+    public String getNextTheme() {
+        return nextTheme;
+    }
+
+    //Check if user has completed all puzzles
     //Create is completed var in puzzle class
 
-    public boolean isThemeRoomCompleted(){
+    public boolean isThemeRoomCompleted() {
         boolean result = true;
         Collection<Puzzle> puzzleList = puzzles.values();
-        for (Puzzle currentPuzzle  : puzzleList) {
-            if(!currentPuzzle.isCompleted()){
+        for (Puzzle currentPuzzle : puzzleList) {
+            if (!currentPuzzle.isCompleted()) {
                 result = false;
             }
         }
@@ -147,9 +167,11 @@ public class ThemeRoom {
     }
 
     //if the current puzzles is completed, get the next puzzle for the user to play
-    public void getNextPuzzle(){
-        if(currentPuzzle.isCompleted()){
-            String puzzleName = currentPuzzle.getDoor().getDestination();
+    public void getNextPuzzle() {
+        String puzzleName = currentPuzzle.getDoor().getDestination();
+        if (puzzleName.equalsIgnoreCase("none")) {
+            this.isCompleted = true;
+        } else {
             setCurrentPuzzle(puzzles.get(puzzleName));
         }
     }
@@ -166,16 +188,17 @@ public class ThemeRoom {
     }
 
     public void input() {
-
-       do {
-           System.out.println("What would you like to do");
-           setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-           if(getUserInput().equals("quit")){
-               System.exit(0);
-           }
-           splitUserInput();
-       } while(!getUserInput().equals("quit"));
-
+        while (!isCompleted) {
+            System.out.println("What would you like to do");
+            setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
+            if (getUserInput().equals("quit")) {
+                System.exit(0);
+            } else if (getUserInput().equals("inventory")) {
+                traveler.showInventory();
+            }
+            splitUserInput();
+        }
+        ;
     }
 
 
@@ -194,10 +217,34 @@ public class ThemeRoom {
         checkItemType();
     }
 
-    void checkItemType(){
+    void checkItemType() {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
-        }else {
+        } else if (getNoun().equals("door")) {
+            traveler.showInventory();
+            Boolean enteredSolution = false;
+            List<String> solution = currentPuzzle.getDoor().getSolution();
+            int index = 0;
+            while (!enteredSolution){
+                if ((index ) == solution.size()) {
+                    System.out.println("YOU GOT OUT");
+                    setCompleted(true);
+                    break;
+                } else {
+                    System.out.println("Enter an item to unlock this door.");
+                    String clue = scanner.nextLine();
+                    if (solution.get(index).equalsIgnoreCase(clue)) {
+                        index++;
+                    } else {
+                        System.out.println("WRONG!");
+                        index = 0;
+                        break;
+                    }
+                }
+
+            }
+
+        } else {
             System.out.println("invalid item type");
             input();
         }
@@ -205,27 +252,92 @@ public class ThemeRoom {
     }
 
 
-    void itemSelection(){
-        System.out.println("Which "+ getNoun() + " would you like to perform the previous action on");
+    void itemSelection() {
+        System.out.println("Which " + getNoun() + " would you like to perform the previous action on");
         Map<String, Item> itemMap = currentPuzzle.getItems().get(getNoun());
 
-        for(Map.Entry<String,Item> entry:itemMap.entrySet()){
+        for (Map.Entry<String, Item> entry : itemMap.entrySet()) {
             System.out.println(entry.getKey());
         }
 
         itemSelection = scanner.nextLine();
-        if(itemMap.containsKey(itemSelection)){
+        if (itemMap.containsKey(itemSelection)) {
             currentItem = itemMap.get(itemSelection);
-        }else {
+            currentItem.setNoun(getNoun());
+            currentItem.setVerb(getVerb());
+            use();
+
+        } else {
             itemSelection();
         }
 
         System.out.println(currentItem.getName() + " " + currentItem.getDescription());
     }
 
+    public void use() {
+        switch (getNoun()) {
+            case "cd":
+                useCD();
+                break;
+            case "picture":
+            case "actionfigure":
+                useGenericItem();
+                break;
+            default:
+                System.out.println("invalid input try again");
+                // input();
+        }
+
+    }
 
 
+    public void useCD() {
+        switch (getVerb()) {
+            case "look at":
+            case "examine":
+            case "view":
+            case "describe":
+                currentItem.getDescription();
+                setCompleted(true);
+                System.out.println("THIS IS COMPLETED STATUS IN USE CD: " + isCompleted);
+                break;
+            case "play":
+            case "listen to":
+                // musicPlayer.run();
+                break;
+            case "stop":
+                //musicPlayer.stopMusic();
+                break;
+            default:
+                System.out.println("You can not do that action with " + getNoun());
+        }
+    }
+
+    public void useGenericItem() {
+        switch (getVerb()) {
+            case "look at":
+            case "examine":
+            case "view":
+            case "describe":
+                currentItem.getDescription();
+                break;
+            case "move":
+            case "pick up":
+            case "lift":
+                if (!currentItem.getHasClue().equals("false")) {
+                    System.out.println("you have added one " + currentItem.getHasClue());
+                    traveler.addItem(currentItem.getHasClue());
+
+                } else {
+                    System.out.println("When you " + getVerb() + getNoun() + " Nothing was there");
+                }
+                break;
+            default:
+                System.out.println("You can not do that action with " + getNoun());
+
+        }
 
 
-
+    }
 }
+

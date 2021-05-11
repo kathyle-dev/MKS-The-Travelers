@@ -1,7 +1,6 @@
 package com.escaperooms.client;
 
 import com.escaperooms.application.EscapeRoomGame;
-import com.escaperooms.application.ThemeRoom;
 import com.escaperooms.application.Traveler;
 import com.escaperooms.application.User;
 

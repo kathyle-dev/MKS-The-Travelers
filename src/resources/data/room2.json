@@ -9,7 +9,7 @@
         "actionfigure": {
           "Master Roshi": {
             "name": "Master Roshi",
-            "description" : "This is a Master Roshi Action Figure. ",
+            "description" : "This is a Master Roshi Action Figure",
             "itemType": "Action Figure",
             "hasClue" : "I"
           },
@@ -101,6 +101,7 @@
       }
 
     }
-
-  }
+  },
+  "isStartingTheme":  false,
+  "nextTheme": "none"
 }

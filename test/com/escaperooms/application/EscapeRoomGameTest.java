@@ -37,19 +37,19 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testLoadWithDefaultCSV() {
-        int gameListSize = escapeRoomGame.getGameList().size();
-        assertEquals(1, gameListSize);
+        int gameListSize = escapeRoomGame.getGameMap().size();
+        assertEquals(2, gameListSize);
     }
 
     @Test
     public void testGetThemeInGameListWithDefaultCSV() {
-        String result = escapeRoomGame.getGameList().get(0).getName();
+        String result = escapeRoomGame.getGameMap().get("Trap Room").getName();
         assertEquals("Trap Room", result);
     }
 
     @Test
     public void testGetPuzzlesOfAThemeRoomWithDefaultCSV(){
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");
         puzzleList = themeRoom.getPuzzles();
         puzzleItems = puzzleList.get("puzzle1").getItems();
         assertEquals(1, puzzleList.size());
@@ -79,7 +79,7 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testIsPuzzlesCompleted() {
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");;
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         puzzle.setCompleted(true);
         boolean result = themeRoom.isThemeRoomCompleted();
@@ -88,7 +88,7 @@ public class EscapeRoomGameTest {
 
     @Test
     public void userInputSplitTwoWords(){
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");
         themeRoom.setCurrentPuzzle(themeRoom.getPuzzles().get("puzzle1"));
         String verb = "view";
         String noun = "cd";
@@ -100,7 +100,7 @@ public class EscapeRoomGameTest {
     }
     @Test
     public void userInputSplitThreeWords(){
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");
         themeRoom.setCurrentPuzzle(themeRoom.getPuzzles().get("puzzle1"));
         String verb = "look at";
         String noun = "cd";
@@ -130,7 +130,7 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testAddItem() {
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem = puzzle.getItems().get("cd").get("skyline");
         String itemName1 = puzzleItem.getName();
@@ -146,7 +146,7 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testRemoveItem() {
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");
         Puzzle puzzle = themeRoom.getPuzzles().get("puzzle1");
         Item puzzleItem1 = puzzle.getItems().get("cd").get("skyline");
         Item puzzleItem2 = puzzle.getItems().get("picture").get("soaringEagle");
@@ -176,7 +176,7 @@ public class EscapeRoomGameTest {
 
     @Test
     public void testHashMapPuzzleInThemeRoom(){
-        themeRoom = escapeRoomGame.getGameList().get(0);
+        themeRoom = escapeRoomGame.getGameMap().get("Trap Room");;
         puzzleList = themeRoom.getPuzzles();
         String expectedDescription = "This is kind of like the SAW movies, You must figure out how to unlock the door.\n There are twelve pictures and boom box that appears to have 3 CDs inside. Good luck";
         assertEquals(1, puzzleList.size());
