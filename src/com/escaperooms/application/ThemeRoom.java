@@ -42,6 +42,7 @@ public class ThemeRoom {
             System.out.println(printPuzzleMessage());
             input();
             getNextPuzzle();
+            traveler.clearInventory();
         }
     }
 
