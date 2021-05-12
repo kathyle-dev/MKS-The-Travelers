@@ -8,7 +8,8 @@ import javax.sound.sampled.*;
 public class MusicPlayer extends Thread{
     String song;
     Clip clip;
-
+    Scanner scanner = new Scanner(System.in);
+    String userInput;
     public MusicPlayer() {
     }
 
@@ -41,6 +42,30 @@ public class MusicPlayer extends Thread{
         }
     }
 
+    public void musicMenu(){
+        while (clip.isOpen()) {
+            System.out.println("What would you like to do with this cd");
+            userInput = scanner.nextLine();
+            if(userInput.equals("start")||userInput.equals("stop") || userInput.equals("pause")){
+                if (clip.isRunning()){
+                    clip.stop();
+                } else if(!clip.isRunning()){
+                    clip.start();
+                }
+            } else if (userInput.equals("restart")){
+                clip.setMicrosecondPosition(0);
+            } else if(userInput.equals("exit")){
+                clip.close();
+            } else {
+                System.out.println("Invalid command");
+                musicMenu();
+            }
+
+
+
+        }
+    }
+
     public Clip getClip() {
         return this.clip;
     }
@@ -51,5 +76,9 @@ public class MusicPlayer extends Thread{
 
     public void musicControls(){
         clip.start();
+        musicMenu();
     }
+
+
+
 }

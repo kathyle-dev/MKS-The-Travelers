@@ -311,9 +311,10 @@ public class ThemeRoom {
                 break;
             case "play":
             case "listen to":
-                System.out.println("Playing");
                 musicPlayer.setSong(currentItem.getName());
                 musicPlayer.run();
+                musicPlayer.musicMenu();
+
                 break;
             case "stop":
                 musicPlayer.stopMusic();
