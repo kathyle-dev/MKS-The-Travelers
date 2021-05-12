@@ -7,7 +7,7 @@ public interface EscapeRoomInterface {
         return null;
     }
 
-    default void run(Traveler traveler, EscapeRoom escapeRoom) {
+    default void run(Traveler traveler, EscapeRoomGame escapeRoomGame) {
 
     }
     default void terminate() {

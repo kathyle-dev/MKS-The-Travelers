@@ -1,6 +1,7 @@
 package com.escaperooms.music;
 
 import java.net.URL;
+import java.util.Scanner;
 import javax.sound.sampled.*;
 
 
@@ -8,20 +9,20 @@ public class MusicPlayer extends Thread{
     String song;
     Clip clip;
 
+    public MusicPlayer() {
+    }
+
     public MusicPlayer(String song) {
         this.song = song;
     }
     public void run() {
         try {
-            URL url = MusicPlayer.class.getResource("/resources/" + song);
+            URL url = MusicPlayer.class.getResource("/resources/" + song + ".wav");
             AudioInputStream audioStream;
             audioStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
-            clip.start();
-            while(clip.getMicrosecondLength() != clip.getMicrosecondPosition())
-            {
-            }
+            musicControls();
         } catch (Exception e) {
             Thread.currentThread().interrupt();
         }
@@ -44,4 +45,11 @@ public class MusicPlayer extends Thread{
         return this.clip;
     }
 
+    public void setSong(String song) {
+        this.song = song;
+    }
+
+    public void musicControls(){
+        clip.start();
+    }
 }

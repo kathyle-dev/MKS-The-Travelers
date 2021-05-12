@@ -1,6 +1,6 @@
 package com.escaperooms.crazystans;
 
-import com.escaperooms.application.EscapeRoom;
+import com.escaperooms.application.EscapeRoomGame;
 import static org.fusesource.jansi.Ansi.Color.RED;
 import static org.fusesource.jansi.Ansi.ansi;
 
@@ -15,7 +15,7 @@ class BeyoncesRoom {
     }
 
     private void askQuestion() {
-        String hint = EscapeRoom.prompt("What album won Beyonce her first solo Grammy? ",
+        String hint = EscapeRoomGame.prompt("What album won Beyonce her first solo Grammy? ",
                 challengeAnswer() + "|hint", "That is not the correct answer.");
         if (hint.equals("hint")) {
             hintChecker();

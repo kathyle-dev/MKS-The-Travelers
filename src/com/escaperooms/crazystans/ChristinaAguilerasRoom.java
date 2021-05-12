@@ -1,6 +1,6 @@
 package com.escaperooms.crazystans;
 
-import com.escaperooms.application.EscapeRoom;
+import com.escaperooms.application.EscapeRoomGame;
 import com.escaperooms.music.MusicPlayer;
 import static org.fusesource.jansi.Ansi.Color.RED;
 import static org.fusesource.jansi.Ansi.ansi;
@@ -19,7 +19,7 @@ class ChristinaAguilerasRoom {
     }
 
     private void startPrompt() {
-        EscapeRoom.prompt("Type 'start' to begin the challenge. ", "start", "Invalid command");
+        EscapeRoomGame.prompt("Type 'start' to begin the challenge. ", "start", "Invalid command");
     }
 
     private String commandsMessage() {
