@@ -1,5 +1,6 @@
 package com.escaperooms.application;
 
+import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -25,6 +26,7 @@ public class ThemeRoom {
     private Item currentItem;
     private String itemType;
     Scanner scanner = new Scanner(System.in);
+    private final MusicPlayer musicPlayer = new MusicPlayer();
     private Traveler traveler;
 
     @JsonCreator
@@ -278,12 +280,11 @@ public class ThemeRoom {
             currentItem.setNoun(getNoun());
             currentItem.setVerb(getVerb());
             use();
-
         } else {
             itemSelection();
         }
 
-        System.out.println(currentItem.getName() + " " + currentItem.getDescription());
+//        System.out.println(currentItem.getName() + " " + currentItem.getDescription());
     }
 
     public void use() {
@@ -313,10 +314,12 @@ public class ThemeRoom {
                 break;
             case "play":
             case "listen to":
-                // musicPlayer.run();
+                System.out.println("Playing");
+                musicPlayer.setSong(itemSelection);
+                musicPlayer.run();
                 break;
             case "stop":
-                //musicPlayer.stopMusic();
+                musicPlayer.stopMusic();
                 break;
             default:
                 System.out.println("You can not do that action with " + getNoun());
