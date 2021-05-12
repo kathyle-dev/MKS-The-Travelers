@@ -307,7 +307,7 @@ public class ThemeRoom {
             case "examine":
             case "view":
             case "describe":
-                currentItem.getDescription();
+                System.out.println(currentItem.getDescription());
                 break;
             case "play":
             case "listen to":
