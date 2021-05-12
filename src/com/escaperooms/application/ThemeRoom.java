@@ -225,7 +225,7 @@ public class ThemeRoom {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
         } else if (getNoun().equals("door")) {
-            if(traveler.getInventory().size() > 0){
+            if(traveler.getInventory().size() > -1){
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
@@ -251,11 +251,8 @@ public class ThemeRoom {
             } else {
                 System.out.println("Enter an item to unlock this door.");
                 String clue = scanner.nextLine();
-                if (solution.get(index).equalsIgnoreCase(clue) && traveler.isItemInInventory(clue)) {
+                if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
-                } else if (!traveler.isItemInInventory(clue)) {
-                    System.out.println("You don't have that.");
-                    break;
                 }else{
                     System.out.println("WRONG!");
                     index = 0;
@@ -315,7 +312,7 @@ public class ThemeRoom {
             case "play":
             case "listen to":
                 System.out.println("Playing");
-                musicPlayer.setSong(itemSelection);
+                musicPlayer.setSong(currentItem.getName());
                 musicPlayer.run();
                 break;
             case "stop":
@@ -332,7 +329,7 @@ public class ThemeRoom {
             case "examine":
             case "view":
             case "describe":
-                currentItem.getDescription();
+                System.out.println(currentItem.getDescription());
                 break;
             case "move":
             case "pick up":
@@ -340,7 +337,6 @@ public class ThemeRoom {
                 if (!currentItem.getHasClue().equals("false")) {
                     System.out.println("you have added one " + currentItem.getHasClue());
                     traveler.addItem(currentItem.getHasClue());
-
                 } else {
                     System.out.println("When you " + getVerb() + getNoun() + " Nothing was there");
                 }
