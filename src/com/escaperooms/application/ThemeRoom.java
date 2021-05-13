@@ -50,7 +50,7 @@ public class ThemeRoom {
 
     public String printPuzzleMessage() {
         String msg = "";
-        msg += ("You've entered: " + getName());
+        msg += ("\nYou've entered: " + getName() + "\n");
         msg += "\nHere's your puzzle: \n" + currentPuzzle.getDescription();
         return msg;
     }
@@ -193,7 +193,7 @@ public class ThemeRoom {
 
     public void input() {
         while (!isCompleted) {
-            System.out.println("What would you like to do");
+            System.out.print("\nWhat would you like to do\n-> ");
             setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
             if (getUserInput().equals("quit")) {
                 System.exit(0);
@@ -230,11 +230,11 @@ public class ThemeRoom {
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
             }else{
-                System.out.println("You can't open this door without items. Nice try.");
+                System.out.println("\nYou can't open this door without items. Nice try.\n");
             }
 
         } else {
-            System.out.println("invalid item type");
+            System.out.println("\ninvalid item type\n");
             input();
         }
 
@@ -245,16 +245,16 @@ public class ThemeRoom {
         int index = 0;
         while (!enteredSolution){
             if (index == solution.size()) {
-                System.out.println("YOU GOT OUT");
+                System.out.println("\nYOU GOT OUT");
                 setCompleted(true);
                 enteredSolution = true;
             } else {
-                System.out.println("Enter an item to unlock this door.");
+                System.out.println("\nEnter an item to unlock this door.");
                 String clue = scanner.nextLine();
                 if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
                 }else{
-                    System.out.println("WRONG!");
+                    System.out.println("\nWRONG!");
                     index = 0;
                     break;
                 }
@@ -264,13 +264,12 @@ public class ThemeRoom {
     }
 
     void itemSelection() {
-        System.out.println("Which " + getNoun() + " would you like to perform the previous action on");
+        System.out.print("\nWhich " + getNoun() + " would you like to perform the previous action on?");
         Map<String, Item> itemMap = currentPuzzle.getItems().get(getNoun());
 
         for (Map.Entry<String, Item> entry : itemMap.entrySet()) {
             System.out.println(entry.getKey());
         }
-
         itemSelection = scanner.nextLine();
         if (itemMap.containsKey(itemSelection)) {
             currentItem = itemMap.get(itemSelection);
@@ -294,7 +293,7 @@ public class ThemeRoom {
                 useGenericItem();
                 break;
             default:
-                System.out.println("invalid input try again");
+                System.out.println("\ninvalid input try again");
                 // input();
         }
 
@@ -307,7 +306,7 @@ public class ThemeRoom {
             case "examine":
             case "view":
             case "describe":
-                System.out.println(currentItem.getDescription());
+                System.out.println("\n" + currentItem.getDescription());
                 break;
             case "play":
             case "listen to":
@@ -320,7 +319,7 @@ public class ThemeRoom {
                 musicPlayer.stopMusic();
                 break;
             default:
-                System.out.println("You can not do that action with " + getNoun());
+                System.out.println("\nYou can not do that action with " + getNoun());
         }
     }
 
@@ -336,18 +335,15 @@ public class ThemeRoom {
             case "pick up":
             case "lift":
                 if (!currentItem.getHasClue().equals("false")) {
-                    System.out.println("you have added one " + currentItem.getHasClue());
+                    System.out.println("\nyou have added one " + currentItem.getHasClue());
                     traveler.addItem(currentItem.getHasClue());
                 } else {
-                    System.out.println("When you " + getVerb() + getNoun() + " Nothing was there");
+                    System.out.println("\nWhen you " + getVerb() + getNoun() + " Nothing was there");
                 }
                 break;
             default:
-                System.out.println("You can not do that action with " + getNoun());
-
+                System.out.println("\nYou can not do that action with " + getNoun());
         }
-
-
     }
 }
 

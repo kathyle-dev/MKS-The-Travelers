@@ -57,7 +57,7 @@ public class Traveler {
                     System.out.println(ansi().fg(RED).a(i + ": " + currentRoom.getName() + "(played)").reset());
                 }
             }
-            String selection = EscapeRoomGame.prompt("Select a room. ", "[0-" + (availableRooms.size()-1) + "]", "Invalid choice.");
+            String selection = EscapeRoomGame.prompt("Select a room.\n->", "[0-" + (availableRooms.size()-1) + "]", "Invalid choice.");
             int choice = Integer.parseInt(selection);
             ThemeRoom room = availableRooms.get(choice);
             jump(room);
@@ -73,14 +73,14 @@ public class Traveler {
 
     public void showInventory() {
         if(inventory.size()==0){
-            System.out.println("There is nothing in your inventory");
+            System.out.println("\nThere is nothing in your inventory");
         }else{
-            System.out.println("You have " + inventory + " in your inventory");
+            System.out.println("\nYou have " + inventory + " in your inventory");
         }
     }
 
     public void addItem(String item) {
-        System.out.println(" Obtained "+item);
+        System.out.println("\n Obtained "+item);
         this.inventory.add(item);
     }
 

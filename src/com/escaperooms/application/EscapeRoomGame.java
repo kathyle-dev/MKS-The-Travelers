@@ -43,7 +43,7 @@ public class EscapeRoomGame implements EscapeRoomInterface {
             });
         } catch(Exception e) {
             System.out.println(e);
-            System.out.println("In Escape Roam loader");
+            System.out.println("In Escape Roam loader\n");
         }
         return allThemes;
     }
@@ -86,7 +86,7 @@ public class EscapeRoomGame implements EscapeRoomInterface {
     }
 
     private static void quitGame() {
-        System.out.println("Quitting game...");
+        System.out.println("\nQuitting game...");
         System.exit(0);
     }
 

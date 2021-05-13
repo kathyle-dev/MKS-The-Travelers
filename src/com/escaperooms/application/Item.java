@@ -41,11 +41,11 @@ public class Item {
 
     public void use() {
         switch (getNoun()) {
-            case "cd":
+            case "CD":
                 useCD();
                 break;
-            case "picture":
-            case "actionfigure":
+            case "PICTURE":
+            case "ACTION FIGURE":
                 useGenericItem();
                 break;
             default:
@@ -58,17 +58,17 @@ public class Item {
 
     public void useCD() {
         switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
+            case "LOOK AT":
+            case "EXAMINE":
+            case "VIEW":
+            case "DESCRIBE":
                 this.getDescription();
                 break;
-            case "play":
-            case "listen to":
+            case "PLAY":
+            case "LISTEN TO":
                 // musicPlayer.run();
                 break;
-            case "stop":
+            case "STOP":
                 musicPlayer.stopMusic();
                 break;
             default:
@@ -78,15 +78,15 @@ public class Item {
 
     public void useGenericItem() {
         switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
+            case "LOOK AT":
+            case "EXAMINE":
+            case "VIEW":
+            case "DESCRIBE":
                 this.getDescription();
                 break;
-            case "move":
-            case "pick up":
-            case "lift":
+            case "MOVE":
+            case "PICK UP":
+            case "LIFT":
                 if(!getHasClue().equals("false")) {
                     System.out.println("you have added one " + this.getHasClue());
 
