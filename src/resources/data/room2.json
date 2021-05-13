@@ -54,7 +54,7 @@
         "hints": ["hint 4", "hint 5", "hint 6"]
     },
     "puzzle3": {
-      "name": "puzzl3",
+      "name": "puzzle3",
       "description": "You have realized that you were in a Genjutsu, and quickly say release. You now see the real room. There are six action figures. Make sure you keep count ",
       "items": {
         "ACTION FIGURE": {
