@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
 public class Traveler {
-    User user;
+   private User user;
     EscapeRoomGame game;
     List<ThemeRoom> availableRooms;
     List<String> inventory = new ArrayList<>();

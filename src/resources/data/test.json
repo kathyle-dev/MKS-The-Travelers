@@ -78,7 +78,8 @@
           "whiteKey",
           "brownKey"
         ]
-      }
+      },
+      "hints": ["hint 1", "hint 2", "hint 3","test"]
     }
   },
   "isStartingTheme":  true,

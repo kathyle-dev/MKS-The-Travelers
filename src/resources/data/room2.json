@@ -50,7 +50,8 @@
           "solution": [
             "M","I","R","A","G","E"
           ]
-        }
+        },
+        "hints": ["hint 4", "hint 5", "hint 6"]
     },
     "puzzle3": {
       "name": "puzzl3",
@@ -98,8 +99,8 @@
       "door": {
         "destination": "none",
         "solution": ["6", "2","4","2"]
-      }
-
+      },
+      "hints": ["hint 7", "hint 8", "hint 9"]
     }
   },
   "isStartingTheme":  false,
