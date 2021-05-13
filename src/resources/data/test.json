@@ -31,43 +31,43 @@
             "name": "RANDOM PICTURE 0",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "yellowKey"
+            "hasClue": "YELLOW KEY"
           },
           "SOARING EAGLE": {
             "name": "SOARING EAGLE",
             "description": " This is a picture of an eagle soaring in the sky with a golden microphone in it's talons",
             "itemType": "Picture",
-            "hasClue": "blackKey"
+            "hasClue": "BLACK KEY"
           },
           "RANDOM PICTURE 1": {
             "name": "RANDOM PICTURE 1",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "purpleKey"
+            "hasClue": "PURPLE KEY"
           },
           "RANDOM PICTURE 2": {
             "name": "RANDOM PICTURE 2",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "redKey"
+            "hasClue": "RED KEY"
           },
           "SKYLINE PICTURE": {
             "name": "SKYLINE PICTURE",
             "description": "This is a picture of the beautiful Seattle skyline",
             "itemType": "Picture",
-            "hasClue": "whiteKey"
+            "hasClue": "WHITE KEY"
           },
           "RANDOM PICTURE 3": {
             "name": "RANDOM PICTURE 3",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "violetKey"
+            "hasClue": "VIOLET KEY"
           },
           "WALKING PICTURE": {
             "name": "WALKING PICTURE",
             "description": "This is a picture of a group of friends walking down a path",
             "itemType": "Picture",
-            "hasClue": "brownKey"
+            "hasClue": "BROWN KEY"
           }
         }
       },
