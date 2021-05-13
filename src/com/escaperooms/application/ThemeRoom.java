@@ -41,7 +41,7 @@ public class ThemeRoom {
 
     public void run(Traveler traveler) {
         this.traveler = traveler;
-        while (!isCompleted) {
+        while (!isThemeRoomCompleted()) {
             System.out.println(printPuzzleMessage());
             input();
             getNextPuzzle();
@@ -161,24 +161,19 @@ public class ThemeRoom {
     //Create is completed var in puzzle class
 
     public boolean isThemeRoomCompleted() {
-        boolean result = true;
         Collection<Puzzle> puzzleList = puzzles.values();
         for (Puzzle currentPuzzle : puzzleList) {
             if (!currentPuzzle.isCompleted()) {
-                result = false;
+                return false;
             }
         }
-        return result;
+        return true;
     }
 
     //if the current puzzles is completed, get the next puzzle for the user to play
     public void getNextPuzzle() {
         String puzzleName = currentPuzzle.getDoor().getDestination();
-        if (puzzleName.equalsIgnoreCase("none")) {
-            this.isCompleted = true;
-        } else {
-            setCurrentPuzzle(puzzles.get(puzzleName));
-        }
+        setCurrentPuzzle(puzzles.get(puzzleName));
     }
 
     @Override
@@ -193,7 +188,7 @@ public class ThemeRoom {
     }
 
     public void input() {
-        while (!isCompleted) {
+        while (!currentPuzzle.isCompleted()) {
             System.out.println("What would you like to do");
             setUserInput(scanner.nextLine().toUpperCase().trim());
             if (getUserInput().equalsIgnoreCase("quit")) {
@@ -242,7 +237,7 @@ public class ThemeRoom {
         while (!enteredSolution){
             if (index == solution.size()) {
                 System.out.println("\nYOU GOT OUT");
-                setCompleted(true);
+                currentPuzzle.setCompleted(true);
                 enteredSolution = true;
             } else {
                 System.out.println("\nEnter an item to unlock this door.");
@@ -355,4 +350,3 @@ public class ThemeRoom {
         }
     }
 }
-
