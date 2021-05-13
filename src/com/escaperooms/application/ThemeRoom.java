@@ -28,6 +28,7 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
     private final MusicPlayer musicPlayer = new MusicPlayer();
     private Traveler traveler;
+    private List<String> validPrepositions =new ArrayList<String>(){{ add("AT"); add("TO"); add("UP");}};
 
     @JsonCreator
     public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("isStartingTheme") boolean isStartingTheme, @JsonProperty("nextTheme") String nextTheme) {
@@ -194,7 +195,7 @@ public class ThemeRoom {
     public void input() {
         while (!isCompleted) {
             System.out.println("What would you like to do");
-            setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
+            setUserInput(scanner.nextLine().toUpperCase().trim());
             if (getUserInput().equals("quit")) {
                 System.exit(0);
             } else if (getUserInput().equals("inventory")) {
@@ -202,23 +203,18 @@ public class ThemeRoom {
             }
             splitUserInput();
         }
-        ;
     }
 
 
     public void splitUserInput() {
-        setSplitting(getUserInput().split("\\s"));
-        if (getSplitting().length == 2) {
-            setVerb(getSplitting()[0]);
-            setNoun(getSplitting()[1]);
+        try{
+            setSplitting(getUserInput().split("\\s", 3));
+            validateInput();
+            checkItemType();
 
-        } else if (getSplitting().length == 3) {
-            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-            setNoun(getSplitting()[2]);
-        } else {
-            input();
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Error: you didn't enter your move correctly!");
         }
-        checkItemType();
     }
 
     void checkItemType() {
@@ -250,7 +246,7 @@ public class ThemeRoom {
                 enteredSolution = true;
             } else {
                 System.out.println("Enter an item to unlock this door.");
-                String clue = scanner.nextLine();
+                String clue = scanner.nextLine().trim();
                 if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
                 }else{
@@ -271,7 +267,7 @@ public class ThemeRoom {
             System.out.println(entry.getKey());
         }
 
-        itemSelection = scanner.nextLine();
+        itemSelection = scanner.nextLine().toUpperCase().trim();
         if (itemMap.containsKey(itemSelection)) {
             currentItem = itemMap.get(itemSelection);
             currentItem.setNoun(getNoun());
@@ -348,6 +344,19 @@ public class ThemeRoom {
         }
 
 
+    }
+
+    public void validateInput(){
+        if (getSplitting().length == 2) {
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1]);
+        }else if(validPrepositions.contains(getSplitting()[1])){
+            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
+            setNoun(getSplitting()[2]);
+        }else{
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1] + " " + getSplitting()[2]);
+        }
     }
 }
 
