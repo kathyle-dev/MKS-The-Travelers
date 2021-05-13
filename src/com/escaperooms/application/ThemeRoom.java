@@ -260,7 +260,7 @@ public class ThemeRoom {
     }
 
     void itemSelection() {
-        System.out.print("\nWhich " + getNoun() + " would you like to perform the previous action on?");
+        System.out.print("\nWhich " + getNoun() + " would you like to perform the previous action on?\n");
         Map<String, Item> itemMap = currentPuzzle.getItems().get(getNoun());
 
         for (Map.Entry<String, Item> entry : itemMap.entrySet()) {
