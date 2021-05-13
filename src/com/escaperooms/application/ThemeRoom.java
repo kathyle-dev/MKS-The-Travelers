@@ -220,7 +220,7 @@ public class ThemeRoom {
     void checkItemType() {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
-        } else if (getNoun().equals("door")) {
+        } else if (getNoun().equalsIgnoreCase("door")) {
             if(traveler.getInventory().size() > 0){
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
