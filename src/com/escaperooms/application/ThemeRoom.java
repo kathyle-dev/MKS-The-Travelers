@@ -28,6 +28,7 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
     private final MusicPlayer musicPlayer = new MusicPlayer();
     private Traveler traveler;
+    private List<String> validPrepositions =new ArrayList<String>(){{ add("AT"); add("TO"); add("UP");}};
 
     @JsonCreator
     public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("isStartingTheme") boolean isStartingTheme, @JsonProperty("nextTheme") String nextTheme) {
@@ -193,39 +194,34 @@ public class ThemeRoom {
 
     public void input() {
         while (!isCompleted) {
-            System.out.print("\nWhat would you like to do\n-> ");
-            setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-            if (getUserInput().equals("quit")) {
+            System.out.println("What would you like to do");
+            setUserInput(scanner.nextLine().toUpperCase().trim());
+            if (getUserInput().equalsIgnoreCase("quit")) {
                 System.exit(0);
-            } else if (getUserInput().equals("inventory")) {
+            } else if (getUserInput().equalsIgnoreCase("inventory")) {
                 traveler.showInventory();
             }
             splitUserInput();
         }
-        ;
     }
 
 
     public void splitUserInput() {
-        setSplitting(getUserInput().split("\\s"));
-        if (getSplitting().length == 2) {
-            setVerb(getSplitting()[0]);
-            setNoun(getSplitting()[1]);
+        try{
+            setSplitting(getUserInput().split("\\s", 3));
+            validateInput();
+            checkItemType();
 
-        } else if (getSplitting().length == 3) {
-            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-            setNoun(getSplitting()[2]);
-        } else {
-            input();
+        }catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Error: you didn't enter your move correctly!");
         }
-        checkItemType();
     }
 
     void checkItemType() {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
         } else if (getNoun().equals("door")) {
-            if(traveler.getInventory().size() > -1){
+            if(traveler.getInventory().size() > 0){
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
@@ -250,7 +246,7 @@ public class ThemeRoom {
                 enteredSolution = true;
             } else {
                 System.out.println("\nEnter an item to unlock this door.");
-                String clue = scanner.nextLine();
+                String clue = scanner.nextLine().trim();
                 if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
                 }else{
@@ -270,7 +266,7 @@ public class ThemeRoom {
         for (Map.Entry<String, Item> entry : itemMap.entrySet()) {
             System.out.println(entry.getKey());
         }
-        itemSelection = scanner.nextLine();
+        itemSelection = scanner.nextLine().toUpperCase().trim();
         if (itemMap.containsKey(itemSelection)) {
             currentItem = itemMap.get(itemSelection);
             currentItem.setNoun(getNoun());
@@ -285,11 +281,11 @@ public class ThemeRoom {
 
     public void use() {
         switch (getNoun()) {
-            case "cd":
+            case "CD":
                 useCD();
                 break;
-            case "picture":
-            case "actionfigure":
+            case "PICTURE":
+            case "ACTION FIGURE":
                 useGenericItem();
                 break;
             default:
@@ -302,20 +298,20 @@ public class ThemeRoom {
 
     public void useCD() {
         switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
+            case "LOOK AT":
+            case "EXAMINE":
+            case "VIEW":
+            case "DESCRIBE":
                 System.out.println("\n" + currentItem.getDescription());
                 break;
-            case "play":
-            case "listen to":
+            case "PLAY":
+            case "LISTEN TO":
                 musicPlayer.setSong(currentItem.getName());
                 musicPlayer.run();
                 musicPlayer.musicMenu();
 
                 break;
-            case "stop":
+            case "STOP":
                 musicPlayer.stopMusic();
                 break;
             default:
@@ -325,15 +321,15 @@ public class ThemeRoom {
 
     public void useGenericItem() {
         switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
+            case "LOOK AT":
+            case "EXAMINE":
+            case "VIEW":
+            case "DESCRIBE":
                 System.out.println(currentItem.getDescription());
                 break;
-            case "move":
-            case "pick up":
-            case "lift":
+            case "MOVE":
+            case "PICK UP":
+            case "LIFT":
                 if (!currentItem.getHasClue().equals("false")) {
                     System.out.println("\nyou have added one " + currentItem.getHasClue());
                     traveler.addItem(currentItem.getHasClue());
@@ -343,6 +339,19 @@ public class ThemeRoom {
                 break;
             default:
                 System.out.println("\nYou can not do that action with " + getNoun());
+        }
+    }
+    
+    public void validateInput(){
+        if (getSplitting().length == 2) {
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1]);
+        }else if(validPrepositions.contains(getSplitting()[1])){
+            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
+            setNoun(getSplitting()[2]);
+        }else{
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1] + " " + getSplitting()[2]);
         }
     }
 }
