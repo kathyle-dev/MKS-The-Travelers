@@ -15,6 +15,14 @@ public class Puzzle {
     @JsonProperty("door")
     private Door door;
     private boolean isCompleted;
+    @JsonProperty("hints")
+    private ArrayList<String> hints;
+    private String currentHint;
+    private int currentHintIndex;
+
+
+
+
 
 
     /*
@@ -59,5 +67,42 @@ public class Puzzle {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public String getCurrentHint() {
+        return currentHint;
+    }
+
+    public void setCurrentHint(String currentHint) {
+        this.currentHint = currentHint;
+    }
+
+    public ArrayList<String> getHints() {
+        return hints;
+    }
+
+    public int getCurrentHintIndex() {
+        return currentHintIndex;
+    }
+
+    public void setCurrentHintIndex(int currentHintIndex) {
+        this.currentHintIndex = currentHintIndex;
+    }
+
+    public void getAHint(ArrayList<String> arrHints) {
+        this.hints = arrHints;
+        for (int i = 1; i < hints.size(); i++) {
+            if(arrHints.get(i).equalsIgnoreCase(arrHints.get(currentHintIndex))){
+                setCurrentHintIndex(i + 1);
+                setCurrentHint(arrHints.get(currentHintIndex));
+            }else if(arrHints.get(i).equalsIgnoreCase(arrHints.get(arrHints.size() - 1))){
+                setCurrentHintIndex(0);
+                setCurrentHint(arrHints.get(getCurrentHintIndex()));
+            }else{
+                setCurrentHint(arrHints.get(currentHintIndex));
+                setCurrentHintIndex(i + 1);
+            }
+        }
+        System.out.println(getCurrentHint());
     }
 }

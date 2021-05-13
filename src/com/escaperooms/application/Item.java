@@ -15,6 +15,7 @@ public class Item {
     private String userInput;
     private MusicPlayer musicPlayer;
     Scanner scanner = new Scanner(System.in);
+    private Puzzle puzzle;
 
 
     private String verb;
@@ -69,7 +70,7 @@ public class Item {
                 break;
             case "stop":
                 musicPlayer.stopMusic();
-            break;
+                break;
             default:
                 System.out.println("You can not do that action with "+ getNoun());
         }
