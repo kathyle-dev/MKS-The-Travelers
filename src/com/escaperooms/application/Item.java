@@ -193,4 +193,14 @@ public class Item {
         this.splitting = splitting;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", hasClue='" + hasClue + '\'' +
+                ", verb='" + verb + '\'' +
+                ", noun='" + noun + '\'' +
+                '}';
+    }
 }
