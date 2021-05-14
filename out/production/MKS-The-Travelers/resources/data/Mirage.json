@@ -127,6 +127,6 @@
       "hints": ["hint 7", "hint 8", "hint 9"]
     }
   },
-  "isStartingTheme":  false,
+  "isStartingTheme":  true,
   "nextTheme": "none"
 }
