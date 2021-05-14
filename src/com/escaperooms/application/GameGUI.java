@@ -64,7 +64,7 @@ public class GameGUI extends JPanel{
     }
 
     public void deployItems(Graphics2D g2) {
-        this.game.getCurrentTheme().getCurrentPuzzle().getItems().values().forEach(e -> e.values().forEach(i -> i.paint(g2)));
+        this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getItems().values().forEach(e -> e.values().forEach(i -> i.paint(g2)));
 
     }
 
@@ -84,7 +84,7 @@ public class GameGUI extends JPanel{
     }
 
     public void run(){
-        traveler.jump(traveler.getAvailableRooms().get(0), true);
+        traveler.jump(traveler.getAvailableGames().get(0), true);
     }
 
     public static int getHEIGHT() {

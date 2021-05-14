@@ -129,30 +129,6 @@ public class ThemeRoom {
         this.splitting = splitting;
     }
 
-    public Item getCurrentItem() {
-        return currentItem;
-    }
-
-    public void setCurrentItem(Item currentItem) {
-        this.currentItem = currentItem;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-
-    public String getItemSelection() {
-        return itemSelection;
-    }
-
-    public void setItemSelection(String itemSelection) {
-        this.itemSelection = itemSelection;
-    }
-
     public boolean isStartingTheme() {
         return isStartingTheme;
     }
@@ -220,7 +196,7 @@ public class ThemeRoom {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
         } else if (getNoun().equalsIgnoreCase("door")) {
-            if(traveler.getInventory().size() > -1){
+            if(traveler.getInventory().size() > 0){
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
