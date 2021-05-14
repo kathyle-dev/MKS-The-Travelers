@@ -4,15 +4,19 @@ import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.awt.*;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Item {
+    private static final int DIAMETER = 20;
     private String name;
     private String description;
     private String itemType;
     private String hasClue;
     private String userInput;
+    private int x;
+    private int y;
     private MusicPlayer musicPlayer;
     Scanner scanner = new Scanner(System.in);
     private Puzzle puzzle;
@@ -30,14 +34,21 @@ public class Item {
     public Item(@JsonProperty("name") String name,
                 @JsonProperty("description") String description,
                 @JsonProperty("itemType") String itemType,
-                @JsonProperty("hasClue") String hasClue) {
+                @JsonProperty("hasClue") String hasClue,
+                @JsonProperty("x") int x,
+                @JsonProperty("y") int y) {
 
         this.name = name;
         this.description = description;
         this.itemType = itemType;
         this.hasClue = hasClue;
+        this.x = x;
+        this.y = y;
     }
 
+    public void paint(Graphics2D g) {
+        g.fillOval(x, y, DIAMETER, DIAMETER);
+    }
 
     public void use() {
         switch (getNoun()) {
@@ -192,6 +203,14 @@ public class Item {
 
     public void setSplitting(String[] splitting) {
         this.splitting = splitting;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     @Override

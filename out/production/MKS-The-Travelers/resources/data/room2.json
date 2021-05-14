@@ -11,37 +11,49 @@
             "name": "MASTER ROSHI",
             "description" : "This is a Master Roshi Action Figure",
             "itemType": "Action Figure",
-            "hasClue" : "I"
+            "hasClue" : "I",
+            "x": 50,
+            "y": 100
           },
           "RED RANGER": {
             "name" : "RED RANGER",
             "description": "This is a  Red Ranger action figure",
             "itemType": "Action Figure",
-            "hasClue": "R"
+            "hasClue": "R",
+            "x": 50,
+            "y": 130
           },
           "BLACK RANGER": {
             "name": "BLACK RANGER",
             "description": "This is a Black Ranger action figure",
             "itemType": "Action Figure",
-            "hasClue": "M"
+            "hasClue": "M",
+            "x": 50,
+            "y": 160
           },
           "YELLOW RANGER" : {
             "name": "YELLOW RANGER",
             "description": "This is a Yellow Ranger action figure",
             "itemType": "Action Figure",
-            "hasClue" : "A"
+            "hasClue" : "A",
+            "x": 50,
+            "y": 190
           },
           "BLUE RANGER": {
             "name": "BLUE RANGER",
             "description" : "This is a Blue Ranger action figure",
             "itemType" : "Action Figure",
-            "hasClue": "E"
+            "hasClue": "E",
+            "x": 50,
+            "y": 220
           },
           "PINK RANGER": {
             "name": "PINK RANGER",
             "description" : "This is a Pink Ranger action figure",
             "itemType" : "Action Figure",
-            "hasClue": "G"
+            "hasClue": "G",
+            "x": 50,
+            "y": 250
           }
         }
       },
@@ -54,7 +66,7 @@
         "hints": ["hint 4", "hint 5", "hint 6"]
     },
     "puzzle3": {
-      "name": "puzzl3",
+      "name": "puzzle3",
       "description": "You have realized that you were in a Genjutsu, and quickly say release. You now see the real room. There are six action figures. Make sure you keep count ",
       "items": {
         "ACTION FIGURE": {
@@ -62,37 +74,49 @@
             "name": "ITACHI UCHIHA",
             "description" : "This is an Itachi Uchiha Action Figure. Itachi is from the Hidden Leaf Village, but left his village to join the Akatsuki",
             "itemType": "Action Figure",
-            "hasClue" : "G"
+            "hasClue" : "G",
+            "x": 50,
+            "y": 100
           },
           "KATASHI HATAKE": {
             "name" : "KATASHI HATAKE",
             "description": "This is a Kakashi Hatake action figure. Kakashi is from the Hidden Leaf Village",
             "itemType": "Action Figure",
-            "hasClue": "O"
+            "hasClue": "O",
+            "x": 50,
+            "y": 130
           },
           "HIRUZEN SARUTOBI": {
             "name": "HIRUZEN SARUTOBI",
             "description": "This is a Hiruzen Sarutobi action figure. Hiruzen is from the Hidden Leaf Village",
             "itemType": "Action Figure",
-            "hasClue": "H"
+            "hasClue": "H",
+            "x": 50,
+            "y": 160
           },
           "SASORI OF THE RED SAND" : {
             "name": "SASORI OF THE RED SAND",
             "description": "This is a Sasori  Of the Red Sand  action figure. Sasori is from the Hidden Sand Village, but left his village to join the Akatsuki",
             "itemType": "Action Figure",
-            "hasClue" : "A"
+            "hasClue" : "A",
+            "x": 50,
+            "y": 190
           },
           "LADY TSUNADE": {
             "name": "LADY TSUNADE",
             "description" : "This is a  Lady Tsunade action figure. Lady Tsunade is from the Hidden Leaf Village",
             "itemType" : "Action Figure",
-            "hasClue": "C"
+            "hasClue": "C",
+            "x": 50,
+            "y": 220
           },
           "GAARA": {
             "name": "GAARA",
             "description" : "This is a Gaara action figure. Gaara is from the Hidden Sand Village",
             "itemType" : "Action Figure",
-            "hasClue": "T"
+            "hasClue": "T",
+            "x": 50,
+            "y": 250
           }
         }
       },

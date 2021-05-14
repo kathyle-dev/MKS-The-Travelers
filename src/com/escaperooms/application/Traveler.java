@@ -8,11 +8,12 @@ import java.util.stream.Collectors;
 
 import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
+
 public class Traveler {
-   private User user;
-    EscapeRoomGame game;
-    List<ThemeRoom> availableRooms;
-    List<String> inventory = new ArrayList<>();
+    private User user;
+    private EscapeRoomGame game;
+    private List<ThemeRoom> availableRooms;
+    private List<String> inventory = new ArrayList<>();
 
     public Traveler(User user, EscapeRoomGame game) {
         this.user = user;
@@ -20,8 +21,8 @@ public class Traveler {
         setAvailableRooms(game);
     }
 
-    private void jump(ThemeRoom room) {
-        game.run(this, room);
+    public void jump(ThemeRoom room, boolean isGUI) {
+        game.run(this, room, isGUI);
     }
 
     public User getUser() {
@@ -30,7 +31,7 @@ public class Traveler {
 
     private boolean isGameCompleted() {
         boolean result = true;
-        for(ThemeRoom room : availableRooms) {
+        for (ThemeRoom room : availableRooms) {
             if (!room.isCompleted()) {
                 result = false;
                 break;
@@ -48,19 +49,19 @@ public class Traveler {
     }
 
     public void menu() {
-        if(!isGameCompleted()) {
-            for(int i = 0; i < availableRooms.size(); i++) {
+        if (!isGameCompleted()) {
+            for (int i = 0; i < availableRooms.size(); i++) {
                 ThemeRoom currentRoom = availableRooms.get(i);
-                if(!currentRoom.isCompleted()) {
+                if (!currentRoom.isCompleted()) {
                     System.out.println(ansi().fg(GREEN).a(i + ": " + currentRoom.getName()).reset());
                 } else {
                     System.out.println(ansi().fg(RED).a(i + ": " + currentRoom.getName() + "(played)").reset());
                 }
             }
-            String selection = EscapeRoomGame.prompt("Select a room.\n->", "[0-" + (availableRooms.size()-1) + "]", "Invalid choice.");
+            String selection = EscapeRoomGame.prompt("Select a room.\n->", "[0-" + (availableRooms.size() - 1) + "]", "Invalid choice.");
             int choice = Integer.parseInt(selection);
             ThemeRoom room = availableRooms.get(choice);
-            jump(room);
+            jump(room, false);
         } else {
             wonSequence();
             System.exit(0);
@@ -72,15 +73,15 @@ public class Traveler {
     }
 
     public void showInventory() {
-        if(inventory.size()==0){
+        if (inventory.size() == 0) {
             System.out.println("\nThere is nothing in your inventory");
-        }else{
+        } else {
             System.out.println("\nYou have " + inventory + " in your inventory");
         }
     }
 
     public void addItem(String item) {
-        System.out.println("\n Obtained "+item);
+        System.out.println("\n Obtained " + item);
         this.inventory.add(item);
     }
 
@@ -88,23 +89,32 @@ public class Traveler {
         this.inventory.remove(item);
     }
 
-    public boolean isItemInInventory(String itemName){
+    public boolean isItemInInventory(String itemName) {
         return this.inventory.contains(itemName);
     }
 
-    public boolean doesItemHaveClue(Item itemName){
-        if(itemName.getHasClue().equalsIgnoreCase("false")){
+    public boolean doesItemHaveClue(Item itemName) {
+        if (itemName.getHasClue().equalsIgnoreCase("false")) {
             return false;
         }
         return true;
     }
+
+    public List<ThemeRoom> getAvailableRooms() {
+        return availableRooms;
+    }
+
     public void setAvailableRooms(EscapeRoomGame game) {
         List<ThemeRoom> gameList = game.getGameMap().values().stream().collect(Collectors.toList());
         gameList.removeIf(room -> !room.isStartingTheme());
         this.availableRooms = gameList;
     }
 
-    public void clearInventory(){
+    public void clearInventory() {
         this.inventory.clear();
+    }
+
+    public EscapeRoomGame getGame() {
+        return game;
     }
 }

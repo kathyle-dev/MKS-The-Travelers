@@ -48,12 +48,16 @@ public class EscapeRoomGame implements EscapeRoomInterface {
         return allThemes;
     }
 
-    public void run(Traveler traveler, ThemeRoom room) {
+    public void run(Traveler traveler, ThemeRoom room, boolean isGUI) {
         this.currentTheme = room;
-        while(!isCompleted){
-            traveler.clearInventory();
-            currentTheme.run(traveler);
-            getNextThemeRoom();
+        if(isGUI){
+            currentTheme.run(traveler, isGUI);
+        }else {
+            while (!isCompleted) {
+                traveler.clearInventory();
+                currentTheme.run(traveler, isGUI);
+                getNextThemeRoom();
+            }
         }
     }
 
@@ -95,4 +99,7 @@ public class EscapeRoomGame implements EscapeRoomInterface {
         return null;
     }
 
+    public ThemeRoom getCurrentTheme() {
+        return currentTheme;
+    }
 }

@@ -39,13 +39,17 @@ public class ThemeRoom {
         this.currentPuzzle = puzzles.get(startingPuzzle);
     }
 
-    public void run(Traveler traveler) {
+    public void run(Traveler traveler, boolean isGUI) {
         this.traveler = traveler;
-        while (!isThemeRoomCompleted()) {
+        if(isGUI){
             System.out.println(printPuzzleMessage());
-            input();
-            getNextPuzzle();
-            traveler.clearInventory();
+        } else{
+            while (!isThemeRoomCompleted()) {
+                System.out.println(printPuzzleMessage());
+                input();
+                getNextPuzzle();
+                traveler.clearInventory();
+            }
         }
     }
 
@@ -216,7 +220,7 @@ public class ThemeRoom {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
         } else if (getNoun().equalsIgnoreCase("door")) {
-            if(traveler.getInventory().size() > 0){
+            if(traveler.getInventory().size() > -1){
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
@@ -228,7 +232,6 @@ public class ThemeRoom {
             System.out.println("\ninvalid item type\n");
             input();
         }
-
     }
 
     void checkSolution(List<String> solution){
