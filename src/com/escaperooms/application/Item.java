@@ -50,6 +50,10 @@ public class Item {
         g.fillOval(x, y, DIAMETER, DIAMETER);
     }
 
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, DIAMETER, DIAMETER);
+    }
+
     public void use() {
         switch (getNoun()) {
             case "CD":

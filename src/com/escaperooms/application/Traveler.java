@@ -1,5 +1,7 @@
 package com.escaperooms.application;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,6 +16,13 @@ public class Traveler {
     private EscapeRoomGame game;
     private List<ThemeRoom> availableRooms;
     private List<String> inventory = new ArrayList<>();
+    private Image image;
+    private int x;
+    private int y;
+    private int velocityX = 0;
+    private int velocityY = 0;
+    private static final int WITH = 15;
+    private static final int HEIGHT = 15;
 
     public Traveler(User user, EscapeRoomGame game) {
         this.user = user;
@@ -68,6 +77,16 @@ public class Traveler {
         }
     }
 
+    public void move() {
+        if (getX() + getVelocityX() > 0 && getX() + getVelocityX() < GameGUI.getWIDTH()- getWITH()) {
+            setX(getX()+ getVelocityX());
+        }
+        if (getY() +  getVelocityY() > 0 && getY() + getVelocityY() < GameGUI.getHEIGHT() - (getHEIGHT() * 3)){
+            setY(getY()+getVelocityY());
+        }
+    }
+
+
     public List<String> getInventory() {
         return inventory;
     }
@@ -109,6 +128,28 @@ public class Traveler {
         gameList.removeIf(room -> !room.isStartingTheme());
         this.availableRooms = gameList;
     }
+    public void keyReleased(KeyEvent e) {
+        this.setVelocityX(0);
+        this.setVelocityY(0);
+    }
+
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        if (code == KeyEvent.VK_UP) {
+            this.setVelocityY(-2);
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            this.setVelocityY(2);
+        }
+        if (code == KeyEvent.VK_LEFT) {
+            this.setVelocityX(-2);
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            this.setVelocityX(2);
+        }
+    }
+
+
 
     public void clearInventory() {
         this.inventory.clear();
@@ -116,5 +157,61 @@ public class Traveler {
 
     public EscapeRoomGame getGame() {
         return game;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getVelocityX() {
+        return velocityX;
+    }
+
+    public void setVelocityX(int velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public int getVelocityY() {
+        return velocityY;
+    }
+
+    public void setVelocityY(int velocityY) {
+        this.velocityY = velocityY;
+    }
+
+    public void paint(Graphics2D g2) {
+        g2.drawOval(x,y,15,15);
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, 15, 15);
+    }
+
+    public static int getWITH() {
+        return WITH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
     }
 }
