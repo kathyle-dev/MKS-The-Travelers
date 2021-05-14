@@ -192,6 +192,7 @@ public class ThemeRoom {
         }
     }
 
+    // Checks item type
     void checkItemType() {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();

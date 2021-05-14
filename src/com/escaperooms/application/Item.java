@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.awt.*;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class Item {
     private static final int DIAMETER = 20;
@@ -18,17 +16,12 @@ public class Item {
     private int x;
     private int y;
     private MusicPlayer musicPlayer;
-    Scanner scanner = new Scanner(System.in);
-    private Puzzle puzzle;
 
 
     private String verb;
     private String noun;
-    private String[] splitting;
 
-    public Item() {
-
-    }
+    public Item() {}
 
     @JsonCreator
     public Item(@JsonProperty("name") String name,
@@ -54,94 +47,6 @@ public class Item {
         return new Rectangle(x, y, DIAMETER, DIAMETER);
     }
 
-    public void use() {
-        switch (getNoun()) {
-            case "CD":
-                useCD();
-                break;
-            case "PICTURE":
-            case "ACTION FIGURE":
-                useGenericItem();
-                break;
-            default:
-                System.out.println("invalid input try again");
-               // input();
-        }
-
-    }
-
-
-    public void useCD() {
-        switch (getVerb()) {
-            case "LOOK AT":
-            case "EXAMINE":
-            case "VIEW":
-            case "DESCRIBE":
-                this.getDescription();
-                break;
-            case "PLAY":
-            case "LISTEN TO":
-                // musicPlayer.run();
-                break;
-            case "STOP":
-                musicPlayer.stopMusic();
-                break;
-            default:
-                System.out.println("You can not do that action with "+ getNoun());
-        }
-    }
-
-    public void useGenericItem() {
-        switch (getVerb()) {
-            case "LOOK AT":
-            case "EXAMINE":
-            case "VIEW":
-            case "DESCRIBE":
-                this.getDescription();
-                break;
-            case "MOVE":
-            case "PICK UP":
-            case "LIFT":
-                if(!getHasClue().equals("false")) {
-                    System.out.println("you have added one " + this.getHasClue());
-
-                }else{
-                    System.out.println("When you "+ getVerb() + getNoun()+ " Nothing was there");
-                }
-                break;
-            default:
-                System.out.println("You can not do that action with "+ getNoun());
-
-        }
-
-    }
-
-
-//    public void input() {
-//        System.out.println("What would you like to do");
-//        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-//        splitUserInput();
-//    }
-//
-//
-//    public void splitUserInput() {
-//        setSplitting(getUserInput().split("\\s"));
-//        if (getSplitting().length == 2) {
-//            setVerb(getSplitting()[0]);
-//            setNoun(getSplitting()[1]);
-//            use();
-//        } else if (getSplitting().length == 3) {
-//            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-//            setNoun(getSplitting()[2]);
-//            use();
-//        } else {
-//            input();
-//        }
-//
-//
-//    }
-
-
 
 
    //Getters and Setters
@@ -149,9 +54,6 @@ public class Item {
         return this.description;
     }
 
-    public String getItemType() {
-        return itemType;
-    }
 
     public String getName() {
         return name;
@@ -161,9 +63,6 @@ public class Item {
         this.description = description;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -199,14 +98,6 @@ public class Item {
 
     public void setNoun(String noun) {
         this.noun = noun;
-    }
-
-    public String[] getSplitting() {
-        return splitting;
-    }
-
-    public void setSplitting(String[] splitting) {
-        this.splitting = splitting;
     }
 
     public int getX() {

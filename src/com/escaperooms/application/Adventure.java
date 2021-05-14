@@ -12,19 +12,22 @@ public class Adventure {
     private ThemeRoom currentTheme;
     private boolean isCompleted = false;
 
-    public Adventure(){}
+    public Adventure() {
+    }
 
-    public Adventure(String name, Map<String, ThemeRoom> adventureMap){
+
+    public Adventure(String name, Map<String, ThemeRoom> adventureMap) {
         this.name = name;
         this.adventureMap = adventureMap;
         setStartingTheme();
     }
 
+    // Will start the escape room game.
     public void run(Traveler traveler, boolean isGUI) {
         this.currentTheme = startingTheme;
-        if(isGUI){
+        if (isGUI) {
             currentTheme.run(traveler, isGUI);
-        }else {
+        } else {
             while (!isAdventureCompleted()) {
                 traveler.clearInventory();
                 currentTheme.run(traveler, isGUI);
@@ -34,6 +37,7 @@ public class Adventure {
         }
     }
 
+    // grabs the next them room
     public void getNextThemeRoom() {
         String themeName = currentTheme.getNextTheme();
         this.currentTheme = adventureMap.get(themeName);
@@ -49,7 +53,7 @@ public class Adventure {
         return true;
     }
 
-    public void addToAdventureMap(String name, ThemeRoom room){
+    public void addToAdventureMap(String name, ThemeRoom room) {
         adventureMap.put(name, room);
     }
 
@@ -73,14 +77,15 @@ public class Adventure {
         return isCompleted;
     }
 
+
     public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
 
     public void setStartingTheme() {
         List<ThemeRoom> themeList = adventureMap.values().stream().collect(Collectors.toList());
-        for(ThemeRoom room: themeList){
-            if(room.isStartingTheme()){
+        for (ThemeRoom room : themeList) {
+            if (room.isStartingTheme()) {
                 this.startingTheme = room;
             }
         }

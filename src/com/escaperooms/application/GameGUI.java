@@ -7,7 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -16,13 +20,14 @@ public class GameGUI extends JPanel{
     private Traveler traveler;
     private static final int HEIGHT = 1000;
     private static final int WIDTH = 1000;
-    List<Item> itemList;
+    Collection<Item> itemList = new ArrayList<>();
+
+
     public GameGUI(){}
 
     public GameGUI(Traveler traveler){
         this.game = traveler.getGame();
         this.traveler = traveler;
-
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -48,24 +53,26 @@ public class GameGUI extends JPanel{
         traveler.move();
     }
 
-    public void collision() {
+    public void crash() {
+        for(Item i: itemList.toArray(new Item[0])) {
 
-     //  this.game.getCurrentTheme().getCurrentPuzzle().getItems().values().forEach(e -> itemList.add(e.values())) ;
-//        for(Picture p: pictures.values().toArray(new Picture[0])) {
-//            if (p.collision()) {
-//                JOptionPane.showMessageDialog(this, "you have look at a picture", "picture", JOptionPane.OK_OPTION,p.icon);
-//                player.x = player.x + 10;
-//                player.y = player.y + 10;
-//                player.ya = 0;
-//                player.xa = 0;
-//            }
-//        }
-
+            if (i.getBounds().intersects(traveler.getBounds())) {
+                JOptionPane.showMessageDialog(this, "you have look at a picture", "picture", JOptionPane.OK_OPTION);
+                traveler.setX(traveler.getX()+10);
+                traveler.setY(traveler.getY()+ 10);
+                traveler.setVelocityY(0);
+                traveler.setVelocityX(0);
+            }
+        }
     }
 
     public void deployItems(Graphics2D g2) {
         this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getItems().values().forEach(e -> e.values().forEach(i -> i.paint(g2)));
 
+    }
+
+    public void setItemList(){
+        this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getItems().values().forEach(entry-> itemList.addAll(entry.values()));
     }
 
     @Override
@@ -85,6 +92,7 @@ public class GameGUI extends JPanel{
 
     public void run(){
         traveler.jump(traveler.getAvailableGames().get(0), true);
+        setItemList();
     }
 
     public static int getHEIGHT() {
