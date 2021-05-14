@@ -4,8 +4,6 @@ import com.escaperooms.application.EscapeRoomGame;
 import com.escaperooms.application.Traveler;
 import com.escaperooms.application.User;
 
-import java.util.List;
-
 class Client {
 
 //    public static void main(String[] args) throws IOException {
@@ -35,6 +33,9 @@ class Client {
             user.newName(name);
             Traveler traveler = new Traveler(user, escapeRoomGame);
             traveler.menu();
+//            Game game = new Game(traveler);
+//            game.run();
+
         } catch (Exception e) {
             System.out.println("The main is not working");
         }

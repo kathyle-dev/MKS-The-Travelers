@@ -11,19 +11,25 @@
             "name": "SKYLINE",
             "description": "Skyline is a song by FKJ, that will send you chill vibes.",
             "itemType": "CD",
-            "hasClue": "false"
+            "hasClue": "false",
+            "x": "200",
+            "y": "100"
           },
           "SOAR": {
             "name": "SOAR",
             "description": "Soar is a song by Christina Aguilera that will motivate you to do great things. ",
             "itemType": "CD",
-            "hasClue": "false"
+            "hasClue": "false",
+            "x": "230",
+            "y": "100"
           },
           "WALK IT TALK IT": {
             "name": "WALK IT TALK IT",
             "description": "Walk It, Talk It is a song by Migos, that will help you walk the path you have spoken.",
             "itemType": "CD",
-            "hasClue": "false"
+            "hasClue": "false",
+            "x": "260",
+            "y": "100"
           }
         },
         "PICTURE": {
@@ -31,43 +37,58 @@
             "name": "RANDOM PICTURE 0",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "YELLOW KEY"
+            "hasClue": "YELLOW KEY",
+            "x": "50",
+            "y": "100"
           },
           "SOARING EAGLE": {
             "name": "SOARING EAGLE",
             "description": " This is a picture of an eagle soaring in the sky with a golden microphone in it's talons",
             "itemType": "Picture",
-            "hasClue": "BLACK KEY"
+            "hasClue": "BLACK KEY",
+            "x": "50",
+            "y": "130"
+
           },
           "RANDOM PICTURE 1": {
             "name": "RANDOM PICTURE 1",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "PURPLE KEY"
+            "hasClue": "PURPLE KEY",
+            "x": "50",
+            "y": "160"
           },
           "RANDOM PICTURE 2": {
             "name": "RANDOM PICTURE 2",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "RED KEY"
+            "hasClue": "RED KEY",
+            "x": "50",
+            "y": "190"
           },
           "SKYLINE PICTURE": {
             "name": "SKYLINE PICTURE",
             "description": "This is a picture of the beautiful Seattle skyline",
             "itemType": "Picture",
-            "hasClue": "WHITE KEY"
+            "hasClue": "WHITE KEY",
+            "x": "50",
+            "y": "210"
           },
           "RANDOM PICTURE 3": {
             "name": "RANDOM PICTURE 3",
             "description": "This is a picture of something very random",
             "itemType": "Picture",
-            "hasClue": "VIOLET KEY"
+            "hasClue": "VIOLET KEY",
+            "x": "50",
+            "y": "240"
           },
           "WALKING PICTURE": {
             "name": "WALKING PICTURE",
             "description": "This is a picture of a group of friends walking down a path",
             "itemType": "Picture",
-            "hasClue": "BROWN KEY"
+            "hasClue": "BROWN KEY",
+            "x": "50",
+            "y": "270"
           }
         }
       },

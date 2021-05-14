@@ -74,6 +74,14 @@ public class EscapeRoomGame implements EscapeRoomInterface {
         this.gameMap = gameMap;
     }
 
+    public ThemeRoom getCurrentTheme() {
+        return currentTheme;
+    }
+
+    public void setCurrentTheme(ThemeRoom currentTheme) {
+        this.currentTheme = currentTheme;
+    }
+
     public static String prompt(String message, String regex, String errorMessage) {
         String customRegex = "|quit|" + regex;
         String input = escapeRoomPrompter.getPrompt(message, customRegex, errorMessage);

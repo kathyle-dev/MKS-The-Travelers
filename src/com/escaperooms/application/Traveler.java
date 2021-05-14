@@ -10,9 +10,13 @@ import static org.fusesource.jansi.Ansi.*;
 import static org.fusesource.jansi.Ansi.Color.*;
 public class Traveler {
    private User user;
+
+
+
     EscapeRoomGame game;
     List<ThemeRoom> availableRooms;
     List<String> inventory = new ArrayList<>();
+
 
     public Traveler(User user, EscapeRoomGame game) {
         this.user = user;
@@ -90,6 +94,14 @@ public class Traveler {
 
     public boolean isItemInInventory(String itemName){
         return this.inventory.contains(itemName);
+    }
+
+    public EscapeRoomGame getGame() {
+        return game;
+    }
+
+    public void setGame(EscapeRoomGame game) {
+        this.game = game;
     }
 
     public boolean doesItemHaveClue(Item itemName){

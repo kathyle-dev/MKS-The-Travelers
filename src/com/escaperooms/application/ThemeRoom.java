@@ -149,6 +149,8 @@ public class ThemeRoom {
         this.itemSelection = itemSelection;
     }
 
+
+
     public boolean isStartingTheme() {
         return isStartingTheme;
     }
@@ -172,7 +174,7 @@ public class ThemeRoom {
 
     //if the current puzzles is completed, get the next puzzle for the user to play
     public void getNextPuzzle() {
-        String puzzleName = currentPuzzle.getDoor().getDestination();
+        String puzzleName = getCurrentPuzzle().getDoor().getDestination();
         setCurrentPuzzle(puzzles.get(puzzleName));
     }
 

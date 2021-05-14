@@ -2,10 +2,11 @@ package com.escaperooms.application;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Puzzle {
+public class Puzzle extends JFrame {
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")

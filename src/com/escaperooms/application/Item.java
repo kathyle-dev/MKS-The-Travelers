@@ -4,18 +4,31 @@ import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class Item {
+public class Item extends JPanel{
+    private static final int DIAMETER = 20;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("description")
     private String description;
+    @JsonProperty("itemType")
     private String itemType;
     private String hasClue;
     private String userInput;
     private MusicPlayer musicPlayer;
     Scanner scanner = new Scanner(System.in);
+
     private Puzzle puzzle;
+
+    private int x;
+
+    private int y;
+    Icon icon;
+
 
 
     private String verb;
@@ -30,14 +43,23 @@ public class Item {
     public Item(@JsonProperty("name") String name,
                 @JsonProperty("description") String description,
                 @JsonProperty("itemType") String itemType,
-                @JsonProperty("hasClue") String hasClue) {
+                @JsonProperty("hasClue") String hasClue,
+                @JsonProperty("x") String x,
+                @JsonProperty("y") String y) {
 
         this.name = name;
         this.description = description;
         this.itemType = itemType;
         this.hasClue = hasClue;
+        this.x= Integer.parseInt(x);
+        this.y = Integer.parseInt(y);
+
     }
 
+
+    public void paint(Graphics2D g) {
+        g.fillOval(x, y, DIAMETER, DIAMETER);
+    }
 
     public void use() {
         switch (getNoun()) {
@@ -99,32 +121,31 @@ public class Item {
 
         }
 
+}
+
+    public void input() {
+        System.out.println("What would you like to do");
+        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
+        splitUserInput();
     }
 
 
-//    public void input() {
-//        System.out.println("What would you like to do");
-//        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-//        splitUserInput();
-//    }
-//
-//
-//    public void splitUserInput() {
-//        setSplitting(getUserInput().split("\\s"));
-//        if (getSplitting().length == 2) {
-//            setVerb(getSplitting()[0]);
-//            setNoun(getSplitting()[1]);
-//            use();
-//        } else if (getSplitting().length == 3) {
-//            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-//            setNoun(getSplitting()[2]);
-//            use();
-//        } else {
-//            input();
-//        }
-//
-//
-//    }
+    public void splitUserInput() {
+        setSplitting(getUserInput().split("\\s"));
+        if (getSplitting().length == 2) {
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1]);
+            use();
+        } else if (getSplitting().length == 3) {
+            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
+            setNoun(getSplitting()[2]);
+            use();
+        } else {
+            input();
+        }
+
+
+    }
 
 
 
@@ -192,6 +213,22 @@ public class Item {
 
     public void setSplitting(String[] splitting) {
         this.splitting = splitting;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override
