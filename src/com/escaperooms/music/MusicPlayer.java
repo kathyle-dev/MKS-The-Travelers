@@ -60,11 +60,25 @@ public class MusicPlayer extends Thread{
                 System.out.println("Invalid command");
                 musicMenu();
             }
-
-
-
         }
     }
+
+    public void playPauseStop(){
+        if (clip.isRunning()){
+            clip.stop();
+        } else if(!clip.isRunning()){
+            clip.start();
+        }
+    }
+
+    public void restart(){
+        clip.setMicrosecondPosition(0);
+    }
+
+    public void exit(){
+        clip.close();
+    }
+
 
     public Clip getClip() {
         return this.clip;
@@ -78,6 +92,8 @@ public class MusicPlayer extends Thread{
         clip.start();
         musicMenu();
     }
+
+
 
 
 

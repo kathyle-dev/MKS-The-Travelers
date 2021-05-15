@@ -4,10 +4,12 @@ import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Item {
-    private static final int DIAMETER = 20;
+    private static final int DIAMETER = 50;
     private String name;
     private String description;
     private String itemType;
@@ -16,10 +18,11 @@ public class Item {
     private int x;
     private int y;
     private MusicPlayer musicPlayer;
-
-
+    public Icon icon;
+    private String filePath;
     private String verb;
     private String noun;
+
 
     public Item() {}
 
@@ -29,7 +32,9 @@ public class Item {
                 @JsonProperty("itemType") String itemType,
                 @JsonProperty("hasClue") String hasClue,
                 @JsonProperty("x") int x,
-                @JsonProperty("y") int y) {
+                @JsonProperty("y") int y,
+                @JsonProperty("filePath")String filePath)
+    {
 
         this.name = name;
         this.description = description;
@@ -37,10 +42,26 @@ public class Item {
         this.hasClue = hasClue;
         this.x = x;
         this.y = y;
+        this.filePath = filePath;
+         this.icon =(new ImageIcon(filePath));
     }
 
     public void paint(Graphics2D g) {
-        g.fillOval(x, y, DIAMETER, DIAMETER);
+        switch (itemType) {
+            case "CD":
+                g.drawImage((new ImageIcon("src/resources/pictures/cd.jpg").getImage()), x, y, null);
+                break;
+            case "Picture":
+                g.drawImage((new ImageIcon("src/resources/pictures/blankFrame.png").getImage()), x, y, null);
+                break;
+            case "Action Figure":
+                g.drawImage((new ImageIcon(getFilepath()).getImage()), x, y, null);
+                break;
+            default:
+                g.fillOval(x, y, DIAMETER, DIAMETER);
+                break;
+        }
+
     }
 
     public Rectangle getBounds() {
@@ -106,6 +127,22 @@ public class Item {
 
     public int getY() {
         return y;
+    }
+
+    public String getFilepath() {
+        return filePath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filePath = filepath;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     @Override

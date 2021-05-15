@@ -329,4 +329,18 @@ public class ThemeRoom {
             setNoun(getSplitting()[1] + " " + getSplitting()[2]);
         }
     }
+
+    public void playMusic(){
+        musicPlayer.setSong(currentItem.getName());
+        musicPlayer.run();
+        musicPlayer.playPauseStop();
+    }
+
+    public void restartMusic(){
+        musicPlayer.restart();
+    }
+
+    public void exit(){
+        musicPlayer.exit();
+    }
 }

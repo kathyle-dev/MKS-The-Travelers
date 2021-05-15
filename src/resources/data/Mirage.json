@@ -13,7 +13,8 @@
             "itemType": "Action Figure",
             "hasClue" : "I",
             "x": 50,
-            "y": 100
+            "y": 100,
+            "filePath": "src/resources/pictures/MasterRoshi.jpg"
           },
           "RED RANGER": {
             "name" : "RED RANGER",
@@ -21,7 +22,8 @@
             "itemType": "Action Figure",
             "hasClue": "R",
             "x": 50,
-            "y": 130
+            "y": 250,
+            "filePath": "src/resources/pictures/RedPowerranger.jpg"
           },
           "BLACK RANGER": {
             "name": "BLACK RANGER",
@@ -29,7 +31,8 @@
             "itemType": "Action Figure",
             "hasClue": "M",
             "x": 50,
-            "y": 160
+            "y": 350,
+            "filePath": "src/resources/pictures/BlackPowerRanger.jpg"
           },
           "YELLOW RANGER" : {
             "name": "YELLOW RANGER",
@@ -37,7 +40,8 @@
             "itemType": "Action Figure",
             "hasClue" : "A",
             "x": 50,
-            "y": 190
+            "y": 450,
+            "filePath": "src/resources/pictures/Yellowpowerranger.jpg"
           },
           "BLUE RANGER": {
             "name": "BLUE RANGER",
@@ -45,7 +49,9 @@
             "itemType" : "Action Figure",
             "hasClue": "E",
             "x": 50,
-            "y": 220
+            "y": 550,
+            "filePath": "src/resources/pictures/BluePowerRanger.jpg"
+
           },
           "PINK RANGER": {
             "name": "PINK RANGER",
@@ -53,7 +59,8 @@
             "itemType" : "Action Figure",
             "hasClue": "G",
             "x": 50,
-            "y": 250
+            "y": 650,
+            "filePath": "src/resources/pictures/PinkPowerRanger.jpg"
           }
         }
       },
@@ -76,7 +83,8 @@
             "itemType": "Action Figure",
             "hasClue" : "G",
             "x": 50,
-            "y": 100
+            "y": 100,
+            "filePath": "src/resources/pictures/Itachi.jpg"
           },
           "KATASHI HATAKE": {
             "name" : "KATASHI HATAKE",
@@ -84,7 +92,8 @@
             "itemType": "Action Figure",
             "hasClue": "O",
             "x": 50,
-            "y": 130
+            "y": 250,
+            "filePath": "src/resources/pictures/Kakashi.jpg"
           },
           "HIRUZEN SARUTOBI": {
             "name": "HIRUZEN SARUTOBI",
@@ -92,7 +101,8 @@
             "itemType": "Action Figure",
             "hasClue": "H",
             "x": 50,
-            "y": 160
+            "y": 350,
+            "filePath" : "src/resources/pictures/sarutobi.jpg"
           },
           "SASORI OF THE RED SAND" : {
             "name": "SASORI OF THE RED SAND",
@@ -100,7 +110,8 @@
             "itemType": "Action Figure",
             "hasClue" : "A",
             "x": 50,
-            "y": 190
+            "y": 450,
+            "filePath": "src/resources/pictures/Sasori.jpg"
           },
           "LADY TSUNADE": {
             "name": "LADY TSUNADE",
@@ -108,7 +119,9 @@
             "itemType" : "Action Figure",
             "hasClue": "C",
             "x": 50,
-            "y": 220
+            "y": 550,
+            "filePath": "src/resources/pictures/Tsunade.jpg"
+
           },
           "GAARA": {
             "name": "GAARA",
@@ -116,7 +129,8 @@
             "itemType" : "Action Figure",
             "hasClue": "T",
             "x": 50,
-            "y": 250
+            "y": 650,
+            "filePath": "src/resources/pictures/Gaara.jpg"
           }
         }
       },

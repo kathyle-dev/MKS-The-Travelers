@@ -12,24 +12,27 @@
             "description": "Skyline is a song by FKJ, that will send you chill vibes.",
             "itemType": "CD",
             "hasClue": "false",
-            "x": 200,
-            "y": 100
+            "x": 300,
+            "y": 50,
+            "filePath" : "src/resources/pictures/cd.jpg"
           },
           "SOAR": {
             "name": "SOAR",
             "description": "Soar is a song by Christina Aguilera that will motivate you to do great things. ",
             "itemType": "CD",
             "hasClue": "false",
-            "x": 230,
-            "y": 100
+            "x": 400,
+            "y": 50,
+            "filePath" : "src/resources/pictures/cd.jpg"
           },
           "WALK IT TALK IT": {
             "name": "WALK IT TALK IT",
             "description": "Walk It, Talk It is a song by Migos, that will help you walk the path you have spoken.",
             "itemType": "CD",
             "hasClue": "false",
-            "x": 260,
-            "y": 100
+            "x": 500,
+            "y": 50,
+            "filePath" : "src/resources/pictures/cd.jpg"
           }
         },
         "PICTURE": {
@@ -39,7 +42,8 @@
             "itemType": "Picture",
             "hasClue": "YELLOW KEY",
             "x": 50,
-            "y": 100
+            "y": 150,
+            "filePath":"src/resources/pictures/IffleTower.jpg"
           },
           "SOARING EAGLE": {
             "name": "SOARING EAGLE",
@@ -47,7 +51,8 @@
             "itemType": "Picture",
             "hasClue": "BLACK KEY",
             "x": 50,
-            "y": 130
+            "y": 250,
+            "filePath": "src/resources/pictures/SoaringEagle.jpg"
           },
           "RANDOM PICTURE 1": {
             "name": "RANDOM PICTURE 1",
@@ -55,7 +60,8 @@
             "itemType": "Picture",
             "hasClue": "PURPLE KEY",
             "x": 50,
-            "y": 160
+            "y": 350,
+            "filePath": "src/resources/pictures/Sunset.jpg"
           },
           "RANDOM PICTURE 2": {
             "name": "RANDOM PICTURE 2",
@@ -63,7 +69,8 @@
             "itemType": "Picture",
             "hasClue": "RED KEY",
             "x": 50,
-            "y": 190
+            "y": 450,
+            "filePath": "src/resources/pictures/Sunset.jpg"
           },
           "SKYLINE PICTURE": {
             "name": "SKYLINE PICTURE",
@@ -71,7 +78,8 @@
             "itemType": "Picture",
             "hasClue": "WHITE KEY",
             "x": 50,
-            "y": 220
+            "y": 550,
+            "filePath" : "src/resources/pictures/seattleSkyline.jpg"
           },
           "RANDOM PICTURE 3": {
             "name": "RANDOM PICTURE 3",
@@ -79,7 +87,8 @@
             "itemType": "Picture",
             "hasClue": "VIOLET KEY",
             "x": 50,
-            "y": 250
+            "y": 650,
+            "filePath": "src/resources/pictures/SusetLake.jpg"
           },
           "WALKING PICTURE": {
             "name": "WALKING PICTURE",
@@ -87,7 +96,8 @@
             "itemType": "Picture",
             "hasClue": "BROWN KEY",
             "x": 50,
-            "y": 280
+            "y": 750,
+            "filePath": "src/resources/pictures/WalkingPicture.jpg"
           }
         }
       },

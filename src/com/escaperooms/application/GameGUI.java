@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -43,9 +45,11 @@ public class GameGUI extends JPanel{
             public void keyPressed(KeyEvent e) {
                 traveler.keyPressed(e);
             }
+
         });
         setFocusable(true);
 
+        ActionListener listener;
 
     }
 
@@ -57,11 +61,50 @@ public class GameGUI extends JPanel{
         for(Item i: itemList.toArray(new Item[0])) {
 
             if (i.getBounds().intersects(traveler.getBounds())) {
-                JOptionPane.showMessageDialog(this, "you have look at a picture", "picture", JOptionPane.OK_OPTION);
-                traveler.setX(traveler.getX()+10);
-                traveler.setY(traveler.getY()+ 10);
-                traveler.setVelocityY(0);
-                traveler.setVelocityX(0);
+                if(i.getItemType().equals("CD")){
+                    JButton pauseButton = new JButton("Pause");
+                    JButton playButton = new JButton("Play");
+                    JButton stopButton = new JButton("Stop");
+                    JButton restartButton = new JButton("restart");
+                    playButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            game.getCurrentAdventure().getCurrentTheme().playMusic();
+                        }
+                    });
+
+                    pauseButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            game.getCurrentAdventure().getCurrentTheme().playMusic();
+                        }
+                    });
+
+                    stopButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            game.getCurrentAdventure().getCurrentTheme().playMusic();
+                        }
+                    });
+
+                    restartButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            game.getCurrentAdventure().getCurrentTheme().restartMusic();
+                        }
+                    });
+
+                    JOptionPane jOptionPane;
+
+                }
+                else if(i.getItemType().equals("Picture")){
+                    JOptionPane.showMessageDialog(this, i.getDescription(), i.getName(), JOptionPane.OK_OPTION,i.icon);
+                    traveler.setX(traveler.getX()+10);
+                    traveler.setY(traveler.getY()+ 10);
+                    traveler.setVelocityY(0);
+                    traveler.setVelocityX(0);
+                }
+
             }
         }
     }
@@ -87,7 +130,9 @@ public class GameGUI extends JPanel{
 
         g2d.setColor(Color.GRAY);
         g2d.setFont(new Font("Verdana", Font.BOLD, 30));
-        g2d.drawString(String.valueOf("This is a random message we can display the whole time"), 10, 30);
+        g2d.drawString(String.valueOf(game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getDescription()), 10, 30);
+
+
     }
 
     public void run(){
