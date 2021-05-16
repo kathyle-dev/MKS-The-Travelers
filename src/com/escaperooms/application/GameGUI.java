@@ -63,39 +63,59 @@ public class GameGUI extends JPanel{
 
             if (i.getBounds().intersects(traveler.getBounds())) {
                 if(i.getItemType().equals("CD")){
-                    JButton pauseButton = new JButton("Pause");
-                    JButton playButton = new JButton("Play");
-                    JButton stopButton = new JButton("Stop");
-                    JButton restartButton = new JButton("restart");
-                    playButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            game.getCurrentAdventure().getCurrentTheme().playMusic();
-                        }
-                    });
 
-                    pauseButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            game.getCurrentAdventure().getCurrentTheme().playMusic();
-                        }
-                    });
-
-                    stopButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            game.getCurrentAdventure().getCurrentTheme().playMusic();
-                        }
-                    });
-
-                    restartButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
+                    String[] options = new String[] {"EXIT", "STOP", "RESTART", "PLAY/PAUSE"};
+                    int response = JOptionPane.showOptionDialog(this, "Listen to the CD", "CD PLAYER",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                            null, options, options[0]);
+//                    JDialog dialog = optionPane.createDialog("PLAY MUSIC");
+//                    dialog.setVisible(true);
+//
+                    switch(response){
+                        case 1:
+                             game.getCurrentAdventure().getCurrentTheme().stopMusic();
+                             break;
+                        case 2:
                             game.getCurrentAdventure().getCurrentTheme().restartMusic();
-                        }
-                    });
+                            break;
+                        case 3:
+                            game.getCurrentAdventure().getCurrentTheme().playMusic(i.getName());
+                            break;
+                        case -1:
+                        case 0:
+                            System.out.println("EXIT");
+                            JOptionPane.getRootFrame().dispose();
+                            game.getCurrentAdventure().getCurrentTheme().exit();
+                            traveler.setX(traveler.getX()+20);
+                            traveler.setY(traveler.getY()+ 40);
+                            traveler.setVelocityY(0);
+                            traveler.setVelocityX(0);
+                            break;
+                        default:
+                            System.out.println("NO BUTTON");
+                         }
 
-                    JOptionPane jOptionPane;
+//                        if(response == 1){
+//                            game.getCurrentAdventure().getCurrentTheme().stopMusic();
+//                            crash();
+//                        }else if(response == 2){
+//                            game.getCurrentAdventure().getCurrentTheme().restartMusic();
+//                            crash();
+//                        }else if(response == 3){
+//                            game.getCurrentAdventure().getCurrentTheme().playMusic(i.getName());
+//                            crash();
+//                        }else if(response == -1 || response == 0){
+//                            System.out.println("EXIT");
+//                            JOptionPane.getRootFrame().dispose();
+//                            game.getCurrentAdventure().getCurrentTheme().exit();
+//                            traveler.setX(traveler.getX()+20);
+//                            traveler.setY(traveler.getY()+ 40);
+//                            traveler.setVelocityY(0);
+//                            traveler.setVelocityX(0);
+//                        }else{
+//                            System.out.println("ERRORRRRR");
+//                        }
+
 
                 }
                 else if(i.getItemType().equals("Picture")){
