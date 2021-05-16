@@ -139,7 +139,10 @@
       },
       "door": {
         "destination": "none",
-        "solution": ["6", "2","4","2"]
+        "solution": ["6", "2","4","2"],
+        "x": 700,
+        "y": 700,
+        "filePath":"src/resources/pictures/door.jpg"
       },
       "hints": ["hint 7", "hint 8", "hint 9"]
     }
