@@ -330,10 +330,16 @@ public class ThemeRoom {
         }
     }
 
-    public void playMusic(){
-        musicPlayer.setSong(currentItem.getName());
+    public void playMusic(String name){
+        System.out.println("START OF PLAY MUSIC");
+        musicPlayer.setSong(name);
+        System.out.println("SONG SUPPOSED TO PLAY " + name);
         musicPlayer.run();
         musicPlayer.playPauseStop();
+    }
+
+    public void stopMusic(){
+        musicPlayer.stopMusic();
     }
 
     public void restartMusic(){

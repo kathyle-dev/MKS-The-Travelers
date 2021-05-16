@@ -18,6 +18,7 @@ public class MusicPlayer extends Thread{
     }
     public void run() {
         try {
+            System.out.println("SONG " + song);
             URL url = MusicPlayer.class.getResource("/resources/" + song + ".wav");
             AudioInputStream audioStream;
             audioStream = AudioSystem.getAudioInputStream(url);
@@ -26,6 +27,7 @@ public class MusicPlayer extends Thread{
             musicControls();
         } catch (Exception e) {
             Thread.currentThread().interrupt();
+            System.out.println("Could not create the music clip");
         }
     }
 

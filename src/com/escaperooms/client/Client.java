@@ -40,7 +40,9 @@ class Client extends JPanel{
                 gui.move();
                 gui.repaint();
                 gui.crash();
+                gui.repaint();
                 Thread.sleep(10);
+
             }
 
         } catch (Exception e) {
