@@ -39,6 +39,7 @@ class Client extends JPanel{
             while (true) {
                 gui.move();
                 gui.repaint();
+                gui.crashDoor();
                 gui.crash();
                 Thread.sleep(10);
             }
