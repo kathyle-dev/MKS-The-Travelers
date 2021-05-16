@@ -28,6 +28,7 @@ public class Traveler {
         this.availableGames = game.getGameMap().values().stream().collect(Collectors.toList());
     }
 
+    // Method that will run the next adventure
     public void jump(Adventure adventure, boolean isGUI) {
         game.run(this, adventure, isGUI);
     }
