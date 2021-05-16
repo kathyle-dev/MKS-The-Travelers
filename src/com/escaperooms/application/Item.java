@@ -24,7 +24,8 @@ public class Item {
     private String noun;
 
 
-    public Item() {}
+    public Item() {
+    }
 
     @JsonCreator
     public Item(@JsonProperty("name") String name,
@@ -33,8 +34,7 @@ public class Item {
                 @JsonProperty("hasClue") String hasClue,
                 @JsonProperty("x") int x,
                 @JsonProperty("y") int y,
-                @JsonProperty("filePath")String filePath)
-    {
+                @JsonProperty("filePath") String filePath) {
 
         this.name = name;
         this.description = description;
@@ -43,7 +43,7 @@ public class Item {
         this.x = x;
         this.y = y;
         this.filePath = filePath;
-         this.icon =(new ImageIcon(filePath));
+        this.icon = (new ImageIcon(filePath));
     }
 
     public void paint(Graphics2D g) {
@@ -69,8 +69,7 @@ public class Item {
     }
 
 
-
-   //Getters and Setters
+    //Getters and Setters
     public String getDescription() {
         return this.description;
     }

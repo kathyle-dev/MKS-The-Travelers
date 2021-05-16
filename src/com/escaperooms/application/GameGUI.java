@@ -25,6 +25,7 @@ public class GameGUI extends JPanel{
     Collection<Item> itemList = new ArrayList<>();
 
 
+
     public GameGUI(){}
 
     public GameGUI(Traveler traveler){
@@ -111,7 +112,6 @@ public class GameGUI extends JPanel{
 
     public void deployItems(Graphics2D g2) {
         this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getItems().values().forEach(e -> e.values().forEach(i -> i.paint(g2)));
-
     }
 
     public void setItemList(){
@@ -126,6 +126,7 @@ public class GameGUI extends JPanel{
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         deployItems(g2d);
+        deployDoors(g2d);
         traveler.paint(g2d);
 
         g2d.setColor(Color.GRAY);
@@ -148,5 +149,20 @@ public class GameGUI extends JPanel{
         return WIDTH;
     }
 
+    public void deployDoors(Graphics2D g2) {
+        this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getDoor().paint(g2);
+    }
 
+    public void crashDoor() {
+        Door currentDoor = this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getDoor();
+        String checkSolution = this.game.getCurrentAdventure().getCurrentTheme().checkSolution(traveler.getInventory());
+
+        if(currentDoor instanceof Door && (currentDoor.getBounds().intersects(traveler.getBounds()))){
+            JOptionPane.showMessageDialog(this, checkSolution, currentDoor.getDestination(), JOptionPane.OK_OPTION,currentDoor.icon);
+            traveler.setX(traveler.getX() - 10);
+            traveler.setY(traveler.getY() - 10);
+            traveler.setVelocityY(0);
+            traveler.setVelocityX(0);
+        }
+    }
 }
