@@ -85,7 +85,7 @@ public class GameGUI extends JPanel{
                         case 0:
                             System.out.println("EXIT");
                             JOptionPane.getRootFrame().dispose();
-                            game.getCurrentAdventure().getCurrentTheme().exit();
+                            game.getCurrentAdventure().getCurrentTheme().exit(); // TODO:  If there is a clip, close it. -> check clip.isActive
                             traveler.setX(traveler.getX()+20);
                             traveler.setY(traveler.getY()+ 40);
                             traveler.setVelocityY(0);

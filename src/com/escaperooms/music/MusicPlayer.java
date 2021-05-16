@@ -78,7 +78,9 @@ public class MusicPlayer extends Thread{
     }
 
     public void exit(){
-        clip.close();
+        if(clip != null){
+            clip.close();
+        }
     }
 
 
