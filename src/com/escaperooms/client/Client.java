@@ -29,19 +29,14 @@ class Client extends JPanel{
             Traveler traveler = new Traveler(user, escapeRoomGame);
 //            traveler.menu();
             GameGUI gui = new GameGUI(traveler);
+            gui.createFrame();
             gui.run();
-            JFrame frame = new JFrame("Test");
-            frame.add(gui);
-            frame.setSize(1000, 1000);
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             while (true) {
                 gui.move();
                 gui.repaint();
                 gui.crashDoor();
                 gui.crash();
-                gui.repaint();
                 Thread.sleep(10);
 
             }
