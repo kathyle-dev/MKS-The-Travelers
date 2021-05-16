@@ -67,8 +67,10 @@
         "door": {
           "destination": "puzzle3",
           "solution": [
-            "M","I","R","A","G","E"
-          ]
+            "M","I","R","A","G","E"],
+          "x": 700,
+          "y": 700,
+          "filePath":"src/resources/pictures/door2.jpg"
         },
         "hints": ["hint 4", "hint 5", "hint 6"]
     },
@@ -136,7 +138,10 @@
       },
       "door": {
         "destination": "none",
-        "solution": ["6", "2","4","2"]
+        "solution": ["6", "2","4","2"],
+        "x": 700,
+        "y": 700,
+        "filePath":"src/resources/pictures/door2.jpg"
       },
       "hints": ["hint 7", "hint 8", "hint 9"]
     }

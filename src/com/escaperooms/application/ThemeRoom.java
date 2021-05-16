@@ -211,27 +211,30 @@ public class ThemeRoom {
         }
     }
 
-    void checkSolution(List<String> solution){
+    String checkSolution(List<String> solution){
         Boolean enteredSolution = false;
         int index = 0;
+        String output ="";
         while (!enteredSolution){
             if (index == solution.size()) {
-                System.out.println("\nYOU GOT OUT");
+                output = "\nYOU GOT OUT";
                 currentPuzzle.setCompleted(true);
                 enteredSolution = true;
+                break;
             } else {
-                System.out.println("\nEnter an item to unlock this door.");
+               output = "\nEnter an item to unlock this door.";
                 String clue = scanner.nextLine().trim();
                 if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
                 }else{
                     System.out.println("\nWRONG!");
                     index = 0;
+                    output = "\nWRONG!";
                     break;
                 }
             }
-
         }
+        return output;
     }
 
     void itemSelection() {

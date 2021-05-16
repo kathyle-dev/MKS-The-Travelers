@@ -107,7 +107,10 @@
           "BLACK KEY",
           "WHITE KEY",
           "BROWN KEY"
-        ]
+        ],
+        "x": 700,
+        "y": 700,
+        "filePath":"src/resources/pictures/door.jpg"
       },
       "hints": ["hint 1", "hint 2", "hint 3","test"]
     }
@@ -115,5 +118,3 @@
   "isStartingTheme":  true,
   "nextTheme": "none"
 }
-
-
