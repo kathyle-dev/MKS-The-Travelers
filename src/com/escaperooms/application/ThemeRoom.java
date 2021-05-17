@@ -28,7 +28,12 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
     private final MusicPlayer musicPlayer = new MusicPlayer();
     private Traveler traveler;
-    private List<String> validPrepositions =new ArrayList<String>(){{ add("AT"); add("TO"); add("UP");}};
+    private List<String> validPrepositions = new ArrayList<String>() {{
+        add("AT");
+        add("TO");
+        add("UP");
+    }};
+    private boolean isGuiPuzzleCompleted = false;
 
     @JsonCreator
     public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("isStartingTheme") boolean isStartingTheme, @JsonProperty("nextTheme") String nextTheme) {
@@ -41,9 +46,9 @@ public class ThemeRoom {
 
     public void run(Traveler traveler, boolean isGUI) {
         this.traveler = traveler;
-        if(isGUI){
+        if (isGUI) {
             System.out.println(printPuzzleMessage());
-        } else{
+        } else {
             while (!isThemeRoomCompleted()) {
                 System.out.println(printPuzzleMessage());
                 input();
@@ -182,12 +187,12 @@ public class ThemeRoom {
 
 
     public void splitUserInput() {
-        try{
+        try {
             setSplitting(getUserInput().split("\\s", 3));
             validateInput();
             checkItemType();
 
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: you didn't enter your move correctly!");
         }
     }
@@ -197,11 +202,11 @@ public class ThemeRoom {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
         } else if (getNoun().equalsIgnoreCase("door")) {
-            if(traveler.getInventory().size() > 0){
+            if (traveler.getInventory().size() > 0) {
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
-            }else{
+            } else {
                 System.out.println("\nYou can't open this door without items. Nice try.\n");
             }
 
@@ -211,33 +216,45 @@ public class ThemeRoom {
         }
     }
 
-    String checkSolution(List<String> solution){
+    public void checkSolution(List<String> solution) {
         Boolean enteredSolution = false;
         int index = 0;
-        String output ="";
-        while (!enteredSolution){
+        while (!enteredSolution) {
             if (index == solution.size()) {
-                output = "\nYOU GOT OUT";
-                currentPuzzle.setCompleted(true);
+                System.out.println("YOU GOT OUT");
+                setCompleted(true);
                 enteredSolution = true;
-                break;
             } else {
-               output = "\nEnter an item to unlock this door.";
-                String clue = scanner.nextLine().trim();
+                System.out.println("Enter an item to unlock this door.");
+                String clue = scanner.nextLine();
                 if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
-                }else{
-                    System.out.println("\nWRONG!");
+                } else {
+                    System.out.println("WRONG!");
                     index = 0;
-                    output = "\nWRONG!";
                     break;
                 }
             }
+
         }
-        return output;
     }
 
-    void itemSelection() {
+    public boolean checkSolutionGui(String[] userInput) {
+        List<String> solution = currentPuzzle.getDoor().getSolution();
+        if(solution.size() != userInput.length){
+            return false;
+        }else{
+            for (int i = 0; i < solution.size(); i++) {
+                if(!userInput[i].equalsIgnoreCase(solution.get(i))){
+                    return false;
+                }
+            }
+            getNextPuzzle();
+            return true;
+        }
+    }
+
+    public void itemSelection() {
         System.out.print("\nWhich " + getNoun() + " would you like to perform the previous action on?\n");
         Map<String, Item> itemMap = currentPuzzle.getItems().get(getNoun());
 
@@ -319,21 +336,21 @@ public class ThemeRoom {
                 System.out.println("\nYou can not do that action with " + getNoun());
         }
     }
-    
-    public void validateInput(){
+
+    public void validateInput() {
         if (getSplitting().length == 2) {
             setVerb(getSplitting()[0]);
             setNoun(getSplitting()[1]);
-        }else if(validPrepositions.contains(getSplitting()[1])){
+        } else if (validPrepositions.contains(getSplitting()[1])) {
             setVerb(getSplitting()[0] + " " + getSplitting()[1]);
             setNoun(getSplitting()[2]);
-        }else{
+        } else {
             setVerb(getSplitting()[0]);
             setNoun(getSplitting()[1] + " " + getSplitting()[2]);
         }
     }
 
-    public void playMusic(String name){
+    public void playMusic(String name) {
         System.out.println("START OF PLAY MUSIC");
         musicPlayer.setSong(name);
         System.out.println("SONG SUPPOSED TO PLAY " + name);
@@ -341,15 +358,15 @@ public class ThemeRoom {
         musicPlayer.playPauseStop();
     }
 
-    public void stopMusic(){
+    public void stopMusic() {
         musicPlayer.stopMusic();
     }
 
-    public void restartMusic(){
+    public void restartMusic() {
         musicPlayer.restart();
     }
 
-    public void exit(){
+    public void exit() {
         musicPlayer.exit();
     }
 }
