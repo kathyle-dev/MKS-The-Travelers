@@ -29,7 +29,8 @@ public class Traveler {
     }
 
     // Method that will run the next adventure
-    public void jump(Adventure adventure, boolean isGUI) {
+    public void jump(
+            Adventure adventure, boolean isGUI) {
         game.run(this, adventure, isGUI);
     }
 

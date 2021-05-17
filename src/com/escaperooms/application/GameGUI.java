@@ -118,7 +118,14 @@ public class GameGUI extends JPanel {
 //                        }
 
 
-                } else if (i.getItemType().equals("Picture")) {
+                }
+                else if (i.getItemType().equals("Picture")) {
+                    JOptionPane.showMessageDialog(this, i.getDescription(), i.getName(), JOptionPane.OK_OPTION, i.icon);
+                    traveler.setX(traveler.getX() + 10);
+                    traveler.setY(traveler.getY() + 10);
+                    traveler.setVelocityY(0);
+                    traveler.setVelocityX(0);
+                }else if(i.getItemType().equals("Action Figure")){
                     JOptionPane.showMessageDialog(this, i.getDescription(), i.getName(), JOptionPane.OK_OPTION, i.icon);
                     traveler.setX(traveler.getX() + 10);
                     traveler.setY(traveler.getY() + 10);

@@ -56,6 +56,8 @@ public class Item {
                 break;
             case "Action Figure":
                 g.drawImage((new ImageIcon(getFilepath()).getImage()), x, y, null);
+            case "Naruto":
+                g.drawImage((new ImageIcon(getFilepath()).getImage()), x, y, null);
                 break;
             default:
                 g.fillOval(x, y, DIAMETER, DIAMETER);
