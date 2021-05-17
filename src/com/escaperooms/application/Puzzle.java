@@ -89,20 +89,11 @@ public class Puzzle {
         this.currentHintIndex = currentHintIndex;
     }
 
-    public void getAHint(ArrayList<String> arrHints) {
-        this.hints = arrHints;
-        for (int i = 1; i < hints.size(); i++) {
-            if(arrHints.get(i).equalsIgnoreCase(arrHints.get(currentHintIndex))){
-                setCurrentHintIndex(i + 1);
-                setCurrentHint(arrHints.get(currentHintIndex));
-            }else if(arrHints.get(i).equalsIgnoreCase(arrHints.get(arrHints.size() - 1))){
-                setCurrentHintIndex(0);
-                setCurrentHint(arrHints.get(getCurrentHintIndex()));
-            }else{
-                setCurrentHint(arrHints.get(currentHintIndex));
-                setCurrentHintIndex(i + 1);
-            }
+    public String getAHint() {
+        if(currentHintIndex == (hints.size()-1)) {
+            setCurrentHintIndex(0);
         }
-        System.out.println(getCurrentHint());
+
+        return getCurrentHint();
     }
 }

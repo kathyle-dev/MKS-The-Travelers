@@ -38,6 +38,7 @@ public class EscapeRoomGame implements EscapeRoomInterface {
                     Adventure adventure = new Adventure(gameName, singleThemeRoom);
                     if(!allThemes.containsKey(gameName)){
                         allThemes.put(gameName, adventure);
+                        System.out.println("after all themes");
                     }else{
                         allThemes.get(gameName).addToAdventureMap(themeRoom.getName(), themeRoom);
                     }

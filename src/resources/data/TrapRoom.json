@@ -112,7 +112,7 @@
         "y": 700,
         "filePath":"src/resources/pictures/door.jpg"
       },
-      "hints": ["hint 1", "hint 2", "hint 3","test"]
+      "hints": ["You might want to look at the song titles to guide the pictures you take clues from. The Order of key entry will be based on the left to right order of the songs"]
     }
   },
   "isStartingTheme":  true,

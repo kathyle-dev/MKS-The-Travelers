@@ -18,7 +18,7 @@ public class Door {
     private int y;
     private String filePath;
     public Icon icon;
-    private static final int DIAMETER = 50;
+    private static final int DIAMETER = 100;
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
@@ -54,7 +54,7 @@ public class Door {
         }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, DIAMETER, DIAMETER);
+        return new Rectangle(x, y,100,200);
     }
 
     public int getX() {

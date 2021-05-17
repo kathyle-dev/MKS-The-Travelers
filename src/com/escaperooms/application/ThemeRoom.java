@@ -28,6 +28,7 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
     private final MusicPlayer musicPlayer = new MusicPlayer();
     private Traveler traveler;
+    String startingPuzzle;
     private List<String> validPrepositions = new ArrayList<String>() {{
         add("AT");
         add("TO");
@@ -41,10 +42,11 @@ public class ThemeRoom {
         this.puzzles = puzzles;
         this.isStartingTheme = isStartingTheme;
         this.nextTheme = nextTheme;
-        this.currentPuzzle = puzzles.get(startingPuzzle);
+        this.startingPuzzle= startingPuzzle;
     }
 
     public void run(Traveler traveler, boolean isGUI) {
+        this.currentPuzzle = puzzles.get(startingPuzzle);
         this.traveler = traveler;
         if (isGUI) {
             System.out.println(printPuzzleMessage());
@@ -351,10 +353,6 @@ public class ThemeRoom {
     }
 
     public void playMusic(String name) {
-        System.out.println("START OF PLAY MUSIC");
-        musicPlayer.setSong(name);
-        System.out.println("SONG SUPPOSED TO PLAY " + name);
-        musicPlayer.run();
         musicPlayer.playPauseStop();
     }
 
@@ -368,5 +366,14 @@ public class ThemeRoom {
 
     public void exit() {
         musicPlayer.exit();
+    }
+
+    public MusicPlayer getMusicPlayer() {
+        return musicPlayer;
+    }
+
+
+    public void resetThemeRoom(){
+        currentPuzzle = puzzles.get(startingPuzzle);
     }
 }

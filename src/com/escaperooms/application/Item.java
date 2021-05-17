@@ -55,7 +55,7 @@ public class Item {
                 g.drawImage((new ImageIcon("src/resources/pictures/blankFrame.png").getImage()), x, y, null);
                 break;
             case "Action Figure":
-                g.drawImage((new ImageIcon(getFilepath()).getImage()), x, y, null);
+                g.drawImage((new ImageIcon("src/resources/pictures/ActionFigureDisplayCase.jpg").getImage()), x, y, null);
                 break;
             default:
                 g.fillOval(x, y, DIAMETER, DIAMETER);

@@ -24,7 +24,6 @@ public class MusicPlayer extends Thread{
             audioStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
-            musicControls();
         } catch (Exception e) {
             Thread.currentThread().interrupt();
             System.out.println("Could not create the music clip");

@@ -31,7 +31,7 @@
             "itemType": "Action Figure",
             "hasClue": "M",
             "x": 50,
-            "y": 350,
+            "y": 400,
             "filePath": "src/resources/pictures/BlackPowerRanger.jpg"
           },
           "YELLOW RANGER" : {
@@ -40,7 +40,7 @@
             "itemType": "Action Figure",
             "hasClue" : "A",
             "x": 50,
-            "y": 450,
+            "y": 550,
             "filePath": "src/resources/pictures/Yellowpowerranger.jpg"
           },
           "BLUE RANGER": {
@@ -49,7 +49,7 @@
             "itemType" : "Action Figure",
             "hasClue": "E",
             "x": 50,
-            "y": 550,
+            "y": 700,
             "filePath": "src/resources/pictures/BluePowerRanger.jpg"
 
           },
@@ -59,7 +59,7 @@
             "itemType" : "Action Figure",
             "hasClue": "G",
             "x": 50,
-            "y": 650,
+            "y": 850,
             "filePath": "src/resources/pictures/PinkPowerRanger.jpg"
           }
         }
@@ -67,13 +67,13 @@
         "door": {
           "destination": "puzzle3",
           "solution": [
-            "M","I","R","A","G","E"
+            "MIRAGE"
           ],
           "x": 700,
           "y": 700,
           "filePath":"src/resources/pictures/door2.jpg"
         },
-        "hints": ["hint 4", "hint 5", "hint 6"]
+        "hints": ["The word you will need to exit the door is a combination of the letter from each clue.A synonym for the word is delusion or hallucination"]
     },
     "puzzle3": {
       "name": "puzzle3",
@@ -104,7 +104,7 @@
             "itemType": "Action Figure",
             "hasClue": "H",
             "x": 50,
-            "y": 350,
+            "y": 400,
             "filePath" : "src/resources/pictures/sarutobi.jpg"
           },
           "SASORI OF THE RED SAND" : {
@@ -113,7 +113,7 @@
             "itemType": "Action Figure",
             "hasClue" : "A",
             "x": 50,
-            "y": 450,
+            "y": 550,
             "filePath": "src/resources/pictures/Sasori.jpg"
           },
           "LADY TSUNADE": {
@@ -122,7 +122,7 @@
             "itemType" : "Action Figure",
             "hasClue": "C",
             "x": 50,
-            "y": 550,
+            "y": 700,
             "filePath": "src/resources/pictures/Tsunade.jpg"
 
           },
@@ -132,21 +132,21 @@
             "itemType" : "Action Figure",
             "hasClue": "T",
             "x": 50,
-            "y": 650,
+            "y": 850,
             "filePath": "src/resources/pictures/Gaara.jpg"
           }
         }
       },
       "door": {
         "destination": "none",
-        "solution": ["6", "2","4","2"],
+        "solution": ["6242"],
         "x": 700,
         "y": 700,
         "filePath":"src/resources/pictures/door.jpg"
       },
-      "hints": ["hint 7", "hint 8", "hint 9"]
+      "hints": ["Total number of Action figure is the first number, Number of the shinobi form the Sand village is the second number. Number of shinobi from the leaf is the third number. Number shinobi that left their village is the last number "]
     }
   },
   "isStartingTheme":  true,
-  "nextTheme": "none"
+  "nextTheme": "Trap Room"
 }

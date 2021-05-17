@@ -1,9 +1,6 @@
 package com.escaperooms.client;
 
-import com.escaperooms.application.EscapeRoomGame;
-import com.escaperooms.application.GameGUI;
-import com.escaperooms.application.Traveler;
-import com.escaperooms.application.User;
+import com.escaperooms.application.*;
 import org.fusesource.jansi.AnsiConsole;
 
 import javax.swing.*;
@@ -28,23 +25,25 @@ class Client extends JPanel{
             user.newName(name);
             Traveler traveler = new Traveler(user, escapeRoomGame);
 //            traveler.menu();
-            GameGUI gui = new GameGUI(traveler);
-            gui.run();
-            JFrame frame = new JFrame("Test");
-            frame.add(gui);
-            frame.setSize(1000, 1000);
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            GameGUI gui =
+            Frame frame = new Frame("Escape Room", traveler);
+//            gui.setFrame(frame);
+            frame.showGame();
 
-            while (true) {
-                gui.move();
-                gui.repaint();
-                gui.crashDoor();
-                gui.crash();
-                gui.repaint();
-                Thread.sleep(10);
 
-            }
+//            frame.setSize(1000, 1000);
+//            frame.setVisible(true);
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+//            while (true) {
+//                gui.move();
+//                gui.repaint();
+//                gui.crashDoor();
+//                gui.crash();
+//                gui.repaint();
+//                Thread.sleep(10);
+//
+//            }
 
         } catch (Exception e) {
             System.out.println("The main is not working");
