@@ -4,138 +4,76 @@ import com.escaperooms.music.MusicPlayer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Locale;
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Item {
+    private static final int DIAMETER = 50;
     private String name;
     private String description;
     private String itemType;
     private String hasClue;
     private String userInput;
+    private int x;
+    private int y;
     private MusicPlayer musicPlayer;
-    Scanner scanner = new Scanner(System.in);
-
-
+    public Icon icon;
+    private String filePath;
     private String verb;
     private String noun;
-    private String[] splitting;
+
 
     public Item() {
-
     }
 
     @JsonCreator
     public Item(@JsonProperty("name") String name,
                 @JsonProperty("description") String description,
                 @JsonProperty("itemType") String itemType,
-                @JsonProperty("hasClue") String hasClue) {
+                @JsonProperty("hasClue") String hasClue,
+                @JsonProperty("x") int x,
+                @JsonProperty("y") int y,
+                @JsonProperty("filePath") String filePath) {
 
         this.name = name;
         this.description = description;
         this.itemType = itemType;
         this.hasClue = hasClue;
+        this.x = x;
+        this.y = y;
+        this.filePath = filePath;
+        this.icon = (new ImageIcon(filePath));
     }
 
-
-    public void use() {
-        switch (getNoun()) {
-            case "cd":
-                useCD();
+    public void paint(Graphics2D g) {
+        switch (itemType) {
+            case "CD":
+                g.drawImage((new ImageIcon("src/resources/pictures/cd.jpg").getImage()), x, y, null);
                 break;
-            case "picture":
-            case "actionfigure":
-                useGenericItem();
+            case "Picture":
+                g.drawImage((new ImageIcon("src/resources/pictures/blankFrame.png").getImage()), x, y, null);
+                break;
+            case "Action Figure":
+                g.drawImage((new ImageIcon("src/resources/pictures/ActionFigureDisplayCase.jpg").getImage()), x, y, null);
                 break;
             default:
-                System.out.println("invalid input try again");
-               // input();
+                g.fillOval(x, y, DIAMETER, DIAMETER);
+                break;
         }
 
     }
 
-
-    public void useCD() {
-        switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
-                this.getDescription();
-                break;
-            case "play":
-            case "listen to":
-                // musicPlayer.run();
-                break;
-            case "stop":
-                musicPlayer.stopMusic();
-            break;
-            default:
-                System.out.println("You can not do that action with "+ getNoun());
-        }
-    }
-
-    public void useGenericItem() {
-        switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
-                this.getDescription();
-                break;
-            case "move":
-            case "pick up":
-            case "lift":
-                if(!getHasClue().equals("false")) {
-                    System.out.println("you have added one " + this.getHasClue());
-
-                }else{
-                    System.out.println("When you "+ getVerb() + getNoun()+ " Nothing was there");
-                }
-                break;
-            default:
-                System.out.println("You can not do that action with "+ getNoun());
-
-        }
-
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, DIAMETER, DIAMETER);
     }
 
 
-//    public void input() {
-//        System.out.println("What would you like to do");
-//        setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-//        splitUserInput();
-//    }
-//
-//
-//    public void splitUserInput() {
-//        setSplitting(getUserInput().split("\\s"));
-//        if (getSplitting().length == 2) {
-//            setVerb(getSplitting()[0]);
-//            setNoun(getSplitting()[1]);
-//            use();
-//        } else if (getSplitting().length == 3) {
-//            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-//            setNoun(getSplitting()[2]);
-//            use();
-//        } else {
-//            input();
-//        }
-//
-//
-//    }
-
-
-
-
-   //Getters and Setters
+    //Getters and Setters
     public String getDescription() {
         return this.description;
     }
 
-    public String getItemType() {
-        return itemType;
-    }
 
     public String getName() {
         return name;
@@ -145,9 +83,6 @@ public class Item {
         this.description = description;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -185,12 +120,28 @@ public class Item {
         this.noun = noun;
     }
 
-    public String[] getSplitting() {
-        return splitting;
+    public int getX() {
+        return x;
     }
 
-    public void setSplitting(String[] splitting) {
-        this.splitting = splitting;
+    public int getY() {
+        return y;
+    }
+
+    public String getFilepath() {
+        return filePath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filePath = filepath;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     @Override

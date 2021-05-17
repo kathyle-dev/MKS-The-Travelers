@@ -1,0 +1,152 @@
+{
+  "name": "Mirage",
+  "startingPuzzle" : "puzzle2",
+  "puzzles": {
+    "puzzle2": {
+      "name": "puzzle2",
+      "description": "Now that you have made it past the first room things will get a bit more tricky.",
+      "items": {
+        "ACTION FIGURE": {
+          "MASTER ROSHI": {
+            "name": "MASTER ROSHI",
+            "description" : "This is a Master Roshi Action Figure",
+            "itemType": "Action Figure",
+            "hasClue" : "I",
+            "x": 50,
+            "y": 100,
+            "filePath": "src/resources/pictures/MasterRoshi.jpg"
+          },
+          "RED RANGER": {
+            "name" : "RED RANGER",
+            "description": "This is a  Red Ranger action figure",
+            "itemType": "Action Figure",
+            "hasClue": "R",
+            "x": 50,
+            "y": 250,
+            "filePath": "src/resources/pictures/RedPowerranger.jpg"
+          },
+          "BLACK RANGER": {
+            "name": "BLACK RANGER",
+            "description": "This is a Black Ranger action figure",
+            "itemType": "Action Figure",
+            "hasClue": "M",
+            "x": 50,
+            "y": 400,
+            "filePath": "src/resources/pictures/BlackPowerRanger.jpg"
+          },
+          "YELLOW RANGER" : {
+            "name": "YELLOW RANGER",
+            "description": "This is a Yellow Ranger action figure",
+            "itemType": "Action Figure",
+            "hasClue" : "A",
+            "x": 50,
+            "y": 550,
+            "filePath": "src/resources/pictures/Yellowpowerranger.jpg"
+          },
+          "BLUE RANGER": {
+            "name": "BLUE RANGER",
+            "description" : "This is a Blue Ranger action figure",
+            "itemType" : "Action Figure",
+            "hasClue": "E",
+            "x": 50,
+            "y": 700,
+            "filePath": "src/resources/pictures/BluePowerRanger.jpg"
+
+          },
+          "PINK RANGER": {
+            "name": "PINK RANGER",
+            "description" : "This is a Pink Ranger action figure",
+            "itemType" : "Action Figure",
+            "hasClue": "G",
+            "x": 50,
+            "y": 850,
+            "filePath": "src/resources/pictures/PinkPowerRanger.jpg"
+          }
+        }
+      },
+        "door": {
+          "destination": "puzzle3",
+          "solution": [
+            "MIRAGE"
+          ],
+          "x": 700,
+          "y": 700,
+          "filePath":"src/resources/pictures/door2.jpg"
+        },
+        "hints": ["The word you will need to exit the door is a combination of the letter from each clue.A synonym for the word is delusion or hallucination"]
+    },
+    "puzzle3": {
+      "name": "puzzle3",
+      "description": "You have realized that you were in a Genjutsu, and quickly say release. You now see the real room. There are six action figures. Make sure you keep count ",
+      "items": {
+        "ACTION FIGURE": {
+          "ITACHI UCHIHA": {
+            "name": "ITACHI UCHIHA",
+            "description" : "This is an Itachi Uchiha Action Figure. Itachi is from the Hidden Leaf Village, but left his village to join the Akatsuki",
+            "itemType": "Action Figure",
+            "hasClue" : "G",
+            "x": 50,
+            "y": 100,
+            "filePath": "src/resources/pictures/Itachi.jpg"
+          },
+          "KATASHI HATAKE": {
+            "name" : "KATASHI HATAKE",
+            "description": "This is a Kakashi Hatake action figure. Kakashi is from the Hidden Leaf Village",
+            "itemType": "Action Figure",
+            "hasClue": "O",
+            "x": 50,
+            "y": 250,
+            "filePath": "src/resources/pictures/Kakashi.jpg"
+          },
+          "HIRUZEN SARUTOBI": {
+            "name": "HIRUZEN SARUTOBI",
+            "description": "This is a Hiruzen Sarutobi action figure. Hiruzen is from the Hidden Leaf Village",
+            "itemType": "Action Figure",
+            "hasClue": "H",
+            "x": 50,
+            "y": 400,
+            "filePath" : "src/resources/pictures/sarutobi.jpg"
+          },
+          "SASORI OF THE RED SAND" : {
+            "name": "SASORI OF THE RED SAND",
+            "description": "This is a Sasori  Of the Red Sand  action figure. Sasori is from the Hidden Sand Village, but left his village to join the Akatsuki",
+            "itemType": "Action Figure",
+            "hasClue" : "A",
+            "x": 50,
+            "y": 550,
+            "filePath": "src/resources/pictures/Sasori.jpg"
+          },
+          "LADY TSUNADE": {
+            "name": "LADY TSUNADE",
+            "description" : "This is a  Lady Tsunade action figure. Lady Tsunade is from the Hidden Leaf Village",
+            "itemType" : "Action Figure",
+            "hasClue": "C",
+            "x": 50,
+            "y": 700,
+            "filePath": "src/resources/pictures/Tsunade.jpg"
+
+          },
+          "GAARA": {
+            "name": "GAARA",
+            "description" : "This is a Gaara action figure. Gaara is from the Hidden Sand Village",
+            "itemType" : "Action Figure",
+            "hasClue": "T",
+            "x": 50,
+            "y": 850,
+            "filePath": "src/resources/pictures/Gaara.jpg"
+          }
+        }
+      },
+      "door": {
+        "destination": "none",
+        "solution": ["6242"],
+        "x": 700,
+        "y": 700,
+        "filePath":"src/resources/pictures/door.jpg"
+      },
+      "hints": ["Total number of Action figure is the first number, Number of the shinobi form the Sand village is the second number. Number of shinobi from the leaf is the third number. Number shinobi that left their village is the last number "]
+    }
+  },
+  "isStartingTheme":  false,
+  "nextTheme": "None"
+}

@@ -28,6 +28,13 @@ public class ThemeRoom {
     Scanner scanner = new Scanner(System.in);
     private final MusicPlayer musicPlayer = new MusicPlayer();
     private Traveler traveler;
+    String startingPuzzle;
+    private List<String> validPrepositions = new ArrayList<String>() {{
+        add("AT");
+        add("TO");
+        add("UP");
+    }};
+    private boolean isGuiPuzzleCompleted = false;
 
     @JsonCreator
     public ThemeRoom(@JsonProperty("name") String name, @JsonProperty("startingPuzzle") String startingPuzzle, @JsonProperty("puzzles") Map<String, Puzzle> puzzles, @JsonProperty("isStartingTheme") boolean isStartingTheme, @JsonProperty("nextTheme") String nextTheme) {
@@ -35,22 +42,27 @@ public class ThemeRoom {
         this.puzzles = puzzles;
         this.isStartingTheme = isStartingTheme;
         this.nextTheme = nextTheme;
-        this.currentPuzzle = puzzles.get(startingPuzzle);
+        this.startingPuzzle= startingPuzzle;
     }
 
-    public void run(Traveler traveler) {
+    public void run(Traveler traveler, boolean isGUI) {
+        this.currentPuzzle = puzzles.get(startingPuzzle);
         this.traveler = traveler;
-        while (!isCompleted) {
+        if (isGUI) {
             System.out.println(printPuzzleMessage());
-            input();
-            getNextPuzzle();
-            traveler.clearInventory();
+        } else {
+            while (!isThemeRoomCompleted()) {
+                System.out.println(printPuzzleMessage());
+                input();
+                getNextPuzzle();
+                traveler.clearInventory();
+            }
         }
     }
 
     public String printPuzzleMessage() {
         String msg = "";
-        msg += ("You've entered: " + getName());
+        msg += ("\nYou've entered: " + getName() + "\n");
         msg += "\nHere's your puzzle: \n" + currentPuzzle.getDescription();
         return msg;
     }
@@ -124,30 +136,6 @@ public class ThemeRoom {
         this.splitting = splitting;
     }
 
-    public Item getCurrentItem() {
-        return currentItem;
-    }
-
-    public void setCurrentItem(Item currentItem) {
-        this.currentItem = currentItem;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-
-    public String getItemSelection() {
-        return itemSelection;
-    }
-
-    public void setItemSelection(String itemSelection) {
-        this.itemSelection = itemSelection;
-    }
-
     public boolean isStartingTheme() {
         return isStartingTheme;
     }
@@ -160,24 +148,26 @@ public class ThemeRoom {
     //Create is completed var in puzzle class
 
     public boolean isThemeRoomCompleted() {
-        boolean result = true;
         Collection<Puzzle> puzzleList = puzzles.values();
         for (Puzzle currentPuzzle : puzzleList) {
             if (!currentPuzzle.isCompleted()) {
-                result = false;
+                return false;
             }
         }
-        return result;
+        return true;
+    }
+
+    public void resetPuzzleComplete() {
+        Collection<Puzzle> puzzleList = puzzles.values();
+        for (Puzzle currentPuzzle : puzzleList) {
+            currentPuzzle.setCompleted(false);
+        }
     }
 
     //if the current puzzles is completed, get the next puzzle for the user to play
     public void getNextPuzzle() {
         String puzzleName = currentPuzzle.getDoor().getDestination();
-        if (puzzleName.equalsIgnoreCase("none")) {
-            this.isCompleted = true;
-        } else {
-            setCurrentPuzzle(puzzles.get(puzzleName));
-        }
+        setCurrentPuzzle(puzzles.get(puzzleName));
     }
 
     @Override
@@ -192,58 +182,53 @@ public class ThemeRoom {
     }
 
     public void input() {
-        while (!isCompleted) {
+        while (!currentPuzzle.isCompleted()) {
             System.out.println("What would you like to do");
-            setUserInput(scanner.nextLine().toLowerCase(Locale.ROOT));
-            if (getUserInput().equals("quit")) {
+            setUserInput(scanner.nextLine().toUpperCase().trim());
+            if (getUserInput().equalsIgnoreCase("quit")) {
                 System.exit(0);
-            } else if (getUserInput().equals("inventory")) {
+            } else if (getUserInput().equalsIgnoreCase("inventory")) {
                 traveler.showInventory();
             }
             splitUserInput();
         }
-        ;
     }
 
 
     public void splitUserInput() {
-        setSplitting(getUserInput().split("\\s"));
-        if (getSplitting().length == 2) {
-            setVerb(getSplitting()[0]);
-            setNoun(getSplitting()[1]);
+        try {
+            setSplitting(getUserInput().split("\\s", 3));
+            validateInput();
+            checkItemType();
 
-        } else if (getSplitting().length == 3) {
-            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
-            setNoun(getSplitting()[2]);
-        } else {
-            input();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: you didn't enter your move correctly!");
         }
-        checkItemType();
     }
 
+    // Checks item type
     void checkItemType() {
         if (currentPuzzle.getItems().containsKey(getNoun())) {
             itemSelection();
-        } else if (getNoun().equals("door")) {
-            if(traveler.getInventory().size() > -1){
+        } else if (getNoun().equalsIgnoreCase("door")) {
+            if (traveler.getInventory().size() > 0) {
                 traveler.showInventory();
                 List<String> solution = currentPuzzle.getDoor().getSolution();
                 checkSolution(solution);
-            }else{
-                System.out.println("You can't open this door without items. Nice try.");
+            } else {
+                System.out.println("\nYou can't open this door without items. Nice try.\n");
             }
 
         } else {
-            System.out.println("invalid item type");
+            System.out.println("\ninvalid item type\n");
             input();
         }
-
     }
 
-    void checkSolution(List<String> solution){
+    public void checkSolution(List<String> solution) {
         Boolean enteredSolution = false;
         int index = 0;
-        while (!enteredSolution){
+        while (!enteredSolution) {
             if (index == solution.size()) {
                 System.out.println("YOU GOT OUT");
                 setCompleted(true);
@@ -253,7 +238,7 @@ public class ThemeRoom {
                 String clue = scanner.nextLine();
                 if (solution.get(index).equalsIgnoreCase(clue)) {
                     index++;
-                }else{
+                } else {
                     System.out.println("WRONG!");
                     index = 0;
                     break;
@@ -263,15 +248,30 @@ public class ThemeRoom {
         }
     }
 
-    void itemSelection() {
-        System.out.println("Which " + getNoun() + " would you like to perform the previous action on");
+    public boolean checkSolutionGui(String[] userInput) {
+        List<String> solution = currentPuzzle.getDoor().getSolution();
+        if(solution.size() != userInput.length){
+            return false;
+        }else{
+            for (int i = 0; i < solution.size(); i++) {
+                if(!userInput[i].equalsIgnoreCase(solution.get(i))){
+                    return false;
+                }
+            }
+            currentPuzzle.setCompleted(true);
+            getNextPuzzle();
+            return true;
+        }
+    }
+
+    public void itemSelection() {
+        System.out.print("\nWhich " + getNoun() + " would you like to perform the previous action on?\n");
         Map<String, Item> itemMap = currentPuzzle.getItems().get(getNoun());
 
         for (Map.Entry<String, Item> entry : itemMap.entrySet()) {
             System.out.println(entry.getKey());
         }
-
-        itemSelection = scanner.nextLine();
+        itemSelection = scanner.nextLine().toUpperCase().trim();
         if (itemMap.containsKey(itemSelection)) {
             currentItem = itemMap.get(itemSelection);
             currentItem.setNoun(getNoun());
@@ -286,15 +286,15 @@ public class ThemeRoom {
 
     public void use() {
         switch (getNoun()) {
-            case "cd":
+            case "CD":
                 useCD();
                 break;
-            case "picture":
-            case "actionfigure":
+            case "PICTURE":
+            case "ACTION FIGURE":
                 useGenericItem();
                 break;
             default:
-                System.out.println("invalid input try again");
+                System.out.println("\ninvalid input try again");
                 // input();
         }
 
@@ -303,50 +303,85 @@ public class ThemeRoom {
 
     public void useCD() {
         switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
-                System.out.println(currentItem.getDescription());
+            case "LOOK AT":
+            case "EXAMINE":
+            case "VIEW":
+            case "DESCRIBE":
+                System.out.println("\n" + currentItem.getDescription());
                 break;
-            case "play":
-            case "listen to":
-                System.out.println("Playing");
+            case "PLAY":
+            case "LISTEN TO":
                 musicPlayer.setSong(currentItem.getName());
                 musicPlayer.run();
+                musicPlayer.musicMenu();
+
                 break;
-            case "stop":
+            case "STOP":
                 musicPlayer.stopMusic();
                 break;
             default:
-                System.out.println("You can not do that action with " + getNoun());
+                System.out.println("\nYou can not do that action with " + getNoun());
         }
     }
 
     public void useGenericItem() {
         switch (getVerb()) {
-            case "look at":
-            case "examine":
-            case "view":
-            case "describe":
+            case "LOOK AT":
+            case "EXAMINE":
+            case "VIEW":
+            case "DESCRIBE":
                 System.out.println(currentItem.getDescription());
                 break;
-            case "move":
-            case "pick up":
-            case "lift":
+            case "MOVE":
+            case "PICK UP":
+            case "LIFT":
                 if (!currentItem.getHasClue().equals("false")) {
-                    System.out.println("you have added one " + currentItem.getHasClue());
+                    System.out.println("\nyou have added one " + currentItem.getHasClue());
                     traveler.addItem(currentItem.getHasClue());
                 } else {
-                    System.out.println("When you " + getVerb() + getNoun() + " Nothing was there");
+                    System.out.println("\nWhen you " + getVerb() + getNoun() + " Nothing was there");
                 }
                 break;
             default:
-                System.out.println("You can not do that action with " + getNoun());
-
+                System.out.println("\nYou can not do that action with " + getNoun());
         }
+    }
+
+    public void validateInput() {
+        if (getSplitting().length == 2) {
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1]);
+        } else if (validPrepositions.contains(getSplitting()[1])) {
+            setVerb(getSplitting()[0] + " " + getSplitting()[1]);
+            setNoun(getSplitting()[2]);
+        } else {
+            setVerb(getSplitting()[0]);
+            setNoun(getSplitting()[1] + " " + getSplitting()[2]);
+        }
+    }
+
+    public void playMusic(String name) {
+        musicPlayer.playPauseStop();
+    }
+
+    public void stopMusic() {
+        musicPlayer.stopMusic();
+    }
+
+    public void restartMusic() {
+        musicPlayer.restart();
+    }
+
+    public void exit() {
+        musicPlayer.exit();
+    }
+
+    public MusicPlayer getMusicPlayer() {
+        return musicPlayer;
+    }
 
 
+    public void resetThemeRoom(){
+        currentPuzzle = puzzles.get(startingPuzzle);
     }
 }
-

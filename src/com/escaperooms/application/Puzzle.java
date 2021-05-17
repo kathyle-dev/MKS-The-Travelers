@@ -15,7 +15,10 @@ public class Puzzle {
     @JsonProperty("door")
     private Door door;
     private boolean isCompleted;
-
+    @JsonProperty("hints")
+    private ArrayList<String> hints;
+    private String currentHint;
+    private int currentHintIndex = 0;
 
     /*
      * GETTER'S AND SETTERS
@@ -59,5 +62,33 @@ public class Puzzle {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    public String getCurrentHint() {
+        return hints.get(currentHintIndex);
+    }
+
+    public void setCurrentHint(String currentHint) {
+        this.currentHint = currentHint;
+    }
+
+    public ArrayList<String> getHints() {
+        return hints;
+    }
+
+    public int getCurrentHintIndex() {
+        return currentHintIndex;
+    }
+
+    public void setCurrentHintIndex(int currentHintIndex) {
+        this.currentHintIndex = currentHintIndex;
+    }
+
+    public String getAHint() {
+        if(currentHintIndex == (hints.size()-1)) {
+            setCurrentHintIndex(0);
+        }
+
+        return getCurrentHint();
     }
 }
