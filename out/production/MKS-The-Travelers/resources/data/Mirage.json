@@ -147,6 +147,6 @@
       "hints": ["Total number of Action figure is the first number, Number of the shinobi form the Sand village is the second number. Number of shinobi from the leaf is the third number. Number shinobi that left their village is the last number "]
     }
   },
-  "isStartingTheme":  true,
-  "nextTheme": "Trap Room"
+  "isStartingTheme":  false,
+  "nextTheme": "None"
 }

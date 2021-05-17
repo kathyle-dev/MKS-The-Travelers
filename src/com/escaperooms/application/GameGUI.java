@@ -220,7 +220,9 @@ public class GameGUI extends JPanel implements ActionListener  {
     }
 
     public void deployDoors(Graphics2D g2) {
-        this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getDoor().paint(g2);
+        if (!game.getCurrentAdventure().getCurrentTheme().isThemeRoomCompleted()) {
+            this.game.getCurrentAdventure().getCurrentTheme().getCurrentPuzzle().getDoor().paint(g2);
+        }
     }
 
     public void crashDoor() {

@@ -18,12 +18,7 @@ public class Puzzle {
     @JsonProperty("hints")
     private ArrayList<String> hints;
     private String currentHint;
-    private int currentHintIndex;
-
-
-
-
-
+    private int currentHintIndex = 0;
 
     /*
      * GETTER'S AND SETTERS
@@ -70,7 +65,7 @@ public class Puzzle {
     }
 
     public String getCurrentHint() {
-        return currentHint;
+        return hints.get(currentHintIndex);
     }
 
     public void setCurrentHint(String currentHint) {

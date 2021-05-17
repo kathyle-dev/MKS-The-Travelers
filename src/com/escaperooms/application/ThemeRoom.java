@@ -157,6 +157,13 @@ public class ThemeRoom {
         return true;
     }
 
+    public void resetPuzzleComplete() {
+        Collection<Puzzle> puzzleList = puzzles.values();
+        for (Puzzle currentPuzzle : puzzleList) {
+            currentPuzzle.setCompleted(false);
+        }
+    }
+
     //if the current puzzles is completed, get the next puzzle for the user to play
     public void getNextPuzzle() {
         String puzzleName = currentPuzzle.getDoor().getDestination();
@@ -251,6 +258,7 @@ public class ThemeRoom {
                     return false;
                 }
             }
+            currentPuzzle.setCompleted(true);
             getNextPuzzle();
             return true;
         }

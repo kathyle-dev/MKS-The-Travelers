@@ -24,26 +24,10 @@ class Client extends JPanel{
                     "\nThat is not a valid name!\n");
             user.newName(name);
             Traveler traveler = new Traveler(user, escapeRoomGame);
-//            traveler.menu();
-//            GameGUI gui =
+
             Frame frame = new Frame("Escape Room", traveler);
-//            gui.setFrame(frame);
+
             frame.showGame();
-
-
-//            frame.setSize(1000, 1000);
-//            frame.setVisible(true);
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-//            while (true) {
-//                gui.move();
-//                gui.repaint();
-//                gui.crashDoor();
-//                gui.crash();
-//                gui.repaint();
-//                Thread.sleep(10);
-//
-//            }
 
         } catch (Exception e) {
             System.out.println("The main is not working");

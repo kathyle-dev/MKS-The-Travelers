@@ -35,10 +35,10 @@
             "filePath" : "src/resources/pictures/cd.jpg"
           }
         },
-        "PICTURE": {
-          "RANDOM PICTURE 0": {
-            "name": "RANDOM PICTURE 0",
-            "description": "This is a picture of something very random",
+        "EIFFEL TOWER": {
+          "EIFFEL TOWER": {
+            "name": "Eiffel Tower",
+            "description": "A picture of the Eiffel Tower.",
             "itemType": "Picture",
             "hasClue": "YELLOW KEY",
             "x": 50,
@@ -47,52 +47,52 @@
           },
           "SOARING EAGLE": {
             "name": "SOARING EAGLE",
-            "description": " This is a picture of an eagle soaring in the sky with a golden microphone in it's talons",
+            "description": " This is a picture of an eagle soaring in the sky with a golden microphone in it's talons.",
             "itemType": "Picture",
-            "hasClue": "BLACK KEY",
+            "hasClue": "WHITE KEY",
             "x": 50,
             "y": 250,
             "filePath": "src/resources/pictures/SoaringEagle.jpg"
           },
-          "RANDOM PICTURE 1": {
-            "name": "RANDOM PICTURE 1",
-            "description": "This is a picture of something very random",
+          "SUNSET": {
+            "name": "SUNSET",
+            "description": "A picture of a beautiful sunset on a beach.",
             "itemType": "Picture",
             "hasClue": "PURPLE KEY",
             "x": 50,
             "y": 350,
             "filePath": "src/resources/pictures/Sunset.jpg"
           },
-          "RANDOM PICTURE 2": {
-            "name": "RANDOM PICTURE 2",
-            "description": "This is a picture of something very random",
+          "SUNSET LAKE": {
+            "name": "SUNSET LAKE",
+            "description": "A picture of a sun setting in the lake.",
             "itemType": "Picture",
             "hasClue": "RED KEY",
             "x": 50,
             "y": 450,
-            "filePath": "src/resources/pictures/Sunset.jpg"
+            "filePath": "src/resources/pictures/SunsetLake.jpg"
           },
           "SKYLINE PICTURE": {
             "name": "SKYLINE PICTURE",
-            "description": "This is a picture of the beautiful Seattle skyline",
+            "description": "This is a picture of the beautiful Seattle skyline.",
             "itemType": "Picture",
-            "hasClue": "WHITE KEY",
+            "hasClue": "BLACK KEY",
             "x": 50,
             "y": 550,
             "filePath" : "src/resources/pictures/seattleSkyline.jpg"
           },
-          "RANDOM PICTURE 3": {
-            "name": "RANDOM PICTURE 3",
-            "description": "This is a picture of something very random",
+          "MOUNTAIN": {
+            "name": "MOUNTAIN",
+            "description": "A picture of a mountain.",
             "itemType": "Picture",
             "hasClue": "VIOLET KEY",
             "x": 50,
             "y": 650,
-            "filePath": "src/resources/pictures/SusetLake.jpg"
+            "filePath": "src/resources/pictures/MountainPainting.jpg"
           },
           "WALKING PICTURE": {
             "name": "WALKING PICTURE",
-            "description": "This is a picture of a group of friends walking down a path",
+            "description": "This is a picture of a group of friends walking down a path.",
             "itemType": "Picture",
             "hasClue": "BROWN KEY",
             "x": 50,
@@ -116,7 +116,7 @@
     }
   },
   "isStartingTheme":  true,
-  "nextTheme": "none"
+  "nextTheme": "Mirage"
 }
 
 
